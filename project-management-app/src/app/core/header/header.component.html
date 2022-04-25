@@ -1,4 +1,4 @@
-<header>
+<header (scroll)="onScroll()" [ngClass]="headerSticky?'sticky':'noSticky'">
   <div class="header-section">
     <div class="left-block">
       <div class="logo">

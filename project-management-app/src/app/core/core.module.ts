@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainComponent } from './main/main.component';
 import { MaterialModule } from '../shared/modules/material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -16,6 +17,7 @@ import { MaterialModule } from '../shared/modules/material.module';
   imports: [
     CommonModule,
     MaterialModule,
+    BrowserAnimationsModule
   ],
   exports: [
     HeaderComponent,
