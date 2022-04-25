@@ -1,36 +1,35 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from "rxjs";
 
 const BASE = 'http://localhost:4000';
 const SIGNUP = `${BASE}/signup`;
 const SIGNIN = `${BASE}/signin`;
-
-interface Headers {
-  [header: string]: string,
-}
+const USERS = `${BASE}/users`
 
 interface User {
+  "id"?: string,
   "name"?: string,
-  "login": string,
-  "password": string
+  "login"?: string,
+  "password"?: string,
+  "token"?: string,
 }
-
-const HEADERS: Headers = {
-  'Accept': 'application/json',
-  'Content-Type': 'application/json',
-};
-
 @Injectable()
 export class ApiService {
   constructor(private httpClient: HttpClient) { }
 
-  public signup(user: User) {
+  //signup => {id, name, login}, signin => {token}
+  public authenticate(user: User, mode: string): Observable<User> {
+    const url = mode === 'signup' ? SIGNUP : SIGNIN;
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json');
     const body = JSON.stringify(user);
-    return this.httpClient.post(SIGNUP, body, {headers: HEADERS});
+    return this.httpClient.post<User>(url, body, { headers: headers });
   }
 
-  public signin(user: User) {
-    const body = JSON.stringify(user);
-    return this.httpClient.post(SIGNIN, body, {headers: HEADERS});
+  public getUsers(token: string): Observable<User[]> {
+    const headers = new HttpHeaders().set('accept', 'application/json').set('Authorization', `Bearer ${token}`);
+    return this.httpClient.get<User[]>(USERS, { headers: headers });
   }
 }
