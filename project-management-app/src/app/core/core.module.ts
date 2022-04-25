@@ -6,6 +6,7 @@ import { MainComponent } from './main/main.component';
 import { MaterialModule } from '../shared/modules/material.module';
 import { IncorrectPageComponent } from './incorrect-page/incorrect-page.component';
 import { RouterModule, Routes } from '@angular/router';
+import { ApiService } from './services/api';
 
 const routes: Routes = [{ path: '', component: MainComponent }];
 
@@ -13,5 +14,6 @@ const routes: Routes = [{ path: '', component: MainComponent }];
   declarations: [HeaderComponent, FooterComponent, MainComponent, IncorrectPageComponent],
   imports: [CommonModule, MaterialModule, RouterModule.forChild(routes)],
   exports: [HeaderComponent, FooterComponent, MainComponent, IncorrectPageComponent, RouterModule],
+  providers: [ApiService],
 })
 export class CoreModule {}

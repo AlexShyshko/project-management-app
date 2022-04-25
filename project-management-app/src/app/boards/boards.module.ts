@@ -9,7 +9,6 @@ const routes: Routes = [{ path: '', component: BoardsComponent }];
 @NgModule({
   declarations: [BoardsComponent],
   imports: [CommonModule, MaterialModule, RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [BoardsComponent, RouterModule],
 })
 export class BoardsModule {}
-
