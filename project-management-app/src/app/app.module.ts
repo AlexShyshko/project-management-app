@@ -6,14 +6,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ApiCheckComponent } from './api-check/api-check.component';
-import { ApiService } from './apis/api';
+import { CoreModule } from './core/core.module';
+import { MaterialModule } from './shared/modules/material.module';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, ApiCheckComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, FormsModule, CommonModule, HttpClientModule],
-  providers: [ApiService],
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    CommonModule,
+    CoreModule,
+    MaterialModule,
+    HttpClientModule
+  ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
