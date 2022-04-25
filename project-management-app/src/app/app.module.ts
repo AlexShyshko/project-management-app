@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CoreModule } from './core/core.module';
 import { MaterialModule } from './shared/modules/material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +19,9 @@ import { MaterialModule } from './shared/modules/material.module';
     FormsModule,
     CommonModule,
     CoreModule,
-    MaterialModule],
+    MaterialModule,
+    HttpClientModule
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
