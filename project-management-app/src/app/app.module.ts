@@ -6,10 +6,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CoreModule } from './core/core.module';
+import { MaterialModule } from './shared/modules/material.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, FormsModule, CommonModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    CommonModule,
+    CoreModule,
+    MaterialModule],
   providers: [],
   bootstrap: [AppComponent],
 })
