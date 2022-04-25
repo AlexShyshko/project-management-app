@@ -1,0 +1,41 @@
+header {
+  background: var(--main-color);
+}
+
+.header-section {
+  margin: 0 auto;
+  color: var(--text-color-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1440px;
+  padding: 10px 20px;
+}
+
+.right-block,
+.left-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-icon{
+  width: 60px;
+}
+
+.vertical-line {
+  border-left: 1px solid var(--text-color-light);
+  height: 20px;
+  margin-left: 15px;
+}
+
+.toggle-block {
+  margin-right: 40px;
+}
+
+.new-board-btn {
+  font-weight: normal;
+  font-size: 20px;
+  align-self: center;
+  padding: 10px 25px;
+}

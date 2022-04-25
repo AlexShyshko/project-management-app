@@ -1,0 +1,30 @@
+main {
+background: linear-gradient(175deg, rgba(88,84,183,1) 19%, rgba(115,112,195,1) 30%, rgba(155,153,212,1) 38%, rgba(190,189,227,1) 46%, rgba(237,236,255,1) 56%, rgba(255,255,255,1) 64%);
+}
+
+.main-section {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  min-height: 82vh;
+  max-width: 1440px;
+}
+
+.app-background {
+  width: 100%;
+  background: no-repeat url('../../../assets/main-page/background-img.png');
+  background-size: 50%;
+  background-position: 100% 0%;
+}
+
+.app-title {
+  margin-top: 15vh;
+  font-size: 10rem;
+  color: var(--text-color-light);
+  text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);
+}
+
+.app-description {
+  width: 40%;
+  font-size: 1.5rem;
+}

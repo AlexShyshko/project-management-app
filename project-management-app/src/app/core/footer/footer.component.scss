@@ -14,13 +14,12 @@ footer {
 
 .footer-section .git {
   display: flex;
-  min-width: 30%;
+  min-width: 25%;
   justify-content: space-between;
   align-items: center;
 }
 
 .git-acc {
-  font-weight:600;
   color: var(--text-color-light);
   transition: 0.5s ease-out;
 }
@@ -28,6 +27,7 @@ footer {
 .git-acc:hover {
   color: #83dde0;
   transition: 0.5s ease-out;
+  transform: scale(1.05);
 }
 
 .logo-icon{

@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CoreModule } from './core/core.module';
+import { MaterialModule } from './shared/modules/material.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,7 +17,8 @@ import { CoreModule } from './core/core.module';
     BrowserAnimationsModule,
     FormsModule,
     CommonModule,
-    CoreModule],
+    CoreModule,
+    MaterialModule],
   providers: [],
   bootstrap: [AppComponent],
 })

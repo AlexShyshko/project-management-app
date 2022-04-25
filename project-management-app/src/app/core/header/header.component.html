@@ -1,1 +1,35 @@
-<p>header works!</p>
+<header>
+  <div class="header-section">
+    <div class="left-block">
+      <div class="logo">
+        <a href="">
+          <img src="../../../assets/header/logo.png" alt="logo" class="logo-icon">
+        </a>
+      </div>
+    </div>
+    <button mat-stroked-button class="new-board-btn">Create new board</button>
+    <div class="right-block">
+      <div class="toggle-block">
+        <mat-slide-toggle>En</mat-slide-toggle>
+      </div>
+      <div class="search-block">
+        <mat-form-field>
+          <mat-icon matPrefix>search</mat-icon>
+          <input matInput type="search">
+        </mat-form-field>
+      </div>
+      <div class="vertical-line"></div>
+      <div class="login-block">
+        <button mat-button [matMenuTriggerFor]="menu" class="account-button">
+          <mat-icon matPrefix>person</mat-icon>
+          My account</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Log in</button>
+          <button mat-menu-item>Register</button>
+          <button mat-menu-item>Edit profile</button>
+        </mat-menu>
+      </div>
+    </div>
+
+  </div>
+</header>
