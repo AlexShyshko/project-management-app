@@ -1,0 +1,51 @@
+footer {
+  background: var(--main-color);
+}
+
+.footer-section {
+  margin: 0 auto;
+  color: var(--text-color-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1440px;
+  padding: 10px 20px;
+}
+
+.footer-section .git {
+  display: flex;
+  min-width: 30%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.git-acc {
+  font-weight:600;
+  color: var(--text-color-light);
+  transition: 0.5s ease-out;
+}
+
+.git-acc:hover {
+  color: #83dde0;
+  transition: 0.5s ease-out;
+}
+
+.logo-icon{
+  width: 90px;
+}
+
+@media (max-width: 640px) {
+  .footer-section .git {
+    width: 50%;
+  }
+}
+
+@media (max-width: 400px) {
+  .footer-section{
+    flex-direction: column;
+  }
+  .footer-section .git {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
