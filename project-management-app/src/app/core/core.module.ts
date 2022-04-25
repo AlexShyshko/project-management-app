@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainComponent } from './main/main.component';
 import { MaterialModule } from '../shared/modules/material.module';
+import { ApiService } from './services/api';
 
 
 
@@ -21,6 +22,7 @@ import { MaterialModule } from '../shared/modules/material.module';
     HeaderComponent,
     FooterComponent,
     MainComponent
-  ]
+  ],
+  providers: [ApiService]
 })
 export class CoreModule { }

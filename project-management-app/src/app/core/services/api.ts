@@ -1,24 +1,18 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs";
+import { User } from "../../models/user.model";
 
 const BASE = 'http://localhost:4000';
 const SIGNUP = `${BASE}/signup`;
 const SIGNIN = `${BASE}/signin`;
 const USERS = `${BASE}/users`
 
-interface User {
-  "id"?: string,
-  "name"?: string,
-  "login"?: string,
-  "password"?: string,
-  "token"?: string,
-}
 @Injectable()
 export class ApiService {
   constructor(private httpClient: HttpClient) { }
 
-  //signup => {id, name, login}, signin => {token}
+  //signup: (user: {name, login, password}) => {id, name, login}, signin: (user: {login, password}) => {token}
   public authenticate(user: User, mode: string): Observable<User> {
     const url = mode === 'signup' ? SIGNUP : SIGNIN;
     const headers = new HttpHeaders()
