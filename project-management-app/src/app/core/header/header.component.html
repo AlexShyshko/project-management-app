@@ -24,7 +24,9 @@
           <mat-icon matPrefix>person</mat-icon>
           My account</button>
         <mat-menu #menu="matMenu" class="account-buttons">
-          <button mat-menu-item>Log in / Sign in</button>
+          <button mat-menu-item (click)="signin()">Log in</button>
+          <button mat-menu-item (click)="signup()">Register</button>
+          <button mat-menu-item>Edit profile</button>
         </mat-menu>
       </div>
     </div>
