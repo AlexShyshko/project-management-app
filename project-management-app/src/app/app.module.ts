@@ -10,7 +10,9 @@ import { CoreModule } from './core/core.module';
 import { MaterialModule } from './shared/modules/material.module';
 import { AuthModule } from './auth/auth.module';
 import { BoardsModule } from './boards/boards.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslatingModule } from './shared/translating/translating.module';
+import { CoreService } from './core/services/core.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,10 +26,10 @@ import { HttpClientModule } from '@angular/common/http';
     AuthModule,
     BoardsModule,
     MaterialModule,
-    MaterialModule,
     HttpClientModule,
+    TranslatingModule,
   ],
-  providers: [],
+  providers: [CoreService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
