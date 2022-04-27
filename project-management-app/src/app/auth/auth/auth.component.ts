@@ -7,7 +7,7 @@ import { CustomValidator } from 'src/app/shared/services/customValidator';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit {
   hide = true;

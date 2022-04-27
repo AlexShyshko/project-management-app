@@ -30,7 +30,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSidenavModule,
     MatListModule,
     MatSlideToggleModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   exports: [
     MatIconModule,
@@ -45,7 +45,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSidenavModule,
     MatListModule,
     MatSlideToggleModule,
-    MatDialogModule
+    MatDialogModule,
   ],
 
 })
