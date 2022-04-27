@@ -3,11 +3,13 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { catchError, Observable, throwError } from "rxjs";
 import { User } from "../../models/user.model";
 import { jsDocComment } from "@angular/compiler";
+import { Board } from "src/app/models/board.model";
 
 const BASE = 'http://localhost:4000';
 const SIGNUP = `${BASE}/signup`;
 const SIGNIN = `${BASE}/signin`;
-const USERS = `${BASE}/users`
+const USERS = `${BASE}/users`;
+const BOARDS = `${BASE}/boards`;
 
 @Injectable()
 export class ApiService {
@@ -56,6 +58,53 @@ export class ApiService {
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient.put(`${USERS}/${id}`, body, { headers: headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public getBoards(token: string): Observable<Board[]> {
+    const headers = new HttpHeaders().set('accept', 'application/json').set('Authorization', `Bearer ${token}`);
+    return this.httpClient.get<Board[]>(BOARDS, { headers: headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public createBoard(token: string, board: Board): Observable<Board> {
+    const body = JSON.stringify(board);
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient.post<Board>(BOARDS, body, { headers: headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public getBoardById(token: string, id: string): Observable<Board> {
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient.get<Board>(`${BOARDS}/${id}`, { headers: headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public deleteBoard(token: string, id: string) {
+    const headers = new HttpHeaders()
+      .set('Accept', '*/*')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient.delete(`${BOARDS}/${id}`, { headers: headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public updateBoard(token: string, id: string, board: Board): Observable<Board> {
+    const body = JSON.stringify(board);
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient.put<Board>(`${BOARDS}/${id}`, body, { headers: headers }).pipe(
       catchError(this.handleError)
     );
   }
