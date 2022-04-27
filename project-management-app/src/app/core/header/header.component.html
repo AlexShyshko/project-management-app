@@ -1,4 +1,4 @@
-<header>
+<header (scroll)="onScroll()" [ngClass]="headerSticky?'sticky':'noSticky'">
   <div class="header-section">
     <div class="left-block">
       <div class="logo">
@@ -23,7 +23,7 @@
         <button mat-button [matMenuTriggerFor]="menu" class="account-button">
           <mat-icon matPrefix>person</mat-icon>
           My account</button>
-        <mat-menu #menu="matMenu">
+        <mat-menu #menu="matMenu" class="account-buttons">
           <button mat-menu-item (click)="signin()">Log in</button>
           <button mat-menu-item (click)="signup()">Register</button>
           <button mat-menu-item>Edit profile</button>
