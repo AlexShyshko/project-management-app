@@ -28,3 +28,8 @@ a {
 ul {
   list-style: none;
 }
+
+.custom-dialog-container .mat-dialog-container {
+  background: rgb(88, 84, 183);
+  border-radius: 10px;
+}

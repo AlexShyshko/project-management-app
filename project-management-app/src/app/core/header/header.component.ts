@@ -1,6 +1,8 @@
 import { Router } from '@angular/router';
 import { Component, HostListener } from '@angular/core';
 import { ApiService } from '../services/api';
+import { MatDialog } from '@angular/material/dialog';
+import { NewBoardComponent } from 'src/app/boards/new-board/new-board.component';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +12,7 @@ import { ApiService } from '../services/api';
 
 export class HeaderComponent {
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router, public dialog: MatDialog) {}
 
   headerSticky: boolean = false;
 
@@ -37,6 +39,8 @@ export class HeaderComponent {
     this.router.navigate(['/auth']);
   }
 
-
+  openDialog() {
+    this.dialog.open(NewBoardComponent, { panelClass: 'custom-dialog-container' });
+  }
 
 }
