@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ApiService } from 'src/app/core/services/api';
+import { User } from 'src/app/models/user.model';
 import { CustomValidator } from 'src/app/shared/services/customValidator';
 
 @Component({
@@ -15,7 +16,7 @@ export class SignUpComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(public authService: ApiService, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(public apiService: ApiService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -44,7 +45,13 @@ export class SignUpComponent implements OnInit {
   }
 
 
-  submit() {
+  submit(name: string, login: string, password: string) {
+    const user: User = {
+      name,
+      login,
+      password
+    };
+    this.apiService.authenticate(user, 'signup').subscribe(res => console.log(res));
     if (this.form.valid) {
       this.router.navigate(['/boards']);
     }
