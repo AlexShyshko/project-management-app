@@ -6,7 +6,10 @@ main {
 }
 
 .container {
-  min-height: 85vh;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  height: 85vh;
   background-image: url("../../../assets/auth/auth-background.png");
   background-position: left bottom;
   background-repeat: no-repeat;
@@ -16,7 +19,7 @@ main {
 .signUp-wrapper {
   width: 350px;
   height: 510px;
-  margin: 15vh auto;
+  margin: 10vh auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -1,42 +1,42 @@
 <main>
-<div class="container">
-<form [formGroup]="form" (ngSubmit)="submit()">
-  <div class="login-wrapper">
-    <p class="login-title">Login</p>
-    <mat-form-field appearance="fill">
-      <mat-label>login</mat-label>
-      <input formControlName="login" matInput>
-      <mat-error *ngIf="form.get('login')!.errors?.['required']">
-        Please enter a login
-      </mat-error>
-      <mat-error *ngIf="form.get('login')!.errors?.['minlength']">
-        Please enter at least {{form.get('login')!.errors?.['minlength'].requiredLength}} characters
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>password</mat-label>
-      <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
-      <mat-error *ngIf="form.get('password')!.errors?.['required']">
-        Please enter a password
-      </mat-error>
-      <mat-error *ngIf="form.dirty && form.get('password')!.value.length">
-        Your password isn't strong enough:
-        <mat-error *ngIf="form.get('password')!.errors?.['minlength']">
-          - at least {{form.get('password')!.errors?.['minlength'].requiredLength}} characters
-        </mat-error>
-        <mat-error *ngFor="let item of form.get('password')!.errors | keyvalue">
-          {{item.value.message}}
-        </mat-error>
-      </mat-error>
-      <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-    </mat-form-field>
-    <button type="submit" [disabled]="form.invalid" mat-flat-button class="login-button">Login</button>
-    <p class="sign-up">Don't have an account? <a [routerLink]="['/signup']">Sign up</a> here</p>
+  <div class="container">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="login-wrapper">
+        <p class="login-title">Login</p>
+        <mat-form-field appearance="fill">
+          <mat-label>login</mat-label>
+          <input formControlName="login" matInput>
+          <mat-error *ngIf="form.get('login')!.errors?.['required']">
+            Please enter a login
+          </mat-error>
+          <mat-error *ngIf="form.get('login')!.errors?.['minlength']">
+            Please enter at least {{form.get('login')!.errors?.['minlength'].requiredLength}} characters
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>password</mat-label>
+          <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+          <mat-error *ngIf="form.get('password')!.errors?.['required']">
+            Please enter a password
+          </mat-error>
+          <mat-error *ngIf="form.dirty && form.get('password')!.value.length">
+            Your password isn't strong enough:
+            <mat-error *ngIf="form.get('password')!.errors?.['minlength']">
+              - at least {{form.get('password')!.errors?.['minlength'].requiredLength}} characters
+            </mat-error>
+            <mat-error *ngFor="let item of form.get('password')!.errors | keyvalue">
+              {{item.value.message}}
+            </mat-error>
+          </mat-error>
+          <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <button type="submit" [disabled]="form.invalid" mat-flat-button class="login-button">Login</button>
+        <p class="sign-up">Don't have an account? <a [routerLink]="['/signup']">Sign up</a> here</p>
+      </div>
+    </form>
+  <!-- <button [routerLink]="['/']" mat-raised-button color="primary">home</button> -->
   </div>
-</form>
-<!-- <button [routerLink]="['/']" mat-raised-button color="primary">home</button> -->
-</div>
 </main>

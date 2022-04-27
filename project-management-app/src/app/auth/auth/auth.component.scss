@@ -6,7 +6,10 @@ main {
 }
 
 .container {
-  min-height: 85vh;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  height: 85vh;
   background-image: url('../../../assets/auth/auth-background-2.png');
   background-position: 100% 70%;
   background-repeat: no-repeat;
