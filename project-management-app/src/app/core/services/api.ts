@@ -4,6 +4,7 @@ import { catchError, Observable, throwError } from "rxjs";
 import { User } from "../../models/user.model";
 import { jsDocComment } from "@angular/compiler";
 import { Board } from "src/app/models/board.model";
+import { Column } from "src/app/models/column.model";
 
 const BASE = 'http://localhost:4000';
 const SIGNUP = `${BASE}/signup`;
@@ -105,6 +106,55 @@ export class ApiService {
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient.put<Board>(`${BOARDS}/${id}`, body, { headers: headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public getColumns(token: string, boardId: string): Observable<Column> {
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient.get<Column>(`${BOARDS}/${boardId}/columns`, { headers: headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public createColumn(token: string, boardId: string, column: Column): Observable<Column> {
+    const body = JSON.stringify(column);
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient.post<Column>(`${BOARDS}/${boardId}/columns`, body, { headers: headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public getColumnById(token: string, boardId: string, columnId: string): Observable<Column> {
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient.get<Column>(`${BOARDS}/${boardId}/columns/${columnId}`, { headers: headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public deleteColumn(token: string, boardId: string, columnId: string) {
+    const headers = new HttpHeaders()
+      .set('Accept', '*/*')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient.delete(`${BOARDS}/${boardId}/columns/${columnId}`, { headers: headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public updateColumn(token: string, boardId: string, columnId: string, column: Column): Observable<Column> {
+    const body = JSON.stringify(column);
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient.put<Column>(`${BOARDS}/${boardId}/columns/${columnId}`, body, { headers: headers }).pipe(
       catchError(this.handleError)
     );
   }
