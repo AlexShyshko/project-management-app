@@ -11,9 +11,25 @@ import { ApiService } from './services/api';
 const routes: Routes = [{ path: '', component: MainComponent }];
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, MainComponent, IncorrectPageComponent],
-  imports: [CommonModule, MaterialModule, RouterModule.forChild(routes)],
-  exports: [HeaderComponent, FooterComponent, MainComponent, IncorrectPageComponent, RouterModule],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    MainComponent,
+    IncorrectPageComponent,
+  ],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    RouterModule.forChild(routes),
+  ],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    MainComponent,
+    IncorrectPageComponent,
+    RouterModule,
+  ],
   providers: [ApiService],
 })
+
 export class CoreModule {}

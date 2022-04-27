@@ -1,13 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ApiService } from '../services/api';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
+
 export class HeaderComponent {
-  isEnglish = 'en';
+  headerSticky: boolean = false;
+
+  @HostListener('window:scroll', ['$event']) onScroll() {
+    this.headerSticky = window.scrollY > 50;
+  }
+
   constructor(private apiService: ApiService) {}
 
   public signup() {

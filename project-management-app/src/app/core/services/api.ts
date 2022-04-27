@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from "rxjs";
-import { User } from "../../models/user.model";
+import { Observable } from 'rxjs';
+import { User } from '../../models/user.model';
 
 const BASE = 'http://localhost:4000';
 const SIGNUP = `${BASE}/signup`;
 const SIGNIN = `${BASE}/signin`;
-const USERS = `${BASE}/users`
+const USERS = `${BASE}/users`;
 
 @Injectable()
 export class ApiService {
