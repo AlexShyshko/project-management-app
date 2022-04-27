@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from "rxjs";
 import { User } from "../../models/user.model";
-import { jsDocComment } from "@angular/compiler";
 import { Board } from "src/app/models/board.model";
 import { Column } from "src/app/models/column.model";
+import { Task } from "src/app/models/task.model";
 
 const BASE = 'http://localhost:4000';
 const SIGNUP = `${BASE}/signup`;
@@ -188,6 +188,65 @@ export class ApiService {
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient
       .put<Column>(`${BOARDS}/${boardId}/columns/${columnId}`, body, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  public getTasks(token: string, boardId: string, columnId: string): Observable<Task> {
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient
+      .get<Task>(`${BOARDS}/${boardId}/columns/${columnId}/tasks`, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  public createTask(token: string, boardId: string, columnId: string, task: Task): Observable<Task> {
+    const body = JSON.stringify(task);
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient
+      .post<Task>(`${BOARDS}/${boardId}/columns/${columnId}/tasks`, body, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  public getTaskById(token: string, boardId: string, columnId: string, taskId: string): Observable<Task> {
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient
+      .get<Task>(`${BOARDS}/${boardId}/columns/${columnId}/tasks/${taskId}`, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  public deleteTask(token: string, boardId: string, columnId: string, taskId: string) {
+    const headers = new HttpHeaders()
+      .set('Accept', '*/*')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient
+      .delete(`${BOARDS}/${boardId}/columns/${columnId}/tasks/${taskId}`, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  public updateTask(token: string, boardId: string, columnId: string, taskId: string, task: Task): Observable<Task> {
+    const body = JSON.stringify(task);
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient
+      .put<Task>(`${BOARDS}/${boardId}/columns/${columnId}/tasks/${taskId}`, body, { headers: headers })
       .pipe(
         catchError(this.handleError)
       );
