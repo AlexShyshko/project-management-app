@@ -1,9 +1,16 @@
+main {
+  background: url('../../../assets/auth/line.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position:top;
+}
+
 .container {
   min-height: 85vh;
-  background-image: url('../../../assets/auth/auth-background-2.png'), url('../../../assets/auth/auth-background.png');
-  background-position: right bottom, left bottom;
-  background-repeat: no-repeat, no-repeat;
-  background-size: 30%, 25%;
+  background-image: url('../../../assets/auth/auth-background-2.png');
+  background-position: 100% 70%;
+  background-repeat: no-repeat;
+  background-size: 30%;
 }
 
 .login-wrapper {
@@ -14,7 +21,7 @@
   flex-direction: column;
   background-color: rgb(88, 84, 183);
   padding: 0 20px;
-  border-radius: 5px;
+  border-radius: 15px;
 }
 
 .login-title {

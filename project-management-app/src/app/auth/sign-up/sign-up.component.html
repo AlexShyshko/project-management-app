@@ -1,8 +1,9 @@
+<main>
 <div class="container">
   <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="signUp-wrapper">
       <div class="first-part">
-        <p class="signUp-title">Sign up to enter</p>
+        <p class="signUp-title">Sign up</p>
         <mat-form-field appearance="fill">
           <mat-label>login</mat-label>
           <input formControlName="login" matInput>
@@ -64,3 +65,4 @@
   </form>
   <!-- <button [routerLink]="['/']" mat-raised-button color="primary">home</button> -->
 </div>
+</main>
