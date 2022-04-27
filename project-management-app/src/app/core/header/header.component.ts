@@ -11,8 +11,9 @@ export class HeaderComponent {
   headerSticky: boolean = false;
 
   @HostListener('window:scroll', ['$event']) onScroll() {
-    window.scrollY > 50 ? this.headerSticky = true : this.headerSticky = false;
+    this.headerSticky = window.scrollY > 50;
   }
+
   constructor(private apiService: ApiService) {}
 
   public signup() {

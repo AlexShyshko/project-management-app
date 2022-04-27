@@ -8,9 +8,9 @@ describe('IncorrectPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IncorrectPageComponent ]
+      declarations: [ IncorrectPageComponent ],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
