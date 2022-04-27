@@ -5,12 +5,8 @@ import { Component, HostListener } from '@angular/core';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  // animations: [
-  //   trigger('header', [
-  //     state('start', style)
-  //   ])
-  // ]
 })
+
 export class HeaderComponent {
   headerSticky: boolean = false;
 

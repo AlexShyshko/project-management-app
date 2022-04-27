@@ -57,3 +57,7 @@ header {
   position: static;
   transition: 0.2s ease-out;
 }
+
+::ng-deep .account-buttons {
+  background-color: var(--main-color);
+}

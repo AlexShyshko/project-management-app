@@ -6,7 +6,7 @@ main {
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  min-height: 150vh;
+  min-height: 85vh;
   max-width: 1440px;
 }
 
@@ -21,7 +21,7 @@ main {
   margin-top: 15vh;
   font-size: 10rem;
   color: var(--text-color-light);
-  text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);
+  text-shadow: 3px 3px 3px rgba(150, 150, 150, 1);
 }
 
 .app-description {

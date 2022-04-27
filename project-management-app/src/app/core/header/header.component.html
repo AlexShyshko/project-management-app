@@ -23,10 +23,8 @@
         <button mat-button [matMenuTriggerFor]="menu" class="account-button">
           <mat-icon matPrefix>person</mat-icon>
           My account</button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item>Log in</button>
-          <button mat-menu-item>Register</button>
-          <button mat-menu-item>Edit profile</button>
+        <mat-menu #menu="matMenu" class="account-buttons">
+          <button mat-menu-item>Log in / Sign in</button>
         </mat-menu>
       </div>
     </div>
