@@ -33,23 +33,33 @@ export class ApiService {
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json');
     const body = JSON.stringify(user);
-    return this.httpClient.post<User>(url, body, { headers: headers }).pipe(
-      catchError(this.handleError)
-    );
+    return this.httpClient
+      .post<User>(url, body, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   public getUsers(token: string): Observable<User[]> {
-    const headers = new HttpHeaders().set('accept', 'application/json').set('Authorization', `Bearer ${token}`);
-    return this.httpClient.get<User[]>(USERS, { headers: headers }).pipe(
-      catchError(this.handleError)
-    );
+    const headers = new HttpHeaders()
+      .set('accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient
+      .get<User[]>(USERS, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   public deleteUser(token: string, id: string) {
-    const headers = new HttpHeaders().set('accept', '*/*').set('Authorization', `Bearer ${token}`);
-    return this.httpClient.delete(`${USERS}/${id}`, { headers: headers }).pipe(
-      catchError(this.handleError)
-    );
+    const headers = new HttpHeaders()
+      .set('accept', '*/*')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient
+      .delete(`${USERS}/${id}`, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   public updateUser(user: User, token: string, id: string): Observable<User> {
@@ -58,16 +68,22 @@ export class ApiService {
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
-    return this.httpClient.put(`${USERS}/${id}`, body, { headers: headers }).pipe(
-      catchError(this.handleError)
-    );
+    return this.httpClient
+      .put(`${USERS}/${id}`, body, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   public getBoards(token: string): Observable<Board[]> {
-    const headers = new HttpHeaders().set('accept', 'application/json').set('Authorization', `Bearer ${token}`);
-    return this.httpClient.get<Board[]>(BOARDS, { headers: headers }).pipe(
-      catchError(this.handleError)
-    );
+    const headers = new HttpHeaders()
+      .set('accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient
+      .get<Board[]>(BOARDS, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   public createBoard(token: string, board: Board): Observable<Board> {
@@ -76,27 +92,33 @@ export class ApiService {
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
-    return this.httpClient.post<Board>(BOARDS, body, { headers: headers }).pipe(
-      catchError(this.handleError)
-    );
+    return this.httpClient
+      .post<Board>(BOARDS, body, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   public getBoardById(token: string, id: string): Observable<Board> {
     const headers = new HttpHeaders()
       .set('Accept', 'application/json')
       .set('Authorization', `Bearer ${token}`);
-    return this.httpClient.get<Board>(`${BOARDS}/${id}`, { headers: headers }).pipe(
-      catchError(this.handleError)
-    );
+    return this.httpClient
+      .get<Board>(`${BOARDS}/${id}`, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   public deleteBoard(token: string, id: string) {
     const headers = new HttpHeaders()
       .set('Accept', '*/*')
       .set('Authorization', `Bearer ${token}`);
-    return this.httpClient.delete(`${BOARDS}/${id}`, { headers: headers }).pipe(
-      catchError(this.handleError)
-    );
+    return this.httpClient
+      .delete(`${BOARDS}/${id}`, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   public updateBoard(token: string, id: string, board: Board): Observable<Board> {
@@ -105,18 +127,22 @@ export class ApiService {
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
-    return this.httpClient.put<Board>(`${BOARDS}/${id}`, body, { headers: headers }).pipe(
-      catchError(this.handleError)
-    );
+    return this.httpClient
+      .put<Board>(`${BOARDS}/${id}`, body, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   public getColumns(token: string, boardId: string): Observable<Column> {
     const headers = new HttpHeaders()
       .set('Accept', 'application/json')
       .set('Authorization', `Bearer ${token}`);
-    return this.httpClient.get<Column>(`${BOARDS}/${boardId}/columns`, { headers: headers }).pipe(
-      catchError(this.handleError)
-    );
+    return this.httpClient
+      .get<Column>(`${BOARDS}/${boardId}/columns`, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   public createColumn(token: string, boardId: string, column: Column): Observable<Column> {
@@ -125,27 +151,33 @@ export class ApiService {
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
-    return this.httpClient.post<Column>(`${BOARDS}/${boardId}/columns`, body, { headers: headers }).pipe(
-      catchError(this.handleError)
-    );
+    return this.httpClient
+      .post<Column>(`${BOARDS}/${boardId}/columns`, body, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   public getColumnById(token: string, boardId: string, columnId: string): Observable<Column> {
     const headers = new HttpHeaders()
       .set('Accept', 'application/json')
       .set('Authorization', `Bearer ${token}`);
-    return this.httpClient.get<Column>(`${BOARDS}/${boardId}/columns/${columnId}`, { headers: headers }).pipe(
-      catchError(this.handleError)
-    );
+    return this.httpClient
+      .get<Column>(`${BOARDS}/${boardId}/columns/${columnId}`, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   public deleteColumn(token: string, boardId: string, columnId: string) {
     const headers = new HttpHeaders()
       .set('Accept', '*/*')
       .set('Authorization', `Bearer ${token}`);
-    return this.httpClient.delete(`${BOARDS}/${boardId}/columns/${columnId}`, { headers: headers }).pipe(
-      catchError(this.handleError)
-    );
+    return this.httpClient
+      .delete(`${BOARDS}/${boardId}/columns/${columnId}`, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   public updateColumn(token: string, boardId: string, columnId: string, column: Column): Observable<Column> {
@@ -154,8 +186,10 @@ export class ApiService {
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
-    return this.httpClient.put<Column>(`${BOARDS}/${boardId}/columns/${columnId}`, body, { headers: headers }).pipe(
-      catchError(this.handleError)
-    );
+    return this.httpClient
+      .put<Column>(`${BOARDS}/${boardId}/columns/${columnId}`, body, { headers: headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 }
