@@ -11,6 +11,7 @@ import { MaterialModule } from './shared/modules/material.module';
 import { AuthModule } from './auth/auth.module';
 import { BoardsModule } from './boards/boards.module';
 import { HttpClientModule } from '@angular/common/http';
+import { SignUpModule } from './auth/sign-up/sign-up.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     MaterialModule,
     HttpClientModule,
+    SignUpModule
   ],
   providers: [],
   bootstrap: [AppComponent],
