@@ -27,7 +27,7 @@ import { SignUpModule } from './auth/sign-up/sign-up.module';
     MaterialModule,
     MaterialModule,
     HttpClientModule,
-    SignUpModule
+    SignUpModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

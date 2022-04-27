@@ -11,6 +11,7 @@ import { ApiService } from '../services/api';
 export class HeaderComponent {
 
   constructor(private apiService: ApiService, private router: Router) {}
+
   headerSticky: boolean = false;
 
   @HostListener('window:scroll', ['$event']) onScroll() {

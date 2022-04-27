@@ -10,7 +10,7 @@ const routes: Routes = [{ path: '', component: AuthComponent }];
 @NgModule({
   declarations: [AuthComponent],
   imports: [CommonModule, MaterialModule, RouterModule.forChild(routes), ReactiveFormsModule,
-    FormsModule,],
+    FormsModule],
   exports: [AuthComponent, RouterModule],
 })
 export class AuthModule {}

@@ -10,7 +10,7 @@ const routes: Routes = [{ path: '', component: SignUpComponent }];
 @NgModule({
   declarations: [SignUpComponent],
   imports: [CommonModule, MaterialModule, RouterModule.forChild(routes), ReactiveFormsModule,
-    FormsModule,],
+    FormsModule],
   exports: [RouterModule],
 })
 export class SignUpModule {}

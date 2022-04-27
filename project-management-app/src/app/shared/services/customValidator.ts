@@ -51,7 +51,7 @@ export class CustomValidator {
     if (control.get('confirmPassword')!.touched || control.get('confirmPassword')!.dirty) {
       let verifyPassword = control.get('confirmPassword')!.value;
       if (password != verifyPassword) {
-        return control.get('confirmPassword')!.setErrors( {MatchPassword: true} );
+        return control.get('confirmPassword')!.setErrors( { MatchPassword: true } );
       } else {
         return null;
       }

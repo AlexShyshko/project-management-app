@@ -8,7 +8,7 @@ import { CustomValidator } from 'src/app/shared/services/customValidator';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
   hide = true;
@@ -20,24 +20,24 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       login: new FormControl('', [
-      Validators.required,
-      Validators.minLength(5),
-    ]),
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email,
-    ]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(8),
-      CustomValidator.upperCaseValidator,
-      CustomValidator.lowerCaseValidator,
-      CustomValidator.numbersValidator,
-      CustomValidator.symbolsValidator,
-    ]),
-    confirmPassword: new FormControl('', [
-      Validators.required,
-    ]),
+        Validators.required,
+        Validators.minLength(5),
+      ]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.email,
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+        CustomValidator.upperCaseValidator,
+        CustomValidator.lowerCaseValidator,
+        CustomValidator.numbersValidator,
+        CustomValidator.symbolsValidator,
+      ]),
+      confirmPassword: new FormControl('', [
+        Validators.required,
+      ]),
     }, {
       validator: CustomValidator.passwordValidator,
     });
