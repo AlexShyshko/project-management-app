@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, HostListener } from '@angular/core';
 import { ApiService } from '../services/api';
 
@@ -8,13 +9,14 @@ import { ApiService } from '../services/api';
 })
 
 export class HeaderComponent {
+
+  constructor(private apiService: ApiService, private router: Router) {}
+
   headerSticky: boolean = false;
 
   @HostListener('window:scroll', ['$event']) onScroll() {
     this.headerSticky = window.scrollY > 50;
   }
-
-  constructor(private apiService: ApiService) {}
 
   public signup() {
     const user = {
@@ -23,6 +25,7 @@ export class HeaderComponent {
       password: 'test123',
     };
     this.apiService.authenticate(user, 'signup').subscribe(res => console.log('userId', res.id));
+    this.router.navigate(['/signup']);
   }
 
   public signin() {
@@ -31,6 +34,9 @@ export class HeaderComponent {
       password: 'test1',
     };
     this.apiService.authenticate(user, 'signin').subscribe(res => console.log('token', res.token));
+    this.router.navigate(['/auth']);
   }
+
+
 
 }
