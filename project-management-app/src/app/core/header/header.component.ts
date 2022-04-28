@@ -9,7 +9,6 @@ import { CoreService } from '../services/core.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-
   constructor(private apiService: ApiService, private router: Router, public coreService: CoreService) {}
 
   headerSticky: boolean = false;

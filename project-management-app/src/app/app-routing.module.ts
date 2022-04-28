@@ -4,15 +4,19 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { IncorrectPageComponent } from './core/incorrect-page/incorrect-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'main', pathMatch: 'full' },
+  { path: '', loadChildren: () => import('./core/core.module').then((m) => m.CoreModule) },
   {
     path: 'main',
-    loadChildren: () => import('./core/core.module').then((m) => m.CoreModule),
+    loadChildren: () => import('./boards/boards.module').then((m) => m.BoardsModule),
     canActivate: [AuthGuard],
   },
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule) },
   { path: 'signup', loadChildren: () => import('./auth/sign-up/sign-up.module').then((m) => m.SignUpModule) },
-  { path: 'boards', loadChildren: () => import('./boards/boards.module').then((m) => m.BoardsModule) },
+  {
+    path: 'edit-profile',
+    loadChildren: () => import('./core/core.module').then((m) => m.CoreModule),
+    canActivate: [AuthGuard],
+  },
   { path: '**', component: IncorrectPageComponent },
 ];
 

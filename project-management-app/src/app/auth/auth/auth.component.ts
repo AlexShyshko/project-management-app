@@ -14,10 +14,7 @@ export class AuthComponent implements OnInit {
   hide = true;
 
   form: FormGroup = new FormGroup({
-    login: new FormControl('', [
-      Validators.required,
-      Validators.minLength(5),
-    ]),
+    login: new FormControl('', [Validators.required, Validators.minLength(5)]),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(8),
@@ -30,8 +27,7 @@ export class AuthComponent implements OnInit {
 
   constructor(public apiService: ApiService, private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   submit(login: string, password: string) {
     const user: User = {
@@ -49,8 +45,7 @@ export class AuthComponent implements OnInit {
     });
 
     if (this.form.valid) {
-      this.router.navigate(['/boards']);
+      this.router.navigate(['/main']);
     }
   }
-
 }
