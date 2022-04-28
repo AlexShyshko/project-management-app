@@ -15,7 +15,7 @@ export class SignUpComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(public authService: ApiService, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(public authService: ApiService, private router: Router, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -41,13 +41,12 @@ export class SignUpComponent implements OnInit {
     }, {
       validator: CustomValidator.passwordValidator,
     });
-  }
 
+  }
 
   submit() {
     if (this.form.valid) {
-      this.router.navigate(['/boards']);
+      this.router.navigate(['/main']);
     }
   }
-
 }

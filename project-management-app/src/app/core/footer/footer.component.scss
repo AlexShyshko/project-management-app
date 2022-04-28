@@ -1,5 +1,6 @@
 footer {
   background: var(--main-color);
+  height: 10vh;
 }
 
 .footer-section {
@@ -30,7 +31,7 @@ footer {
   transform: scale(1.05);
 }
 
-.logo-icon{
+.logo-icon {
   width: 90px;
 }
 @media (max-width: 970px) {
@@ -46,6 +47,7 @@ footer {
 }
 
 @media (max-width: 400px) {
+
   .footer-section{
     flex-flow:column wrap;
     position: relative;

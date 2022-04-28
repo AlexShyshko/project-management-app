@@ -1,5 +1,7 @@
 <div class="incorrect-wrapper">
-  <img class="crying-cat" src="../../../assets/images/cat.jpg" alt="cat" />
-  <p>Something went wrong...</p>
-  <button [routerLink]="['/']" mat-raised-button color="primary">Home</button>
+  <div class="incorrect-message">
+    <img class="crying-cat" src="../../../assets/images/cat.jpg" alt="cat" />
+    <h2 class="wrong-message">Something went wrong...</h2>
+    <button [routerLink]="['/']" class="home-button" mat-raised-button color="primary">Home</button>
+  </div>
 </div>

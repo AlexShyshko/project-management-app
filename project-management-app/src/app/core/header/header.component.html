@@ -2,16 +2,24 @@
   <div class="header-section">
     <div class="left-block">
       <div class="logo">
-        <a href="">
+        <a [routerLink]="['/']">
           <img src="../../../assets/header/logo.png" alt="logo" class="logo-icon" />
         </a>
       </div>
       <button mat-stroked-button class="new-board-btn" (click)="openDialog()">Create new board</button>
     </div>
     <div class="right-block">
-      <div class="toggle-block">
-        <mat-slide-toggle>En</mat-slide-toggle>
-      </div>
+      <mat-form-field appearance="fill" class="lang-select">
+        <mat-label>Language</mat-label>
+        <mat-select #selLang (selectionChange)="coreService.translateLanguageTo(selLang.value)">
+          <mat-option
+            *ngFor="let language of coreService.translate.getLangs()"
+            [value]="language"
+            class="lang-select-option"
+            >{{ language | uppercase }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
       <div class="search-block">
         <mat-form-field>
           <mat-icon matPrefix>search</mat-icon>

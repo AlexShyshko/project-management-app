@@ -2,7 +2,8 @@ main {
   background: url('../../../assets/auth/line.svg');
   background-repeat: no-repeat;
   background-size: contain;
-  background-position:top;
+  background-position: top;
+  height: 80vh;
 }
 
 .container {
@@ -57,11 +58,11 @@ main {
   &:disabled {
     cursor: not-allowed;
     &:hover {
-      background-color: rgba(255,255,255,.12);
+      background-color: var(--buttons-disabled-hover-color);
     }
   }
   &:hover {
-    background-color: #a8a5ff;
+    background-color: var(--buttons-hover-color);
     transition: 0.3s ease-in-out;
   }
 }
@@ -72,7 +73,7 @@ main {
   color: var(--text-color-dark);
 }
 
-mat-error ::ng-deep{
+mat-error ::ng-deep {
   color: rgb(254, 160, 160);
 }
 

@@ -27,15 +27,13 @@ export class AuthComponent implements OnInit {
     ]),
   });
 
-  constructor(public authService: ApiService, private router: Router) { }
+  constructor(public authService: ApiService, private router: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   submit() {
     if (this.form.valid) {
-      this.router.navigate(['/boards']);
+      this.router.navigate(['/main']);
     }
   }
-
 }
