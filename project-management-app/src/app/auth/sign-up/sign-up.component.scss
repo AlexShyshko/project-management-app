@@ -1,8 +1,8 @@
 main {
-  background: url('../../../assets/auth/line.svg');
+  background: url("../../../assets/auth/line.svg");
   background-repeat: no-repeat;
   background-size: contain;
-  background-position:top;
+  background-position: top;
 }
 
 .container {
@@ -10,24 +10,31 @@ main {
   display: flex;
   justify-content: center;
   height: 85vh;
-  background-image: url('../../../assets/auth/auth-background-2.png');
-  background-position: 100% 70%;
+  background-image: url("../../../assets/auth/auth-background.png");
+  background-position: left bottom;
   background-repeat: no-repeat;
-  background-size: 30%;
+  background-size: 25%;
 }
 
-.login-wrapper {
+.signUp-wrapper {
   width: 350px;
-  height: 370px;
-  margin: 15vh auto;
+  height: 510px;
+  margin: 10vh auto;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   background-color: rgb(88, 84, 183);
   padding: 0 20px;
   border-radius: 15px;
 }
 
-.login-title {
+.first-part,
+.second-part {
+  display: flex;
+  flex-direction: column;
+}
+
+.signUp-title {
   margin-top: 28px;
   margin-bottom: 20px;
   font-weight: 500;
@@ -37,12 +44,12 @@ main {
   text-align: center;
 }
 
-.login-name {
+.signUp-name {
   height: 37px;
   width: 100%;
 }
 
-.login-button {
+.signUp-button {
   margin-top: 20px;
   width: 130px;
   height: 40px;
@@ -56,7 +63,7 @@ main {
   &:disabled {
     cursor: not-allowed;
     &:hover {
-      background-color: rgba(255,255,255,.12);
+      background-color: rgba(255, 255, 255, 0.12);
     }
   }
   &:hover {
@@ -69,8 +76,9 @@ main {
   margin-top: 30px;
   font-size: 0.7rem;
   color: var(--text-color-dark);
+  margin-bottom: 15px;
 }
 
-mat-error ::ng-deep{
+mat-error ::ng-deep {
   color: rgb(254, 160, 160);
 }

@@ -11,6 +11,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule) },
+  { path: 'signup', loadChildren: () => import('./auth/sign-up/sign-up.module').then((m) => m.SignUpModule) },
   { path: 'boards', loadChildren: () => import('./boards/boards.module').then((m) => m.BoardsModule) },
   { path: '**', component: IncorrectPageComponent },
 ];

@@ -13,6 +13,7 @@ import { BoardsModule } from './boards/boards.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslatingModule } from './shared/translating/translating.module';
 import { CoreService } from './core/services/core.service';
+import { SignUpModule } from './auth/sign-up/sign-up.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import { CoreService } from './core/services/core.service';
     MaterialModule,
     HttpClientModule,
     TranslatingModule,
+    SignUpModule,
   ],
   providers: [CoreService],
   bootstrap: [AppComponent],
