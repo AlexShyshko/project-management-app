@@ -4,12 +4,11 @@
   align-items: center;
   width: 100%;
   height: 80vh;
+
   background: linear-gradient(175deg, #5854b7 19%, #7370c3 30%, #9b99d4 38%, #bebde3 46%, #edecff 56%, white 64%);
 }
 
 .incorrect-message {
-  background-color: var(--main-color);
-  color: var(--text-color-light);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,11 +17,14 @@
   width: 20vw;
   padding: 2vh 0 2vh 0;
   border-radius: 2vh;
+
+  background-color: var(--main-color);
+  color: var(--text-color-light);
 }
 
 .crying-cat {
-  border-radius: 50%;
   width: 40%;
+  border-radius: 50%;
 }
 
 .wrong-message {
@@ -33,20 +35,24 @@
   margin-top: 20px;
   width: 130px;
   height: 40px;
-  background-color: var(--text-color-light);
   border-radius: 5px;
+
   font-size: 14px;
   line-height: 14px;
+
   color: var(--main-color);
+  background-color: var(--text-color-light);
+
   transition: 0.3s ease-in-out;
+
   &:disabled {
     cursor: not-allowed;
     &:hover {
-      background-color: rgba(255, 255, 255, 0.12);
+      background-color: var(--buttons-disabled-hover-color);
     }
   }
   &:hover {
-    background-color: #a8a5ff;
+    background-color: var(--buttons-hover-color);
     transition: 0.3s ease-in-out;
   }
 }

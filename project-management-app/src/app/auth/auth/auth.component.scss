@@ -57,11 +57,11 @@ main {
   &:disabled {
     cursor: not-allowed;
     &:hover {
-      background-color: rgba(255, 255, 255, 0.12);
+      background-color: var(--buttons-disabled-hover-color);
     }
   }
   &:hover {
-    background-color: #a8a5ff;
+    background-color: var(--buttons-hover-color);
     transition: 0.3s ease-in-out;
   }
 }
