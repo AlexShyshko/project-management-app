@@ -88,7 +88,7 @@ mat-error ::ng-deep{
     background-position: right bottom;
   }
    .login-wrapper {
-    margin: 10vh auto;
+    margin-top: 10vh;
   }
 }
 
@@ -102,6 +102,6 @@ mat-error ::ng-deep{
 @media (max-width: 400px) {
   .login-wrapper {
     width: 300px;
-    margin: 5vh auto;
+    margin-top: 5vh;
   }
 }

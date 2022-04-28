@@ -47,10 +47,25 @@ footer {
 
 @media (max-width: 400px) {
   .footer-section{
-    flex-direction: column;
+    flex-flow:column wrap;
+    position: relative;
+    align-items: start;
+  }
+  .footer-section :nth-child(1) {
+    order: 2;
+    display: inline-block;
+  }
+  .footer-section :nth-child(3) {
+    order: 2;
+    display: inline-block;
   }
   .footer-section .git {
     width: 100%;
     margin: 10px 0;
+  }
+  .footer-year {
+    position: absolute;
+    top: 60px;
+    right: 20px;
   }
 }

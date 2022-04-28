@@ -19,7 +19,7 @@ export class HeaderComponent {
   @ViewChild('header') header: ElementRef;
 
   @HostListener('window:scroll', ['$event']) onScroll() {
-    this.headerSticky = window.scrollY > this.header.nativeElement.offsetHeight - 20;
+    this.headerSticky = window.scrollY > this.header.nativeElement.offsetHeight;
   }
 
   public signup() {

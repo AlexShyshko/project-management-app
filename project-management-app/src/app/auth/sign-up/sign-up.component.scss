@@ -19,7 +19,8 @@ main {
 .signUp-wrapper {
   width: 350px;
   height: 510px;
-  margin: 10vh auto;
+  margin: 0 auto;
+  margin-top: 10vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -81,4 +82,33 @@ main {
 
 mat-error ::ng-deep {
   color: rgb(254, 160, 160);
+}
+
+@media (max-width: 1200px) {
+  .container {
+    background-size: 350px;
+  }
+}
+
+@media (max-width: 850px) {
+  .container {
+    background-size: 300px;
+    background-position: left bottom;
+  }
+   .signUp-wrapper {
+    margin-top: 7vh;
+  }
+}
+
+@media (max-width: 550px) {
+  .container {
+    background-image: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .signUp-wrapper {
+    width: 300px;
+    margin-top: 2vh;
+  }
 }

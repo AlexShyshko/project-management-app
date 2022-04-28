@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/core/services/api';
 
 @Component({
   selector: 'app-new-board',
@@ -15,7 +16,7 @@ export class NewBoardComponent implements OnInit {
     ])
   });
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +24,7 @@ export class NewBoardComponent implements OnInit {
   submit() {
     if (this.form.valid) {
       this.router.navigate(['/boards']);
+      this.apiService.createBoard('', {title: this.form.get('title')?.value}).subscribe(res => console.log('board', res.title));
     }
   }
 }
