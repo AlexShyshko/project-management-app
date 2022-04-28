@@ -9,7 +9,6 @@ import { CoreService } from '../services/core.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-
   constructor(private apiService: ApiService, private router: Router, public coreService: CoreService) {}
 
   headerSticky: boolean = false;
@@ -24,7 +23,7 @@ export class HeaderComponent {
       login: 'test123',
       password: 'test123',
     };
-    this.apiService.authenticate(user, 'signup').subscribe(res => console.log('userId', res.id));
+    this.apiService.authenticate(user, 'signup').subscribe((res) => console.log('userId', res.id));
     this.router.navigate(['/signup']);
   }
 
@@ -33,8 +32,7 @@ export class HeaderComponent {
       login: 'test1',
       password: 'test1',
     };
-  }
-    this.apiService.authenticate(user, 'signin').subscribe(res => console.log('token', res.token));
+    this.apiService.authenticate(user, 'signin').subscribe((res) => console.log('token', res.token));
     this.router.navigate(['/auth']);
   }
 }

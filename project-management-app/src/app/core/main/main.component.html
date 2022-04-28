@@ -8,8 +8,9 @@
       </p>
       <div class="example-button-row">
         <p>Delete routing buttons later</p>
+        <button [routerLink]="['/main']" mat-raised-button>main</button>
         <button [routerLink]="['/auth']" mat-raised-button color="primary">auth</button>
-        <button [routerLink]="['/boards']" mat-raised-button color="accent">boards</button>
+        <button [routerLink]="['/signup']" mat-raised-button color="accent">signup</button>
         <button [routerLink]="['/404']" mat-raised-button color="warn">404</button>
       </div>
       <div [ngStyle]="{ border: '3px green solid', width: 'fit-content' }">
