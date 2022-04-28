@@ -7,29 +7,14 @@ import { MaterialModule } from '../shared/modules/material.module';
 import { IncorrectPageComponent } from './incorrect-page/incorrect-page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiService } from './services/api';
+import { TranslatingModule } from '../shared/translating/translating.module';
 
 const routes: Routes = [{ path: '', component: MainComponent }];
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    FooterComponent,
-    MainComponent,
-    IncorrectPageComponent,
-  ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    RouterModule.forChild(routes),
-  ],
-  exports: [
-    HeaderComponent,
-    FooterComponent,
-    MainComponent,
-    IncorrectPageComponent,
-    RouterModule,
-  ],
+  declarations: [HeaderComponent, FooterComponent, MainComponent, IncorrectPageComponent],
+  imports: [CommonModule, MaterialModule, RouterModule.forChild(routes), TranslatingModule],
+  exports: [HeaderComponent, FooterComponent, MainComponent, IncorrectPageComponent, RouterModule, TranslatingModule],
   providers: [ApiService],
 })
-
 export class CoreModule {}
