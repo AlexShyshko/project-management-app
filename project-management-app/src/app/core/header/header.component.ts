@@ -3,16 +3,17 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { ApiService } from '../services/api';
 import { MatDialog } from '@angular/material/dialog';
 import { NewBoardComponent } from 'src/app/boards/new-board/new-board.component';
+import { CoreService } from '../services/core.service';
+
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-
 export class HeaderComponent {
 
-  constructor(private apiService: ApiService, private router: Router, public dialog: MatDialog) {}
+  constructor(private apiService: ApiService, private router: Router, public dialog: MatDialog, public coreService: CoreService) {}
 
   headerSticky: boolean = false;
 

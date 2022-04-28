@@ -10,7 +10,9 @@ import { CoreModule } from './core/core.module';
 import { MaterialModule } from './shared/modules/material.module';
 import { AuthModule } from './auth/auth.module';
 import { BoardsModule } from './boards/boards.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslatingModule } from './shared/translating/translating.module';
+import { CoreService } from './core/services/core.service';
 import { SignUpModule } from './auth/sign-up/sign-up.module';
 
 @NgModule({
@@ -25,11 +27,11 @@ import { SignUpModule } from './auth/sign-up/sign-up.module';
     AuthModule,
     BoardsModule,
     MaterialModule,
-    MaterialModule,
     HttpClientModule,
+    TranslatingModule,
     SignUpModule,
   ],
-  providers: [],
+  providers: [CoreService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
