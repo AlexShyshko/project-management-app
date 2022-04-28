@@ -38,7 +38,16 @@ export class AuthComponent implements OnInit {
       login,
       password,
     };
-    this.apiService.authenticate(user, 'signin').subscribe(res => console.log('token', res.token));
+    this.apiService.authenticate(user, 'signin').subscribe(res => {
+      if (!res.token) return;
+      localStorage.setItem('token', res.token);
+      this.apiService.getUsers(res.token).subscribe(gres => {
+        const id = gres.filter(item => item.login === login)[0].id;
+        if (!id) return;
+        localStorage.setItem('id', id);
+      });
+    });
+
     if (this.form.valid) {
       this.router.navigate(['/boards']);
     }
