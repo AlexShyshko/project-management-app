@@ -1,9 +1,9 @@
-<header (scroll)="onScroll()" [ngClass]="headerSticky?'sticky':'noSticky'">
+<header (scroll)="onScroll()" [ngClass]="headerSticky ? 'sticky' : 'noSticky'">
   <div class="header-section">
     <div class="left-block">
       <div class="logo">
         <a href="">
-          <img src="../../../assets/header/logo.png" alt="logo" class="logo-icon">
+          <img src="../../../assets/header/logo.png" alt="logo" class="logo-icon" />
         </a>
       </div>
     </div>
@@ -15,21 +15,32 @@
       <div class="search-block">
         <mat-form-field>
           <mat-icon matPrefix>search</mat-icon>
-          <input matInput type="search">
+          <input matInput type="search" />
         </mat-form-field>
       </div>
       <div class="vertical-line"></div>
       <div class="login-block">
         <button mat-button [matMenuTriggerFor]="menu" class="account-button">
           <mat-icon matPrefix>person</mat-icon>
-          My account</button>
+          My account
+        </button>
         <mat-menu #menu="matMenu" class="account-buttons">
           <button mat-menu-item (click)="signin()">Log in</button>
           <button mat-menu-item (click)="signup()">Register</button>
           <button mat-menu-item>Edit profile</button>
         </mat-menu>
       </div>
+      <mat-form-field appearance="fill" class="lang-select">
+        <mat-label>Language</mat-label>
+        <mat-select #selLang (selectionChange)="coreService.translateLanguageTo(selLang.value)">
+          <mat-option
+            *ngFor="let language of coreService.translate.getLangs()"
+            [value]="language"
+            class="lang-select-option"
+            >{{ language | uppercase }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
     </div>
-
   </div>
 </header>

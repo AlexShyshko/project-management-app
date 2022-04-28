@@ -1,16 +1,16 @@
 import { Router } from '@angular/router';
 import { Component, HostListener } from '@angular/core';
 import { ApiService } from '../services/api';
+import { CoreService } from '../services/core.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-
 export class HeaderComponent {
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router, public coreService: CoreService) {}
 
   headerSticky: boolean = false;
 
@@ -33,10 +33,8 @@ export class HeaderComponent {
       login: 'test1',
       password: 'test1',
     };
+  }
     this.apiService.authenticate(user, 'signin').subscribe(res => console.log('token', res.token));
     this.router.navigate(['/auth']);
   }
-
-
-
 }

@@ -12,6 +12,10 @@
         <button [routerLink]="['/boards']" mat-raised-button color="accent">boards</button>
         <button [routerLink]="['/404']" mat-raised-button color="warn">404</button>
       </div>
+      <div [ngStyle]="{ border: '3px green solid', width: 'fit-content' }">
+        <h3>Translation example</h3>
+        <h4>{{ 'TITLE' | translate }}</h4>
+      </div>
     </div>
   </div>
 </main>
