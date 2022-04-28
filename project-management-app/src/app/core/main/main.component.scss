@@ -1,5 +1,13 @@
 main {
-  background: linear-gradient(175deg, rgba(88,84,183,1) 19%, rgba(115,112,195,1) 30%, rgba(155,153,212,1) 38%, rgba(190,189,227,1) 46%, rgba(237,236,255,1) 56%, rgba(255,255,255,1) 64%);
+  background: linear-gradient(
+    175deg,
+    rgba(88, 84, 183, 1) 19%,
+    rgba(115, 112, 195, 1) 30%,
+    rgba(155, 153, 212, 1) 38%,
+    rgba(190, 189, 227, 1) 46%,
+    rgba(237, 236, 255, 1) 56%,
+    rgba(255, 255, 255, 1) 64%
+  );
 }
 
 .main-section {
@@ -12,13 +20,14 @@ main {
 
 .app-background {
   width: 100%;
-  background: no-repeat url('../../../assets/main-page/background-img.png');
-  background-size: 50%;
-  background-position: 100% 0%;
+  background: no-repeat url("../../../assets/main-page/background-img.png");
+  background-size: 800px;
+  background-position: center right;
 }
 
 .app-title {
   margin-top: 15vh;
+  margin-left: 20px;
   font-size: 10rem;
   color: var(--text-color-light);
   text-shadow: 3px 3px 3px rgba(150, 150, 150, 1);
@@ -27,4 +36,52 @@ main {
 .app-description {
   width: 40%;
   font-size: 1.5rem;
+  margin-left: 20px;
+}
+
+@media (max-width: 1250px) {
+  .app-background {
+    background-size: 600px;
+    background-position: center right;
+  }
+}
+
+@media (max-width: 1080px) {
+  .app-background {
+    background-size: 600px;
+    background-position: 50% 130%;
+  }
+  .app-title {
+    text-align: center;
+    margin-top: 2.5vh;
+    margin-left: 0;
+    font-size: 8rem;
+  }
+  .app-description {
+    text-align: justify;
+    margin: 0 auto;
+    width: 70%;
+  }
+}
+
+@media (max-width: 620px) {
+  .app-background {
+    background-size: 450px;
+    background-position: 50% 95%;
+  }
+  .app-title {
+    margin-top: 1.5vh;
+    font-size: 6rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .app-background {
+    background-size: 300px;
+    background-position: 50% 100%;
+  }
+  .app-title {
+    margin-top: 1.5vh;
+    font-size: 5rem;
+  }
 }

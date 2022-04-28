@@ -19,6 +19,10 @@ header {
   align-items: center;
 }
 
+.left-block {
+  width: 50%;
+}
+
 .logo-icon {
   width: 60px;
 }
@@ -60,4 +64,47 @@ header {
 
 ::ng-deep .account-buttons {
   background-color: var(--main-color);
+}
+
+@media (max-width: 980px) {
+  .left-block {
+    width: 40%;
+  }
+}
+
+@media (max-width: 820px) {
+  .header-section {
+    flex-direction: column;
+  }
+  .left-block {
+    width: 100%;
+    justify-content: start;
+  }
+  .new-board-btn {
+    margin-left: 30%;
+  }
+}
+
+@media (max-width: 500px) {
+  .mat-form-field {
+    width: 100px;
+  }
+  .right-block {
+    width: 100%;
+  }
+  .new-board-btn {
+    margin-left: 20%;
+  }
+}
+
+@media (max-width: 375px) {
+  .new-board-btn {
+    margin-left: 10%;
+  }
+  .mat-form-field {
+    width: 50px;
+  }
+  .vertical-line {
+    margin-left: 5px;
+  }
 }

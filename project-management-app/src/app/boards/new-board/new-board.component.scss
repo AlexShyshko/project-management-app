@@ -14,7 +14,7 @@ mat-error ::ng-deep{
 
 .form-buttons {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .submit-button {
@@ -23,6 +23,7 @@ mat-error ::ng-deep{
   transition: 0.3s ease-in-out;
   &:disabled {
     cursor: not-allowed;
+    background-color: rgba(255,255,255,.12);
     &:hover {
       background-color: rgba(255,255,255,.12);
     }

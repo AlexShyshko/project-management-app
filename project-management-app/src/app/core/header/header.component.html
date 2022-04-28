@@ -1,4 +1,4 @@
-<header (scroll)="onScroll()" [ngClass]="headerSticky?'sticky':'noSticky'">
+<header (scroll)="onScroll()" [ngClass]="headerSticky?'sticky':'noSticky'" #header>
   <div class="header-section">
     <div class="left-block">
       <div class="logo">
@@ -6,8 +6,8 @@
           <img src="../../../assets/header/logo.png" alt="logo" class="logo-icon">
         </a>
       </div>
+      <button mat-stroked-button class="new-board-btn" (click)="openDialog()">Create new board</button>
     </div>
-    <button mat-stroked-button class="new-board-btn" (click)="openDialog()">Create new board</button>
     <div class="right-block">
       <div class="toggle-block">
         <mat-slide-toggle>En</mat-slide-toggle>
@@ -30,6 +30,5 @@
         </mat-menu>
       </div>
     </div>
-
   </div>
 </header>

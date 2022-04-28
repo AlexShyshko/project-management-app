@@ -33,6 +33,11 @@ footer {
 .logo-icon{
   width: 90px;
 }
+@media (max-width: 970px) {
+  .footer-section .git {
+    width: 40%;
+  }
+}
 
 @media (max-width: 640px) {
   .footer-section .git {

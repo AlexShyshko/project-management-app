@@ -11,15 +11,16 @@ main {
   justify-content: center;
   height: 85vh;
   background-image: url('../../../assets/auth/auth-background-2.png');
-  background-position: 100% 70%;
+  background-position: right bottom;
   background-repeat: no-repeat;
-  background-size: 30%;
+  background-size: 500px;
 }
 
 .login-wrapper {
   width: 350px;
   height: 370px;
-  margin: 15vh auto;
+  margin: 0 auto;
+  margin-top: 15vh;
   display: flex;
   flex-direction: column;
   background-color: rgb(88, 84, 183);
@@ -73,4 +74,34 @@ main {
 
 mat-error ::ng-deep{
   color: rgb(254, 160, 160);
+}
+
+@media (max-width: 1200px) {
+  .container {
+    background-size: 350px;
+  }
+}
+
+@media (max-width: 850px) {
+  .container {
+    background-size: 300px;
+    background-position: right bottom;
+  }
+   .login-wrapper {
+    margin: 10vh auto;
+  }
+}
+
+@media (max-width: 550px) {
+  .container {
+    background-image: none;
+    height: 75vh;
+  }
+}
+
+@media (max-width: 400px) {
+  .login-wrapper {
+    width: 300px;
+    margin: 5vh auto;
+  }
 }
