@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api';
+import { StorageService } from 'src/app/core/services/storage.service';
 import { User } from 'src/app/models/user.model';
 import { CustomValidator } from 'src/app/shared/services/customValidator';
 
@@ -25,22 +26,24 @@ export class AuthComponent implements OnInit {
     ]),
   });
 
-  constructor(public apiService: ApiService, private router: Router) { }
+  constructor(
+    public apiService: ApiService,
+    private router: Router,
+    private storageService: StorageService,
+  ) { }
 
   ngOnInit(): void {}
 
-  submit(login: string, password: string) {
+  submit(login: string, password: string): void {
     const user: User = {
       login,
       password,
     };
     this.apiService.authenticate(user, 'signin').subscribe(res => {
-      if (!res.token) return;
-      localStorage.setItem('token', res.token);
-      this.apiService.getUsers(res.token).subscribe(gres => {
+      this.storageService.setItem('token', res.token);
+      this.apiService.getUsers(res.token as string).subscribe(gres => {
         const id = gres.filter(item => item.login === login)[0].id;
-        if (!id) return;
-        localStorage.setItem('id', id);
+        this.storageService.setItem('userId', id);
       });
     });
 
