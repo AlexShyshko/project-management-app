@@ -12,6 +12,11 @@ const routes: Routes = [
   },
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule) },
   { path: 'signup', loadChildren: () => import('./auth/sign-up/sign-up.module').then((m) => m.SignUpModule) },
+  {
+    path: 'edit-profile',
+    loadChildren: () => import('./core/core.module').then((m) => m.CoreModule),
+    canActivate: [AuthGuard],
+  },
   { path: '**', component: IncorrectPageComponent },
 ];
 
