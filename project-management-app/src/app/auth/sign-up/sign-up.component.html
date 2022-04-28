@@ -5,23 +5,23 @@
       <div class="first-part">
         <p class="signUp-title">Sign up</p>
         <mat-form-field appearance="fill">
-          <mat-label>login</mat-label>
-          <input formControlName="login" matInput>
-          <mat-error *ngIf="form.get('login')!.errors?.['required']">
-            Please enter a login
+          <mat-label>name</mat-label>
+          <input formControlName="name" matInput>
+          <mat-error *ngIf="form.get('name')!.errors?.['required']">
+            Please enter your name
           </mat-error>
-          <mat-error *ngIf="form.get('login')!.errors?.['minlength']">
-            Please enter at least {{form.get('login')!.errors?.['minlength'].requiredLength}} characters
+          <mat-error *ngIf="form.get('name')!.errors?.['minlength']">
+            Please enter at least {{form.get('name')!.errors?.['minlength'].requiredLength}} characters
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>e-mail</mat-label>
           <input formControlName="email" matInput>
           <mat-error *ngIf="form.get('email')!.errors?.['required']">
-            Please enter an e-mail
+            Please enter e-mail
           </mat-error>
           <mat-error *ngIf="form.get('email')!.errors?.['email']">
-            The login email is invalid
+            The login e-mail is invalid
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">

@@ -13,9 +13,9 @@ export class AuthComponent implements OnInit {
   hide = true;
 
   form: FormGroup = new FormGroup({
-    login: new FormControl('', [
+    email: new FormControl('', [
       Validators.required,
-      Validators.minLength(5),
+      Validators.email,
     ]),
     password: new FormControl('', [
       Validators.required,

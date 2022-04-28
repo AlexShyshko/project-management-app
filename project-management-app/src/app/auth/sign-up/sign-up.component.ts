@@ -19,9 +19,9 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      login: new FormControl('', [
+      name: new FormControl('', [
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(2),
       ]),
       email: new FormControl('', [
         Validators.required,

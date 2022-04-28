@@ -4,13 +4,13 @@
       <div class="login-wrapper">
         <p class="login-title">Login</p>
         <mat-form-field appearance="fill">
-          <mat-label>login</mat-label>
-          <input formControlName="login" matInput>
-          <mat-error *ngIf="form.get('login')!.errors?.['required']">
-            Please enter a login
+          <mat-label>e-mail</mat-label>
+          <input formControlName="email" matInput>
+          <mat-error *ngIf="form.get('email')!.errors?.['required']">
+            Please enter e-mail
           </mat-error>
-          <mat-error *ngIf="form.get('login')!.errors?.['minlength']">
-            Please enter at least {{form.get('login')!.errors?.['minlength'].requiredLength}} characters
+          <mat-error *ngIf="form.get('email')!.errors?.['email']">
+            The login e-mail is invalid
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">

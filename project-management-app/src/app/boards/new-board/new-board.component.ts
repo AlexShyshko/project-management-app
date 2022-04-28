@@ -6,14 +6,14 @@ import { ApiService } from 'src/app/core/services/api';
 @Component({
   selector: 'app-new-board',
   templateUrl: './new-board.component.html',
-  styleUrls: ['./new-board.component.scss']
+  styleUrls: ['./new-board.component.scss'],
 })
 export class NewBoardComponent implements OnInit {
   form: FormGroup = new FormGroup({
     title: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
-    ])
+    ]),
   });
 
   constructor(private router: Router, private apiService: ApiService) { }
@@ -24,7 +24,7 @@ export class NewBoardComponent implements OnInit {
   submit() {
     if (this.form.valid) {
       this.router.navigate(['/boards']);
-      this.apiService.createBoard('', {title: this.form.get('title')?.value}).subscribe(res => console.log('board', res.title));
+      this.apiService.createBoard('', { title: this.form.get('title')?.value }).subscribe(res => console.log('board', res.title));
     }
   }
 }
