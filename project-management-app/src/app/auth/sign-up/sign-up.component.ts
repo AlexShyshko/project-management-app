@@ -15,39 +15,32 @@ export class SignUpComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(public authService: ApiService, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(public authService: ApiService, private router: Router, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      login: new FormControl('', [
-        Validators.required,
-        Validators.minLength(5),
-      ]),
-      email: new FormControl('', [
-        Validators.required,
-        Validators.email,
-      ]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(8),
-        CustomValidator.upperCaseValidator,
-        CustomValidator.lowerCaseValidator,
-        CustomValidator.numbersValidator,
-        CustomValidator.symbolsValidator,
-      ]),
-      confirmPassword: new FormControl('', [
-        Validators.required,
-      ]),
-    }, {
-      validator: CustomValidator.passwordValidator,
-    });
+    this.form = this.formBuilder.group(
+      {
+        login: new FormControl('', [Validators.required, Validators.minLength(5)]),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.minLength(8),
+          CustomValidator.upperCaseValidator,
+          CustomValidator.lowerCaseValidator,
+          CustomValidator.numbersValidator,
+          CustomValidator.symbolsValidator,
+        ]),
+        confirmPassword: new FormControl('', [Validators.required]),
+      },
+      {
+        validator: CustomValidator.passwordValidator,
+      },
+    );
   }
-
 
   submit() {
     if (this.form.valid) {
-      this.router.navigate(['/boards']);
+      this.router.navigate(['/main']);
     }
   }
-
 }
