@@ -8,13 +8,25 @@ import { IncorrectPageComponent } from './incorrect-page/incorrect-page.componen
 import { RouterModule, Routes } from '@angular/router';
 import { ApiService } from './services/api';
 import { TranslatingModule } from '../shared/translating/translating.module';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
-const routes: Routes = [{ path: '', component: MainComponent }];
+const routes: Routes = [
+  { path: '', component: MainComponent },
+  { path: 'edit-profile', component: EditProfileComponent },
+];
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, MainComponent, IncorrectPageComponent],
+  declarations: [HeaderComponent, FooterComponent, MainComponent, IncorrectPageComponent, EditProfileComponent],
   imports: [CommonModule, MaterialModule, RouterModule.forChild(routes), TranslatingModule],
-  exports: [HeaderComponent, FooterComponent, MainComponent, IncorrectPageComponent, RouterModule, TranslatingModule],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    MainComponent,
+    IncorrectPageComponent,
+    EditProfileComponent,
+    RouterModule,
+    TranslatingModule,
+  ],
   providers: [ApiService],
 })
 export class CoreModule {}
