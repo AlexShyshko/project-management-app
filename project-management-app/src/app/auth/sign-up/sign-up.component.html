@@ -1,12 +1,12 @@
 <main>
 <div class="container">
-  <form [formGroup]="form" (ngSubmit)="submit()">
+  <form [formGroup]="form" (ngSubmit)="submit(login.value, name.value, password.value)">
     <div class="signUp-wrapper">
       <div class="first-part">
         <p class="signUp-title">Sign up</p>
         <mat-form-field appearance="fill">
           <mat-label>login</mat-label>
-          <input formControlName="login" matInput>
+          <input formControlName="login" matInput #login>
           <mat-error *ngIf="form.get('login')!.errors?.['required']">
             Please enter a login
           </mat-error>
@@ -16,7 +16,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>e-mail</mat-label>
-          <input formControlName="email" matInput>
+          <input formControlName="email" matInput #name>
           <mat-error *ngIf="form.get('email')!.errors?.['required']">
             Please enter an e-mail
           </mat-error>
@@ -26,7 +26,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>password</mat-label>
-          <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+          <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" #password>
           <mat-error *ngIf="form.get('password')!.errors?.['required']">
             Please enter a password
           </mat-error>
