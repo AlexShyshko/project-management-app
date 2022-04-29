@@ -50,8 +50,8 @@ main {
 
 @media (max-width: 1080px) {
   .app-background {
-    background-size: 500px;
-    background-position: 50% 160%;
+    background-size: 450px;
+    background-position: 50% 120%;
   }
   .app-title {
     text-align: center;
@@ -63,30 +63,38 @@ main {
     text-align: justify;
     margin: 0 auto;
     width: 80%;
+    font-size: 1.4rem;
+    line-height: 2rem;
   }
 }
 
 @media (max-width: 620px) {
   .app-background {
     background-size: 400px;
-    background-position: 50% 120%;
+    background-position: 50% 110%;
   }
   .app-title {
     margin-top: 1.5vh;
     font-size: 6rem;
   }
+  .app-description {
+    font-size: 1.2rem;
+    width: 80%;
+    line-height: 1.8rem;
+  }
 }
 
 @media (max-width: 400px) {
   .app-background {
-    background-size: 300px;
-    background-position: 50% 100%;
+    background-size: 350px;
+    background-position: 50% 90%;
   }
   .app-title {
-    margin-top: 1.5vh;
+    margin-top: 2.5vh;
     font-size: 5rem;
   }
   .app-description {
     width: 90%;
+    line-height: 1.7rem;
   }
 }

@@ -15,9 +15,9 @@
           <mat-option
             *ngFor="let language of coreService.translate.getLangs()"
             [value]="language"
-            class="lang-select-option"
-            >{{ language | uppercase }}</mat-option
-          >
+            class="lang-select-option">
+            {{ language | uppercase }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
       <div class="search-block">

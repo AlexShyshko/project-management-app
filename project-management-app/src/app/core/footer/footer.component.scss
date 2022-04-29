@@ -1,6 +1,5 @@
 footer {
   background: var(--main-color);
-  height: 10vh;
 }
 
 .footer-section {
@@ -11,6 +10,7 @@ footer {
   align-items: center;
   max-width: 1440px;
   padding: 10px 20px;
+  height: 10vh;
 }
 
 .footer-section .git {
@@ -48,18 +48,17 @@ footer {
 
 @media (max-width: 400px) {
 
-  .footer-section{
-    flex-flow:column wrap;
+  .footer-section {
+    flex-flow:column;
     position: relative;
     align-items: start;
+    height: 14vh;
   }
   .footer-section :nth-child(1) {
     order: 2;
-    display: inline-block;
   }
   .footer-section :nth-child(3) {
     order: 2;
-    display: inline-block;
   }
   .footer-section .git {
     width: 100%;
