@@ -12,7 +12,7 @@ import { StorageService } from '../services/storage.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
   constructor(private apiService: ApiService, private router: Router, public dialog: MatDialog, public coreService: CoreService, private storageService: StorageService) {}
 
   isLogged: boolean = false;
