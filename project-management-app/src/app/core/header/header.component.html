@@ -6,7 +6,12 @@
           <img src="../../../assets/header/logo.png" alt="logo" class="logo-icon" />
         </a>
       </div>
-      <button mat-stroked-button class="new-board-btn" (click)="openDialog()">Create new board</button>
+      <button mat-stroked-button
+        [disabled]="!isLogged"
+        class="new-board-btn"
+        (click)="openDialog()">
+        Create new board
+      </button>
     </div>
     <div class="right-block">
       <mat-form-field appearance="fill" class="lang-select">
@@ -33,9 +38,16 @@
           My account
         </button>
         <mat-menu #menu="matMenu" class="account-buttons">
-          <button mat-menu-item (click)="signin()">Log in</button>
-          <button mat-menu-item (click)="signup()">Register</button>
-          <button mat-menu-item>Edit profile</button>
+          <div *ngIf="!isLogged; else ifLoggedIn">
+            <button mat-menu-item (click)="signin()">Login</button>
+            <button mat-menu-item (click)="signup()">Register</button>
+          </div>
+          <ng-template #ifLoggedIn>
+            <button mat-menu-item (click)="editProfile()">Edit profile</button>
+            <button mat-menu-item (click)="logout()">Logout</button>
+          </ng-template>
+
+
         </mat-menu>
       </div>
     </div>

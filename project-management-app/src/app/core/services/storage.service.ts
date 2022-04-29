@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class StorageService {
-  public isLogged$ = new BehaviorSubject(false);
+  public isLogged$ = new BehaviorSubject(this.isLogged());
 
   public setItem(key: string, item?: string): void {
     if (!item) return;

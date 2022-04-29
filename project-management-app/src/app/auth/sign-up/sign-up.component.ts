@@ -45,7 +45,6 @@ export class SignUpComponent implements OnInit {
 
   }
 
-
   submit(name: string, login: string, password: string) {
     const user: User = {
       name,

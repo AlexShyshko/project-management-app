@@ -9,6 +9,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ApiService } from './services/api';
 import { TranslatingModule } from '../shared/translating/translating.module';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ConfirmationComponent } from './edit-profile/confirmation/confirmation.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -16,8 +18,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, MainComponent, IncorrectPageComponent, EditProfileComponent],
-  imports: [CommonModule, MaterialModule, RouterModule.forChild(routes), TranslatingModule],
+  declarations: [HeaderComponent, FooterComponent, MainComponent, IncorrectPageComponent, EditProfileComponent, ConfirmationComponent],
+  imports: [CommonModule, MaterialModule, RouterModule.forChild(routes), TranslatingModule, ReactiveFormsModule,
+    FormsModule],
   exports: [
     HeaderComponent,
     FooterComponent,

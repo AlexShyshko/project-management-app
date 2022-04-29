@@ -1,4 +1,4 @@
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AbstractControl, FormControl } from '@angular/forms';
 
 export class CustomValidator {
   static upperCaseValidator(control: FormControl): { [key: string]: { [key: string]: string } } | null {
@@ -48,7 +48,7 @@ export class CustomValidator {
 
   static passwordValidator(control: AbstractControl) {
     let password = control.get('password')!.value;
-    if (control.get('confirmPassword')!.touched || control.get('confirmPassword')!.dirty) {
+    if (control?.get('confirmPassword')!.touched || control?.get('confirmPassword')!.dirty) {
       let verifyPassword = control.get('confirmPassword')!.value;
       if (password != verifyPassword) {
         return control.get('confirmPassword')!.setErrors( { MatchPassword: true } );
