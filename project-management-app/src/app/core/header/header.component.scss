@@ -68,6 +68,10 @@ header {
   background-color: var(--main-color);
 }
 
+.lang-select {
+  width: 18%;
+}
+
 @media (max-width: 1150px) {
   .right-block {
     width: 40%;

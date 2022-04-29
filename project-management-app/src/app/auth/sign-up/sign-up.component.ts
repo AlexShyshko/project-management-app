@@ -50,7 +50,7 @@ export class SignUpComponent implements OnInit {
     const user: User = {
       name,
       login,
-      password
+      password,
     };
     this.apiService.authenticate(user, 'signup').subscribe(res => console.log(res));
     if (this.form.valid) {
