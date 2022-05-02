@@ -1,4 +1,4 @@
-<header (scroll)="onScroll()" [ngClass]="headerSticky?'sticky':'noSticky'" #header>
+<header (scroll)="onScroll()" [ngClass]="headerSticky ? 'sticky' : 'noSticky'" #header>
   <div class="header-section">
     <div class="left-block">
       <div class="logo">
@@ -6,21 +6,19 @@
           <img src="../../../assets/header/logo.png" alt="logo" class="logo-icon" />
         </a>
       </div>
-      <button mat-stroked-button
-        [disabled]="!isLogged"
-        class="new-board-btn"
-        (click)="openDialog()">
-        Create new board
+      <button mat-stroked-button [disabled]="!isLogged" class="new-board-btn" (click)="openDialog()">
+        {{ 'core.header.new-button' | translate }}
       </button>
     </div>
     <div class="right-block">
       <mat-form-field appearance="fill" class="lang-select">
-        <mat-label>Language</mat-label>
+        <mat-label>{{ 'core.header.language' | translate }}</mat-label>
         <mat-select #selLang (selectionChange)="coreService.translateLanguageTo(selLang.value)">
           <mat-option
             *ngFor="let language of coreService.translate.getLangs()"
             [value]="language"
-            class="lang-select-option">
+            class="lang-select-option"
+          >
             {{ language | uppercase }}
           </mat-option>
         </mat-select>
@@ -35,19 +33,17 @@
       <div class="login-block">
         <button mat-button [matMenuTriggerFor]="menu" class="account-button">
           <mat-icon matPrefix>person</mat-icon>
-          My account
+          {{ 'core.header.my-account' | translate }}
         </button>
         <mat-menu #menu="matMenu" class="account-buttons">
           <div *ngIf="!isLogged; else ifLoggedIn">
-            <button mat-menu-item (click)="signin()">Login</button>
-            <button mat-menu-item (click)="signup()">Register</button>
+            <button mat-menu-item (click)="signin()">{{ 'core.header.login' | translate }}</button>
+            <button mat-menu-item (click)="signup()">{{ 'core.header.register' | translate }}</button>
           </div>
           <ng-template #ifLoggedIn>
-            <button mat-menu-item (click)="editProfile()">Edit profile</button>
-            <button mat-menu-item (click)="logout()">Logout</button>
+            <button mat-menu-item (click)="editProfile()">{{ 'core.header.edit-profile' | translate }}</button>
+            <button mat-menu-item (click)="logout()">{{ 'core.header.logout' | translate }}</button>
           </ng-template>
-
-
         </mat-menu>
       </div>
     </div>
