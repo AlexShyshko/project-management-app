@@ -79,20 +79,20 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     this.dialog.open(ConfirmationComponent, { panelClass: 'custom-dialog-container' });
   }
 
-  getCustomValidatorKey(message: string): string {
-    switch (message) {
-      case '- at least one lowercase letter':
-        return 'core.edit-profile.lower-case';
-      case '- at least one number':
-        return 'core.edit-profile.numbers';
-      case '- at least one special symbol (!@#$%^&*,?])':
-        return 'core.edit-profile.symbols';
-      case '- at least one uppercase letter':
-        return 'core.edit-profile.upper-case';
-      case undefined:
-        return '';
-      default:
-        return '';
-    }
-  }
+  // getCustomValidatorKey(message: string): string {
+  //   switch (message) {
+  //     case '- at least one lowercase letter':
+  //       return 'core.edit-profile.lower-case';
+  //     case '- at least one number':
+  //       return 'core.edit-profile.numbers';
+  //     case '- at least one special symbol (!@#$%^&*,?])':
+  //       return 'core.edit-profile.symbols';
+  //     case '- at least one uppercase letter':
+  //       return 'core.edit-profile.upper-case';
+  //     case undefined:
+  //       return '';
+  //     default:
+  //       return '';
+  //   }
+  // }
 }

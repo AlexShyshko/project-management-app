@@ -45,5 +45,20 @@
     "incorrect-page": {
       "wrong": "Something went wrong..."
     }
+  },
+  "auth": {
+    "auth": {
+      "title": "Login",
+      "login": "login",
+      "enter-mail": "Please enter e-mail",
+      "mail-invalid": "The login e-mail is invalid",
+      "password": "password",
+      "enter-password": "Please enter password",
+      "unsecure-password": "Your password isn't secure enough",
+      "minimum-characters": "Minimum characters count",
+      "login-button": "Login",
+      "havent-registered": "Haven't registered yet?",
+      "sign-up": "Sign up"
+    }
   }
 }

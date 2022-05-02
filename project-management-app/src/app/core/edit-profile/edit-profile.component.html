@@ -38,7 +38,7 @@
                 {{form.get('password')!.errors?.['minlength'].requiredLength}}
               </mat-error>
               <mat-error *ngFor="let item of form.get('password')!.errors | keyvalue">
-                {{ getCustomValidatorKey(item.value.message) | translate }}
+                {{ coreService.getCustomValidatorKey(item.value.message) | translate }}
               </mat-error>
             </mat-error>
             <button

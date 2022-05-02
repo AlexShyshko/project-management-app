@@ -9,8 +9,7 @@ const routes: Routes = [{ path: '', component: SignUpComponent }];
 
 @NgModule({
   declarations: [SignUpComponent],
-  imports: [CommonModule, MaterialModule, RouterModule.forChild(routes), ReactiveFormsModule,
-    FormsModule],
+  imports: [CommonModule, MaterialModule, RouterModule.forChild(routes), ReactiveFormsModule, FormsModule],
   exports: [RouterModule],
 })
 export class SignUpModule {}

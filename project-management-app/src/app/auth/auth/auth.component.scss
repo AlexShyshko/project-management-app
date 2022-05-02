@@ -24,9 +24,23 @@ main {
   margin-top: 15vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   background-color: rgb(88, 84, 183);
   padding: 0 20px;
   border-radius: 15px;
+}
+
+.first-part {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.second-part {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 30px;
 }
 
 .login-title {
@@ -88,7 +102,7 @@ mat-error ::ng-deep {
     background-size: 300px;
     background-position: right bottom;
   }
-   .login-wrapper {
+  .login-wrapper {
     margin-top: 10vh;
   }
 }

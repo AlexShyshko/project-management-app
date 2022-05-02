@@ -45,5 +45,20 @@
     "incorrect-page": {
       "wrong": "Что-то пошло не так..."
     }
+  },
+  "auth": {
+    "auth": {
+      "title": "Авторизация",
+      "login": "логин",
+      "enter-mail": "Введите e-mail",
+      "mail-invalid": "Некорректный e-mail",
+      "password": "пароль",
+      "enter-password": "Введите пароль",
+      "unsecure-password": "Пароль недостаточно надёжный",
+      "minimum-characters": "Минимальное количество символов",
+      "login-button": "Войти",
+      "havent-registered": "Ещё не регистрировались?",
+      "sign-up": "Регистрация"
+    }
   }
 }
