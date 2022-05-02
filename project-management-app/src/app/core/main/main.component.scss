@@ -21,13 +21,14 @@ main {
 
 .app-background {
   width: 100%;
-  background: no-repeat url('../../../assets/main-page/background-img.png');
-  background-size: 50%;
-  background-position: 100% 0%;
+  background: no-repeat url("../../../assets/main-page/background-img.png");
+  background-size: 800px;
+  background-position: center right;
 }
 
 .app-title {
   margin-top: 15vh;
+  margin-left: 20px;
   font-size: 10rem;
   color: var(--text-color-light);
   text-shadow: 3px 3px 3px rgba(150, 150, 150, 1);
@@ -36,4 +37,64 @@ main {
 .app-description {
   width: 40%;
   font-size: 1.5rem;
+  line-height: 2.2rem;
+  margin-left: 20px;
+}
+
+@media (max-width: 1250px) {
+  .app-background {
+    background-size: 600px;
+    background-position: center right;
+  }
+}
+
+@media (max-width: 1080px) {
+  .app-background {
+    background-size: 450px;
+    background-position: 50% 120%;
+  }
+  .app-title {
+    text-align: center;
+    margin-top: 1.8vh;
+    margin-left: 0;
+    font-size: 8rem;
+  }
+  .app-description {
+    text-align: justify;
+    margin: 0 auto;
+    width: 80%;
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+}
+
+@media (max-width: 620px) {
+  .app-background {
+    background-size: 400px;
+    background-position: 50% 110%;
+  }
+  .app-title {
+    margin-top: 1.5vh;
+    font-size: 6rem;
+  }
+  .app-description {
+    font-size: 1.2rem;
+    width: 80%;
+    line-height: 1.8rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .app-background {
+    background-size: 350px;
+    background-position: 50% 90%;
+  }
+  .app-title {
+    margin-top: 2.5vh;
+    font-size: 5rem;
+  }
+  .app-description {
+    width: 90%;
+    line-height: 1.7rem;
+  }
 }

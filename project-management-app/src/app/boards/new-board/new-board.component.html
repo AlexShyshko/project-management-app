@@ -1,0 +1,21 @@
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <h1 mat-dialog-title>Create your new project</h1>
+    <div mat-dialog-content class="content">
+      <mat-form-field appearance="fill">
+        <mat-label>Board title</mat-label>
+        <input formControlName="title" matInput>
+        <mat-error *ngIf="form.get('title')!.errors?.['required']">
+          Please enter a board title
+        </mat-error>
+        <mat-error *ngIf="form.get('title')!.errors?.['minlength']">
+          Please enter at least {{form.get('title')!.errors?.['minlength'].requiredLength}} characters
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="form-buttons">
+      <button mat-button class="submit-button" type="submit" [disabled]="form.invalid" mat-dialog-close>Create board</button>
+      <button mat-stroked-button type="button" mat-dialog-close>Close</button>
+    </div>
+  </form>
+</div>

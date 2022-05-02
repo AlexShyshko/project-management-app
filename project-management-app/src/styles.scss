@@ -30,3 +30,12 @@ a {
 ul {
   list-style: none;
 }
+
+.custom-dialog-container .mat-dialog-container {
+  background: var(--main-color);
+  border-radius: 10px;
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-label  {
+  color: rgb(254, 160, 160);
+}

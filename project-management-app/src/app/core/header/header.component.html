@@ -1,4 +1,4 @@
-<header (scroll)="onScroll()" [ngClass]="headerSticky ? 'sticky' : 'noSticky'">
+<header (scroll)="onScroll()" [ngClass]="headerSticky?'sticky':'noSticky'" #header>
   <div class="header-section">
     <div class="left-block">
       <div class="logo">
@@ -6,8 +6,13 @@
           <img src="../../../assets/header/logo.png" alt="logo" class="logo-icon" />
         </a>
       </div>
+      <button mat-stroked-button
+        [disabled]="!isLogged"
+        class="new-board-btn"
+        (click)="openDialog()">
+        Create new board
+      </button>
     </div>
-    <button mat-stroked-button class="new-board-btn">Create new board</button>
     <div class="right-block">
       <mat-form-field appearance="fill" class="lang-select">
         <mat-label>Language</mat-label>
@@ -15,9 +20,9 @@
           <mat-option
             *ngFor="let language of coreService.translate.getLangs()"
             [value]="language"
-            class="lang-select-option"
-            >{{ language | uppercase }}</mat-option
-          >
+            class="lang-select-option">
+            {{ language | uppercase }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
       <div class="search-block">
@@ -33,9 +38,16 @@
           My account
         </button>
         <mat-menu #menu="matMenu" class="account-buttons">
-          <button mat-menu-item (click)="signin()">Log in</button>
-          <button mat-menu-item (click)="signup()">Register</button>
-          <button mat-menu-item>Edit profile</button>
+          <div *ngIf="!isLogged; else ifLoggedIn">
+            <button mat-menu-item (click)="signin()">Login</button>
+            <button mat-menu-item (click)="signup()">Register</button>
+          </div>
+          <ng-template #ifLoggedIn>
+            <button mat-menu-item (click)="editProfile()">Edit profile</button>
+            <button mat-menu-item (click)="logout()">Logout</button>
+          </ng-template>
+
+
         </mat-menu>
       </div>
     </div>

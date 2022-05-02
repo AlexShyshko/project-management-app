@@ -7,10 +7,10 @@
           <mat-label>login</mat-label>
           <input formControlName="login" matInput #login>
           <mat-error *ngIf="form.get('login')!.errors?.['required']">
-            Please enter a login
+            Please enter e-mail
           </mat-error>
-          <mat-error *ngIf="form.get('login')!.errors?.['minlength']">
-            Please enter at least {{form.get('login')!.errors?.['minlength'].requiredLength}} characters
+          <mat-error *ngIf="form.get('login')!.errors?.['email']">
+            The login e-mail is invalid
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
@@ -37,6 +37,5 @@
         <p class="sign-up">Don't have an account? <a [routerLink]="['/signup']">Sign up</a> here</p>
       </div>
     </form>
-  <!-- <button [routerLink]="['/']" mat-raised-button color="primary">home</button> -->
   </div>
 </main>

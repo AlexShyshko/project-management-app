@@ -4,6 +4,7 @@ import { AuthComponent } from './auth/auth.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from '../shared/modules/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StorageService } from '../core/services/storage.service';
 
 const routes: Routes = [{ path: '', component: AuthComponent }];
 

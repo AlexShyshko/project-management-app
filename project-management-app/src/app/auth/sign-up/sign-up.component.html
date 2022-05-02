@@ -1,27 +1,27 @@
 <main>
 <div class="container">
-  <form [formGroup]="form" (ngSubmit)="submit(login.value, name.value, password.value)">
+  <form [formGroup]="form" (ngSubmit)="submit(name.value, login.value, password.value)">
     <div class="signUp-wrapper">
       <div class="first-part">
         <p class="signUp-title">Sign up</p>
         <mat-form-field appearance="fill">
-          <mat-label>login</mat-label>
-          <input formControlName="login" matInput #login>
-          <mat-error *ngIf="form.get('login')!.errors?.['required']">
-            Please enter a login
+          <mat-label>name</mat-label>
+          <input formControlName="name" matInput #name>
+          <mat-error *ngIf="form.get('name')!.errors?.['required']">
+            Please enter your name
           </mat-error>
-          <mat-error *ngIf="form.get('login')!.errors?.['minlength']">
-            Please enter at least {{form.get('login')!.errors?.['minlength'].requiredLength}} characters
+          <mat-error *ngIf="form.get('name')!.errors?.['minlength']">
+            Please enter at least {{form.get('name')!.errors?.['minlength'].requiredLength}} characters
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
-          <mat-label>e-mail</mat-label>
-          <input formControlName="email" matInput #name>
-          <mat-error *ngIf="form.get('email')!.errors?.['required']">
-            Please enter an e-mail
+          <mat-label>login</mat-label>
+          <input formControlName="login" matInput #login>
+          <mat-error *ngIf="form.get('login')!.errors?.['required']">
+            Please enter e-mail
           </mat-error>
-          <mat-error *ngIf="form.get('email')!.errors?.['email']">
-            The login email is invalid
+          <mat-error *ngIf="form.get('login')!.errors?.['email']">
+            The login e-mail is invalid
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
@@ -63,6 +63,5 @@
 
     </div>
   </form>
-  <!-- <button [routerLink]="['/']" mat-raised-button color="primary">home</button> -->
 </div>
 </main>
