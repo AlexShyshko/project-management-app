@@ -59,6 +59,12 @@
       "login-button": "Войти",
       "havent-registered": "Ещё не регистрировались?",
       "sign-up": "Регистрация"
+    },
+    "sign-up": {
+      "title": "Регистрация",
+      "sign-up-button": "Регистрация",
+      "already-registered": "Уже регистрировались?",
+      "login": "Войти"
     }
   }
 }

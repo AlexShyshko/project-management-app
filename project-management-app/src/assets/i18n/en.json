@@ -59,6 +59,12 @@
       "login-button": "Login",
       "havent-registered": "Haven't registered yet?",
       "sign-up": "Sign up"
+    },
+    "sign-up": {
+      "title": "Sign up",
+      "sign-up-button": "Sign Up",
+      "already-registered": "Already have an account?",
+      "login": "Login"
     }
   }
 }
