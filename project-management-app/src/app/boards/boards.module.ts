@@ -5,13 +5,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from '../shared/modules/material.module';
 import { NewBoardComponent } from './new-board/new-board.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslatingModule } from '../shared/translating/translating.module';
 
 const routes: Routes = [{ path: '', component: BoardsComponent }];
 
 @NgModule({
   declarations: [BoardsComponent, NewBoardComponent],
-  imports: [CommonModule, MaterialModule, RouterModule.forChild(routes), ReactiveFormsModule,
-    FormsModule],
-  exports: [BoardsComponent, RouterModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    RouterModule.forChild(routes),
+    ReactiveFormsModule,
+    FormsModule,
+    TranslatingModule,
+  ],
+  exports: [BoardsComponent, RouterModule, TranslatingModule],
 })
 export class BoardsModule {}

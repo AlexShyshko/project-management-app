@@ -66,5 +66,16 @@
       "already-registered": "Уже регистрировались?",
       "login": "Войти"
     }
+  },
+  "boards": {
+    "boards": {},
+    "new-board": {
+      "new-project": "Новый проект",
+      "title": "Заголовок",
+      "enter-title": "Введите название",
+      "minimum-length": "Минимальная длина заголовка: ",
+      "create": "Создать",
+      "close": "Закрыть"
+    }
   }
 }

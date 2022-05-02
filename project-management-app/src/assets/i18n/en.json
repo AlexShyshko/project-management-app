@@ -66,5 +66,16 @@
       "already-registered": "Already have an account?",
       "login": "Login"
     }
+  },
+  "boards": {
+    "boards": {},
+    "new-board": {
+      "new-project": "Create your new project",
+      "title": "Board title",
+      "enter-title": "Please enter a board title",
+      "minimum-length": "Minimum title length is",
+      "create": "Create board",
+      "close": "Close"
+    }
   }
 }
