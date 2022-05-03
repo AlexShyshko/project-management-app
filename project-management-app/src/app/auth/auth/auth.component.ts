@@ -65,7 +65,7 @@ export class AuthComponent implements OnInit, OnDestroy {
       });
     });
 
-    if (this.form.valid) {
+    if (this.form.valid && this.storageService.isLogged()) {
       this.router.navigate(['/main']);
     }
   }
