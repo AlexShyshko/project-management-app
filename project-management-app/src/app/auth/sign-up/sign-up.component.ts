@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { ApiService } from 'src/app/core/services/api';
 import { CoreService } from 'src/app/core/services/core.service';
+import { StorageService } from 'src/app/core/services/storage.service';
 import { User } from 'src/app/models/user.model';
 import { CustomValidator } from 'src/app/shared/services/customValidator';
 
@@ -26,6 +27,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     public translate: TranslateService,
     public coreService: CoreService,
+    private storageService: StorageService,
   ) {}
 
   ngOnInit(): void {
@@ -64,7 +66,17 @@ export class SignUpComponent implements OnInit, OnDestroy {
       login,
       password,
     };
-    this.apiService.authenticate(user, 'signup').subscribe((res) => console.log(res));
+    this.apiService.authenticate(user, 'signup').subscribe((resUp) => {
+      if (!resUp.id) return;
+      this.apiService.authenticate(user, 'signin').subscribe((resIn) => {
+        if (!resIn.token) return;
+        this.storageService.setItem('token', resIn.token);
+        this.apiService.getUsers(resIn.token).subscribe((resUsers) => {
+          const id = resUsers.filter((item) => item.login === login)[0].id;
+          this.storageService.setItem('userId', id);
+        });
+      });
+    });
     if (this.form.valid) {
       this.router.navigate(['/main']);
     }
