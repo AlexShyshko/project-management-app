@@ -1,19 +1,29 @@
 import { Router } from '@angular/router';
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ApiService } from '../services/api';
 import { MatDialog } from '@angular/material/dialog';
 import { NewBoardComponent } from 'src/app/boards/new-board/new-board.component';
 import { CoreService } from '../services/core.service';
 import { StorageService } from '../services/storage.service';
-
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
-  constructor(private apiService: ApiService, private router: Router, public dialog: MatDialog, public coreService: CoreService, private storageService: StorageService) {}
+export class HeaderComponent implements OnInit, OnDestroy {
+  public subscriptions: Subscription[] = [];
+
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    public dialog: MatDialog,
+    public coreService: CoreService,
+    private storageService: StorageService,
+    public translate: TranslateService,
+  ) {}
 
   isLogged: boolean = false;
 
@@ -26,7 +36,16 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.storageService.isLogged$.subscribe(value => this.isLogged = value);
+    this.subscriptions.push(
+      this.storageService.isLogged$.subscribe((value) => (this.isLogged = value)),
+      this.coreService.currentLang.subscribe((lang) => {
+        this.translate.use(lang);
+      }),
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   public signup() {
@@ -49,5 +68,4 @@ export class HeaderComponent implements OnInit {
   openDialog() {
     this.dialog.open(NewBoardComponent, { panelClass: 'custom-dialog-container' });
   }
-
 }
