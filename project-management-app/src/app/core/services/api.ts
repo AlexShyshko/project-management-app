@@ -16,8 +16,6 @@ const BOARDS = `${BASE}/boards`;
 @Injectable()
 export class ApiService {
 
-  durationInSeconds = 5;
-
   constructor(private httpClient: HttpClient, private snackBar: MatSnackBar) { }
 
   private handleError(error: HttpErrorResponse) {
