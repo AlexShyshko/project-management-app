@@ -1,17 +1,17 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class StorageService {
-  public isLogged$ = new BehaviorSubject(false);
+  public isLogged$ = new BehaviorSubject(this.isLogged());
 
   public setItem(key: string, item?: string): void {
-    if(!item) return;
+    if (!item) return;
     localStorage.setItem(key, item);
     this.isLogged$.next(this.isLogged());
   }
 
-  private isLogged(): boolean {
+  public isLogged(): boolean {
     return localStorage.getItem('token') !== null;
   }
 

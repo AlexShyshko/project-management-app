@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, OnDestroy, Input, SimpleChange, SimpleCha
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { CoreService } from '../services/core.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-main',
@@ -11,7 +12,11 @@ import { CoreService } from '../services/core.service';
 export class MainComponent implements OnInit, OnDestroy {
   public subscriptions: Subscription[] = [];
 
-  constructor(public translate: TranslateService, public coreService: CoreService) {}
+  constructor(
+    public translate: TranslateService,
+    public coreService: CoreService,
+    public storageService: StorageService,
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.push(
@@ -23,5 +28,9 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
+  login() {
+    this.storageService.isLogged$.next(true);
   }
 }

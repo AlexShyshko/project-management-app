@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { ApiService } from 'src/app/core/services/api';
+import { CoreService } from 'src/app/core/services/core.service';
+import { StorageService } from 'src/app/core/services/storage.service';
 import { User } from 'src/app/models/user.model';
 import { CustomValidator } from 'src/app/shared/services/customValidator';
 
@@ -11,20 +14,27 @@ import { CustomValidator } from 'src/app/shared/services/customValidator';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit, OnDestroy {
   hide = true;
 
   form: FormGroup;
 
-  response$: Observable<User>;
+  public subscriptions: Subscription[] = [];
 
-  constructor(public apiService: ApiService, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(
+    public apiService: ApiService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    public translate: TranslateService,
+    public coreService: CoreService,
+    private storageService: StorageService,
+  ) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group(
       {
-        login: new FormControl('', [Validators.required, Validators.minLength(5)]),
-        email: new FormControl('', [Validators.required, Validators.email]),
+        name: new FormControl('', [Validators.required, Validators.minLength(2)]),
+        login: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [
           Validators.required,
           Validators.minLength(8),
@@ -39,18 +49,35 @@ export class SignUpComponent implements OnInit {
         validator: CustomValidator.passwordValidator,
       },
     );
+    this.subscriptions.push(
+      this.coreService.currentLang.subscribe((lang) => {
+        this.translate.use(lang);
+      }),
+    );
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
 
   submit(name: string, login: string, password: string) {
     const user: User = {
       name,
       login,
-      password
+      password,
     };
-    this.response$ = this.apiService.authenticate(user, 'signup');
-    this.response$.subscribe({next: res => console.log(res), error: e => console.log('comp',e.message)});
-    if (this.form.valid) {
+    this.apiService.authenticate(user, 'signup').subscribe((resUp) => {
+      if (!resUp.id) return;
+      this.apiService.authenticate(user, 'signin').subscribe((resIn) => {
+        if (!resIn.token) return;
+        this.storageService.setItem('token', resIn.token);
+        this.apiService.getUsers(resIn.token).subscribe((resUsers) => {
+          const id = resUsers.filter((item) => item.login === login)[0].id;
+          this.storageService.setItem('userId', id);
+        });
+      });
+    });
+    if (this.form.valid && this.storageService.isLogged()) {
       this.router.navigate(['/main']);
     }
   }

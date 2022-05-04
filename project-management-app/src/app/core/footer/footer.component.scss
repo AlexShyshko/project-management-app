@@ -1,6 +1,5 @@
 footer {
   background: var(--main-color);
-  height: 10vh;
 }
 
 .footer-section {
@@ -11,6 +10,7 @@ footer {
   align-items: center;
   max-width: 1440px;
   padding: 10px 20px;
+  height: 10vh;
 }
 
 .footer-section .git {
@@ -34,6 +34,11 @@ footer {
 .logo-icon {
   width: 90px;
 }
+@media (max-width: 970px) {
+  .footer-section .git {
+    width: 40%;
+  }
+}
 
 @media (max-width: 640px) {
   .footer-section .git {
@@ -42,11 +47,26 @@ footer {
 }
 
 @media (max-width: 400px) {
+
   .footer-section {
-    flex-direction: column;
+    flex-flow:column;
+    position: relative;
+    align-items: start;
+    height: 14vh;
+  }
+  .footer-section :nth-child(1) {
+    order: 2;
+  }
+  .footer-section :nth-child(3) {
+    order: 2;
   }
   .footer-section .git {
     width: 100%;
     margin: 10px 0;
+  }
+  .footer-year {
+    position: absolute;
+    top: 60px;
+    right: 20px;
   }
 }

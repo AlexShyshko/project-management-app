@@ -2,10 +2,7 @@
   <div class="main-section">
     <div class="app-background">
       <h1 class="app-title">KANBY</h1>
-      <p class="app-description">
-        Kanby is the flexible work management tool where teams can ideate plans, collaborate on projects, organize
-        workflows, and track progress in a visual, productive, and rewarding way
-      </p>
+      <p class="app-description">{{ 'core.main.kanby-description' | translate }}</p>
       <div class="example-button-row">
         <p>Delete routing buttons later</p>
         <button [routerLink]="['/main']" mat-raised-button>main</button>
@@ -14,9 +11,9 @@
         <button [routerLink]="['/404']" mat-raised-button color="warn">404</button>
         <button [routerLink]="['/edit-profile']" mat-raised-button>edit-profile</button>
       </div>
-      <div [ngStyle]="{ border: '3px green solid', width: 'fit-content' }">
-        <h3>Translation example</h3>
-        <h4>{{ 'TITLE' | translate }}</h4>
+      <div class="buttons-for-help">
+        <p>Help buttons</p>
+        <button (click)="login()" mat-raised-button>login</button>
       </div>
     </div>
   </div>
