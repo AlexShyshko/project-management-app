@@ -7,7 +7,7 @@ import { Column } from 'src/app/models/column.model';
 import { Task } from 'src/app/models/task.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-const BASE = 'http://localhost:4000';
+const BASE = 'https://floating-ocean-39366.herokuapp.com';
 const SIGNUP = `${BASE}/signup`;
 const SIGNIN = `${BASE}/signin`;
 const USERS = `${BASE}/users`;
