@@ -22,6 +22,10 @@ export class StorageService {
   }
 
   public getToken() {
-    return localStorage.getItem('token') as string;
+    return localStorage.getItem('token');
+  }
+
+  public getUserId() {
+    return localStorage.getItem('userId');
   }
 }

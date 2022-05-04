@@ -33,7 +33,7 @@
       <div class="login-block">
         <button mat-button [matMenuTriggerFor]="menu" class="account-button">
           <mat-icon matPrefix>person</mat-icon>
-          {{ 'core.header.my-account' | translate }}
+          {{ showName() | translate }}
         </button>
         <mat-menu #menu="matMenu" class="account-buttons">
           <div *ngIf="!isLogged; else ifLoggedIn">
