@@ -14,6 +14,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslatingModule } from './shared/translating/translating.module';
 import { CoreService } from './core/services/core.service';
 import { SignUpModule } from './auth/sign-up/sign-up.module';
+import { StorageService } from './core/services/storage.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +32,7 @@ import { SignUpModule } from './auth/sign-up/sign-up.module';
     TranslatingModule,
     SignUpModule,
   ],
-  providers: [CoreService],
+  providers: [CoreService, StorageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

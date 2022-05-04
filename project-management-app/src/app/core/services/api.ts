@@ -20,10 +20,10 @@ export class ApiService {
     if (error.status === 0) {
       console.error('An error occurred:', error.error);
     } else {
-      console.error(
-        `Backend returned code ${error.status}, message was: `, error.error.message);
+      console.error(`Backend returned code ${error.status}, message was: `, error.error.message);
+      return throwError(() => new Error(error.error.message));
     }
-    return throwError(() => new Error('Something bad happened; please try again later.'));
+    return throwError(() => new Error(error.message));
   }
 
   //signup: (user: {name, login, password}) => {id, name, login}, signin: (user: {login, password}) => {token}
@@ -36,7 +36,7 @@ export class ApiService {
     return this.httpClient
       .post<User>(url, body, { headers: headers })
       .pipe(
-        catchError(this.handleError),
+        catchError(error => this.handleError(error)),
       );
   }
 
