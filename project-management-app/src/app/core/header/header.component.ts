@@ -29,6 +29,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   headerSticky: boolean = false;
 
+  userName: string;
+
   @ViewChild('header') header: ElementRef;
 
   @HostListener('window:scroll', ['$event']) onScroll() {
@@ -46,6 +48,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
+  public showName() {
+    const id = this.storageService.getUserId();
+    const token = this.storageService.getToken();
+    if(!id || !token) return 'core.header.my-account';
+    this.apiService.getUserById(token, id).subscribe((res) => {
+      if (!res.name) return
+      this.userName = res.name;
+    });
+    return this.userName;
   }
 
   public signup() {

@@ -33,7 +33,7 @@ export class ApiService {
         },
       );
     }
-    return throwError(() => new Error('Something bad happened; please try again later.'));
+    return throwError(() => new Error(error.message));
   }
 
   //signup: (user: {name, login, password}) => {id, name, login}, signin: (user: {login, password}) => {token}
@@ -46,7 +46,7 @@ export class ApiService {
     return this.httpClient
       .post<User>(url, body, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -57,7 +57,18 @@ export class ApiService {
     return this.httpClient
       .get<User[]>(USERS, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
+      );
+  }
+
+  public getUserById(token: string, id: string): Observable<User> {
+    const headers = new HttpHeaders()
+      .set('accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient
+      .get<User>(`${USERS}/${id}`, { headers: headers })
+      .pipe(
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -68,7 +79,7 @@ export class ApiService {
     return this.httpClient
       .delete(`${USERS}/${id}`, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -81,7 +92,7 @@ export class ApiService {
     return this.httpClient
       .put(`${USERS}/${id}`, body, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -92,7 +103,7 @@ export class ApiService {
     return this.httpClient
       .get<Board[]>(BOARDS, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -105,7 +116,7 @@ export class ApiService {
     return this.httpClient
       .post<Board>(BOARDS, body, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -116,7 +127,7 @@ export class ApiService {
     return this.httpClient
       .get<Board>(`${BOARDS}/${id}`, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -127,7 +138,7 @@ export class ApiService {
     return this.httpClient
       .delete(`${BOARDS}/${id}`, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -140,7 +151,7 @@ export class ApiService {
     return this.httpClient
       .put<Board>(`${BOARDS}/${id}`, body, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -151,7 +162,7 @@ export class ApiService {
     return this.httpClient
       .get<Column>(`${BOARDS}/${boardId}/columns`, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -164,7 +175,7 @@ export class ApiService {
     return this.httpClient
       .post<Column>(`${BOARDS}/${boardId}/columns`, body, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -175,7 +186,7 @@ export class ApiService {
     return this.httpClient
       .get<Column>(`${BOARDS}/${boardId}/columns/${columnId}`, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -186,7 +197,7 @@ export class ApiService {
     return this.httpClient
       .delete(`${BOARDS}/${boardId}/columns/${columnId}`, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -199,7 +210,7 @@ export class ApiService {
     return this.httpClient
       .put<Column>(`${BOARDS}/${boardId}/columns/${columnId}`, body, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -210,7 +221,7 @@ export class ApiService {
     return this.httpClient
       .get<Task>(`${BOARDS}/${boardId}/columns/${columnId}/tasks`, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -223,7 +234,7 @@ export class ApiService {
     return this.httpClient
       .post<Task>(`${BOARDS}/${boardId}/columns/${columnId}/tasks`, body, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -234,7 +245,7 @@ export class ApiService {
     return this.httpClient
       .get<Task>(`${BOARDS}/${boardId}/columns/${columnId}/tasks/${taskId}`, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -245,7 +256,7 @@ export class ApiService {
     return this.httpClient
       .delete(`${BOARDS}/${boardId}/columns/${columnId}/tasks/${taskId}`, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 
@@ -258,7 +269,7 @@ export class ApiService {
     return this.httpClient
       .put<Task>(`${BOARDS}/${boardId}/columns/${columnId}/tasks/${taskId}`, body, { headers: headers })
       .pipe(
-        catchError(this.handleError.bind(this)),
+        catchError(error => this.handleError(error)),
       );
   }
 }

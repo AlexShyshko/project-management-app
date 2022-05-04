@@ -11,7 +11,7 @@ export class StorageService {
     this.isLogged$.next(this.isLogged());
   }
 
-  private isLogged(): boolean {
+  public isLogged(): boolean {
     return localStorage.getItem('token') !== null;
   }
 
@@ -22,6 +22,10 @@ export class StorageService {
   }
 
   public getToken() {
-    return localStorage.getItem('token') as string;
+    return localStorage.getItem('token');
+  }
+
+  public getUserId() {
+    return localStorage.getItem('userId');
   }
 }
