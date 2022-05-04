@@ -1,3 +1,19 @@
 .boards-wrapper {
   height: 80vh;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  background-image: url('../../../assets/boards/boards-background.png');
+  background-size: 500px;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+}
+
+.page-title {
+  font-size: 2rem;
+  width: 100%;
+  color: var(--main-color);
+  margin-bottom: 30px;
 }

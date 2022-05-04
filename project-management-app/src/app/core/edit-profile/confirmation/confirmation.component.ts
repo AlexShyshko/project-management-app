@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../../services/storage.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CoreService } from '../../services/core.service';
 import { Subscription } from 'rxjs';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-confirmation',
@@ -18,6 +19,7 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
     private router: Router,
     public translate: TranslateService,
     public coreService: CoreService,
+    @Inject(MAT_DIALOG_DATA) public data: string
   ) {}
 
   ngOnInit(): void {
