@@ -61,6 +61,17 @@ export class ApiService {
       );
   }
 
+  public getUserById(token: string, id: string): Observable<User> {
+    const headers = new HttpHeaders()
+      .set('accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient
+      .get<User>(`${USERS}/${id}`, { headers: headers })
+      .pipe(
+        catchError(error => this.handleError(error)),
+      );
+  }
+
   public deleteUser(token: string, id: string) {
     const headers = new HttpHeaders()
       .set('accept', '*/*')
