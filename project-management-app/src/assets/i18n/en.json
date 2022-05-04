@@ -14,7 +14,14 @@
       "logout": "Logout"
     },
     "main": {
-      "kanby-description": "Kanby is the flexible work management tool where teams can ideate plans, collaborate on projects, organize workflows, and track progress in a visual, productive, and rewarding way."
+      "kanby-description": "Kanby is the flexible work management tool where teams can ideate plans, collaborate on projects, organize workflows, and track progress in a visual, productive, and rewarding way.",
+      "team-info": "RSS 2022Q1. Team #4. Project management app",
+      "shyshko": "Aliaksei Shyshko",
+      "komosko": "Anna Komosko",
+      "shapialevich": "Aliaksei Shapialevich",
+      "shyshko-work": "Architecture, translation, routes, Welcome section",
+      "komosko-work": "Design, responsive design, authorization and registration forms, sections Main, Header, Footer, backend",
+      "shapialevich-work": "Service for working with API, Service for working with Storage"
     },
     "footer": {
       "team": "Developers team"

@@ -11,10 +11,44 @@
         <button [routerLink]="['/404']" mat-raised-button color="warn">404</button>
         <button [routerLink]="['/edit-profile']" mat-raised-button>edit-profile</button>
       </div>
-      <div class="buttons-for-help">
-        <p>Help buttons</p>
-        <button (click)="login()" mat-raised-button>login</button>
+    </div>
+  </div>
+  <div class="welcome-section">
+    <h2 class="course">{{ 'core.main.team-info' | translate }}</h2>
+    <div class="team-wrapper">
+      <div class="developer-wrapper">
+        <img class="developer-photo" src="../../../assets/images/geeky-cat.png" alt="geeky-cat" />
+        <h3 class="developer-name">{{ 'core.main.shyshko' | translate }}</h3>
+        <p class="developer-description">
+          {{ 'core.main.shyshko-work' | translate }}
+        </p>
       </div>
+      <div class="developer-wrapper">
+        <img class="developer-photo" src="../../../assets/images/geeky-cat.png" alt="geeky-cat" />
+        <h3 class="developer-name">{{ 'core.main.komosko' | translate }}</h3>
+        <p class="developer-description">
+          {{ 'core.main.komosko-work' | translate }}
+        </p>
+      </div>
+      <div class="developer-wrapper">
+        <img class="developer-photo" src="../../../assets/images/geeky-cat.png" alt="geeky-cat" />
+        <h3 class="developer-name">{{ 'core.main.shapialevich' | translate }}</h3>
+        <p class="developer-description">
+          {{ 'core.main.shapialevich-work' | translate }}
+        </p>
+      </div>
+    </div>
+    <div class="description-video-wrapper">
+      <iframe
+        class="description-video"
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/qiROY3tHKrU"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
     </div>
   </div>
 </main>

@@ -6,22 +6,26 @@ import {
   CanDeactivate,
   CanLoad,
   Route,
+  Router,
   RouterStateSnapshot,
   UrlSegment,
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { StorageService } from '../services/storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad {
+  constructor(public router: Router, public service: StorageService) {}
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    // todo
-    return true;
+    const isUserLogged = this.service.isLogged();
+    return isUserLogged;
   }
 
   canActivateChild(

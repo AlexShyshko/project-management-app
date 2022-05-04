@@ -1,27 +1,32 @@
 main {
   background: linear-gradient(
     175deg,
-    rgba(88, 84, 183, 1) 19%,
-    rgba(115, 112, 195, 1) 30%,
-    rgba(155, 153, 212, 1) 38%,
-    rgba(190, 189, 227, 1) 46%,
-    rgba(237, 236, 255, 1) 56%,
-    rgba(255, 255, 255, 1) 64%
+    rgba(88, 84, 183, 1) 9%,
+    rgba(115, 112, 195, 1) 15%,
+    rgba(155, 153, 212, 1) 21%,
+    rgba(190, 189, 227, 1) 27%,
+    rgba(237, 236, 255, 1) 33%,
+    rgba(255, 255, 255, 1) 39%,
+    rgba(237, 236, 255, 1) 66%,
+    rgba(190, 189, 227, 1) 73%,
+    rgba(155, 153, 212, 1) 79%,
+    rgba(115, 112, 195, 1) 85%,
+    rgba(88, 84, 183, 1) 91%
   );
-  height: 80vh;
+  height: 170vh;
 }
 
 .main-section {
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  min-height: 85vh;
+  height: 90vh;
   max-width: 1440px;
 }
 
 .app-background {
   width: 100%;
-  background: no-repeat url("../../../assets/main-page/background-img.png");
+  background: no-repeat url('../../../assets/main-page/background-img.png');
   background-size: 800px;
   background-position: center right;
 }
@@ -39,6 +44,55 @@ main {
   font-size: 1.5rem;
   line-height: 2.2rem;
   margin-left: 20px;
+}
+
+.welcome-section {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1440px;
+  height: 80vh;
+}
+
+.course {
+  padding: 3vh 0;
+
+  text-align: center;
+  color: var(--main-color);
+}
+
+.team-wrapper {
+  padding: 0 3vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.developer-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1vh;
+
+  width: 30%;
+}
+
+.developer-photo {
+  width: 30%;
+  border-radius: 50%;
+}
+
+.developer-name {
+  text-align: center;
+
+  color: var(--main-color);
+}
+
+.description-video-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 1250px) {
@@ -66,6 +120,9 @@ main {
     font-size: 1.4rem;
     line-height: 2rem;
   }
+  .developer-description {
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 620px) {
@@ -81,6 +138,27 @@ main {
     font-size: 1.2rem;
     width: 80%;
     line-height: 1.8rem;
+  }
+  main {
+    height: unset;
+  }
+  .welcome-section {
+    height: unset;
+  }
+  .team-wrapper {
+    flex-direction: column;
+    align-items: center;
+    row-gap: 3vh;
+  }
+  .developer-wrapper {
+    width: 80%;
+  }
+  .description-video-wrapper {
+    margin-top: 3vh;
+  }
+  .description-video {
+    width: fit-content;
+    height: fit-content;
   }
 }
 
