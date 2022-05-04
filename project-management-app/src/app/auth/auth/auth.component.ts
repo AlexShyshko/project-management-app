@@ -56,16 +56,16 @@ export class AuthComponent implements OnInit, OnDestroy {
       login,
       password,
     };
-    this.apiService.authenticate(user, 'signin').subscribe((res) => {
-      this.storageService.setItem('token', res.token);
-      this.apiService.getUsers(res.token as string).subscribe((gres) => {
-        const id = gres.filter((item) => item.login === login)[0].id;
+    this.apiService.authenticate(user, 'signin').subscribe((resIn) => {
+      if (!resIn.token) return;
+      this.storageService.setItem('token', resIn.token);
+      this.apiService.getUsers(resIn.token).subscribe((resUsers) => {
+        const id = resUsers.filter((item) => item.login === login)[0].id;
         this.storageService.setItem('userId', id);
       });
+      if (this.form.valid && this.storageService.isLogged()) {
+        this.router.navigate(['/main']);
+      }
     });
-
-    if (this.form.valid) {
-      this.router.navigate(['/main']);
-    }
   }
 }
