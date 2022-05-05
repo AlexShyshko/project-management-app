@@ -33,4 +33,13 @@ export class BoardsService {
       })
   }
 
+  removeBoard(id: string) {
+    this.apiService.deleteBoard(this.storageService.getToken()!, id)
+      .subscribe(() => {
+        const boardIndex = this.boardsArray.findIndex(el => el.id === id);
+        this.boardsArray.splice(boardIndex, 1);
+        this.boards.next(this.boardsArray);
+      })
+  }
+
 }

@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { ConfirmationComponent } from 'src/app/core/edit-profile/confirmation/confirmation.component';
 import { ApiService } from 'src/app/core/services/api';
@@ -18,6 +18,8 @@ export class BoardPreviewComponent implements OnInit {
 
   boards$: Observable<Board[]>;
 
+  dialogRef: MatDialogRef<ConfirmationComponent>;
+
   constructor(private dialog: MatDialog, private boardsService: BoardsService) { }
 
   ngOnInit(): void {
@@ -25,11 +27,16 @@ export class BoardPreviewComponent implements OnInit {
     this.boards$ = this.boardsService.boards$;
   }
 
-  openDialog() {
-    this.dialog.open(ConfirmationComponent, {
+  openDialog(id: string) {
+    this.dialogRef = this.dialog.open(ConfirmationComponent, {
       panelClass: 'custom-dialog-container',
       data: this.data,
-    });
+    })
+    this.dialogRef.afterClosed().subscribe(event => {
+      if (event === 'action') {
+        this.boardsService.removeBoard(id);
+      }
+    })
   }
 
 }
