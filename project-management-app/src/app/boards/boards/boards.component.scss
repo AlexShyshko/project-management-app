@@ -1,6 +1,7 @@
 .boards-wrapper {
   height: 80vh;
   width: 100%;
+  margin: 0 auto;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -9,6 +10,7 @@
   background-size: 500px;
   background-repeat: no-repeat;
   background-position: right bottom;
+  max-width: 1440px;
 }
 
 .page-title {
