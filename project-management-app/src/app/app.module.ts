@@ -15,6 +15,10 @@ import { TranslatingModule } from './shared/translating/translating.module';
 import { CoreService } from './core/services/core.service';
 import { SignUpModule } from './auth/sign-up/sign-up.module';
 import { StorageService } from './core/services/storage.service';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './redux';
+import { EffectsModule } from '@ngrx/effects';
+import { BoardEffect } from './redux/effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +35,8 @@ import { StorageService } from './core/services/storage.service';
     HttpClientModule,
     TranslatingModule,
     SignUpModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([BoardEffect]),
   ],
   providers: [CoreService, StorageService],
   bootstrap: [AppComponent],

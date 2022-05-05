@@ -1,4 +1,8 @@
 <div class="boards-wrapper">
-  <p>boards works!</p>
+  <div class="board-container" *ngIf="boards$ | async as boards">
+    <div *ngFor="let item of boards">
+      {{ item.title }}
+    </div>
+  </div>
   <button [routerLink]="['/']" mat-raised-button color="primary">home</button>
 </div>
