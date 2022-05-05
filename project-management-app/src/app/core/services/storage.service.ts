@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { User } from 'src/app/models/user.model';
 
 @Injectable()
 export class StorageService {
@@ -17,7 +18,7 @@ export class StorageService {
 
   public logout(): void {
     localStorage.removeItem('token');
-    localStorage.removeItem('userId');
+    localStorage.removeItem('user');
     this.isLogged$.next(this.isLogged());
   }
 
@@ -26,6 +27,16 @@ export class StorageService {
   }
 
   public getUserId() {
-    return localStorage.getItem('userId');
+    const item = localStorage.getItem('user');
+    if (!item) return;
+    const user = JSON.parse(item) as User;
+    return user.id;
+  }
+
+  public getUserName() {
+    const item = localStorage.getItem('user');
+    if (!item) return;
+    const user = JSON.parse(item) as User;
+    return user.name;
   }
 }
