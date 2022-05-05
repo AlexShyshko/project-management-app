@@ -29,8 +29,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   headerSticky: boolean = false;
 
-  userName: string;
-
   @ViewChild('header') header: ElementRef;
 
   @HostListener('window:scroll', ['$event']) onScroll() {
@@ -51,14 +49,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public showName() {
-    const id = this.storageService.getUserId();
-    const token = this.storageService.getToken();
-    if(!id || !token) return 'core.header.my-account';
-    this.apiService.getUserById(token, id).subscribe((res) => {
-      if (!res.name) return
-      this.userName = res.name;
-    });
-    return this.userName;
+    const name = this.storageService.getUserName();
+    if (!name) return 'core.header.my-account';
+
+    return name;
   }
 
   public signup() {
