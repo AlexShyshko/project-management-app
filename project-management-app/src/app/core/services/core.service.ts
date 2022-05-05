@@ -10,6 +10,8 @@ export class CoreService {
 
   public currentLang = this.lang.asObservable();
 
+  public isFirstTimeDownloaded = true;
+
   constructor(public translate: TranslateService) {
     translate.addLangs(['en', 'ru']);
     translate.setDefaultLang('en');

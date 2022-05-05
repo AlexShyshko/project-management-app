@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges, OnDestroy, Input, SimpleChange, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { CoreService } from '../services/core.service';
@@ -16,6 +17,7 @@ export class MainComponent implements OnInit, OnDestroy {
     public translate: TranslateService,
     public coreService: CoreService,
     public storageService: StorageService,
+    public router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -24,6 +26,11 @@ export class MainComponent implements OnInit, OnDestroy {
         this.translate.use(lang);
       }),
     );
+    const isUserLogged = this.storageService.isLogged();
+    if (isUserLogged && this.coreService.isFirstTimeDownloaded) {
+      this.coreService.isFirstTimeDownloaded = false;
+      this.router.navigateByUrl('/main');
+    }
   }
 
   ngOnDestroy(): void {
