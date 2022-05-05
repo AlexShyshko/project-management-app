@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { ConfirmationComponent } from 'src/app/core/edit-profile/confirmation/confirmation.component';
+import { ApiService } from 'src/app/core/services/api';
+import { BoardsService } from 'src/app/core/services/boards.service';
+import { StorageService } from 'src/app/core/services/storage.service';
+import { Board } from 'src/app/models/board.model';
 
 @Component({
   selector: 'app-board-preview',
@@ -11,9 +16,13 @@ export class BoardPreviewComponent implements OnInit {
 
   data: string = 'Are you sure to delete board?';
 
-  constructor(private dialog: MatDialog) { }
+  boards$: Observable<Board[]>;
+
+  constructor(private dialog: MatDialog, private boardsService: BoardsService) { }
 
   ngOnInit(): void {
+    this.boardsService.updateBoards();
+    this.boards$ = this.boardsService.boards$;
   }
 
   openDialog() {
