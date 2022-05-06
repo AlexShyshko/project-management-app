@@ -1,13 +1,10 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ConfirmationComponent } from 'src/app/core/edit-profile/confirmation/confirmation.component';
-import { ApiService } from 'src/app/core/services/api';
 import { BoardsService } from 'src/app/core/services/boards.service';
-import { StorageService } from 'src/app/core/services/storage.service';
 import { Board } from 'src/app/models/board.model';
-import { GetBoards } from 'src/app/redux/actions';
 import { selectBoards } from 'src/app/redux/selectors';
 
 @Component({
@@ -26,7 +23,6 @@ export class BoardPreviewComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private boardsService: BoardsService,
-    private storageService: StorageService,
     private store: Store,
     ) { }
 

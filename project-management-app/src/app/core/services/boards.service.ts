@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Board } from 'src/app/models/board.model';
 import { GetBoards } from 'src/app/redux/actions';
 import { ApiService } from './api';
 import { StorageService } from './storage.service';
@@ -10,13 +8,6 @@ import { StorageService } from './storage.service';
   providedIn: 'root',
 })
 export class BoardsService {
-
-  private boards = new BehaviorSubject<Board[]>([]);
-
-  private boardsArray: Board[];
-
-  boards$ = this.boards.asObservable();
-
   constructor(
     private apiService: ApiService,
     private storageService: StorageService,
@@ -30,8 +21,6 @@ export class BoardsService {
 
   removeBoard(id: string) {
     const token = this.storageService.getToken();
-    this.apiService.deleteBoard(token!, id)
-    this.store.dispatch(new GetBoards(token!));
+    this.apiService.deleteBoard(token!, id).subscribe(() => this.store.dispatch(new GetBoards(token!)))
   }
-
 }
