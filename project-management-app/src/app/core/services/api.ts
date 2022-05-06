@@ -155,12 +155,12 @@ export class ApiService {
       );
   }
 
-  public getColumns(token: string, boardId: string): Observable<Column> {
+  public getColumns(token: string, boardId: string): Observable<Column[]> {
     const headers = new HttpHeaders()
       .set('Accept', 'application/json')
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient
-      .get<Column>(`${BOARDS}/${boardId}/columns`, { headers: headers })
+      .get<Column[]>(`${BOARDS}/${boardId}/columns`, { headers: headers })
       .pipe(
         catchError(error => this.handleError(error)),
       );
@@ -214,12 +214,12 @@ export class ApiService {
       );
   }
 
-  public getTasks(token: string, boardId: string, columnId: string): Observable<Task> {
+  public getTasks(token: string, boardId: string, columnId: string): Observable<Task[]> {
     const headers = new HttpHeaders()
       .set('Accept', 'application/json')
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient
-      .get<Task>(`${BOARDS}/${boardId}/columns/${columnId}/tasks`, { headers: headers })
+      .get<Task[]>(`${BOARDS}/${boardId}/columns/${columnId}/tasks`, { headers: headers })
       .pipe(
         catchError(error => this.handleError(error)),
       );
