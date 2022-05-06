@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/core/services/api';
 import { TranslateService } from '@ngx-translate/core';
 import { CoreService } from '../../core/services/core.service';
+import { StorageService } from 'src/app/core/services/storage.service';
+import { BoardsService } from 'src/app/core/services/boards.service';
+
 @Component({
   selector: 'app-new-board',
   templateUrl: './new-board.component.html',
@@ -16,9 +18,10 @@ export class NewBoardComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private apiService: ApiService,
+    private boardsService: BoardsService,
     public translate: TranslateService,
     public coreService: CoreService,
+    private storageService: StorageService,
   ) {}
 
   ngOnInit(): void {}
@@ -26,9 +29,8 @@ export class NewBoardComponent implements OnInit {
   submit() {
     if (this.form.valid) {
       this.router.navigate(['/main']);
-      this.apiService
-        .createBoard('', { title: this.form.get('title')?.value })
-        .subscribe((res) => console.log('board', res.title));
+      this.boardsService
+        .addBoard({ title: this.form.get('title')?.value });
     }
   }
 }

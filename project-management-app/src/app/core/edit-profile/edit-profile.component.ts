@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { CustomValidator } from 'src/app/shared/services/customValidator';
@@ -21,7 +21,11 @@ export class EditProfileComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
 
+  private data = 'Are you sure to delete profile?';
+
   public subscriptions: Subscription[] = [];
+
+  dialogRef: MatDialogRef<ConfirmationComponent>;
 
   constructor(
     public apiService: ApiService,
@@ -69,14 +73,22 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       login,
       password,
     };
-    // this.apiService.updateUser().subscribe(res => console.log(res));
     if (this.form.valid) {
+      this.apiService.updateUser(user, this.storageService.getToken()!, this.storageService.getUserId()!);
       this.router.navigate(['/main']);
     }
   }
 
   openDialog() {
-    this.dialog.open(ConfirmationComponent, { panelClass: 'custom-dialog-container' });
+    this.dialogRef = this.dialog.open(ConfirmationComponent, {
+      panelClass: 'custom-dialog-container',
+      data: this.data,
+    });
+    this.dialogRef.afterClosed().subscribe(event => {
+      if (event === 'action') {
+        this.apiService.deleteUser(this.storageService.getToken()!, this.storageService.getUserId()!);
+      }
+    });
   }
 
   // getCustomValidatorKey(message: string): string {
