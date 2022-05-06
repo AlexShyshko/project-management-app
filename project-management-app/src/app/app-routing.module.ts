@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CurrentBoardComponent } from './boards/current-board/current-board.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { IncorrectPageComponent } from './core/incorrect-page/incorrect-page.component';
 
@@ -15,6 +16,11 @@ const routes: Routes = [
   {
     path: 'edit-profile',
     loadChildren: () => import('./core/core.module').then((m) => m.CoreModule),
+  },
+  {
+    path: 'boards/:id',
+    component: CurrentBoardComponent,
+    canActivate: [AuthGuard],
   },
   { path: '**', component: IncorrectPageComponent },
 ];

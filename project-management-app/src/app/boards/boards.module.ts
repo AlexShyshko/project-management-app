@@ -7,11 +7,12 @@ import { NewBoardComponent } from './new-board/new-board.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatingModule } from '../shared/translating/translating.module';
 import { BoardPreviewComponent } from './board-preview/board-preview.component';
+import { CurrentBoardComponent } from './current-board/current-board.component';
 
 const routes: Routes = [{ path: '', component: BoardsComponent }];
 
 @NgModule({
-  declarations: [BoardsComponent, NewBoardComponent, BoardPreviewComponent],
+  declarations: [BoardsComponent, NewBoardComponent, BoardPreviewComponent, CurrentBoardComponent],
   imports: [
     CommonModule,
     MaterialModule,
