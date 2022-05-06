@@ -5,7 +5,7 @@ import { ApiService } from './api';
 import { StorageService } from './storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BoardsService {
 
@@ -21,7 +21,7 @@ export class BoardsService {
     this.apiService.getBoards(this.storageService.getToken()!)
       .subscribe(collection => {
         this.boardsArray = collection;
-        this.boards.next(this.boardsArray)
+        this.boards.next(this.boardsArray);
       });
   }
 
@@ -30,7 +30,7 @@ export class BoardsService {
       .subscribe(element => {
         this.boardsArray.push(element);
         this.boards.next(this.boardsArray);
-      })
+      });
   }
 
   removeBoard(id: string) {
@@ -39,7 +39,7 @@ export class BoardsService {
         const boardIndex = this.boardsArray.findIndex(el => el.id === id);
         this.boardsArray.splice(boardIndex, 1);
         this.boards.next(this.boardsArray);
-      })
+      });
   }
 
 }

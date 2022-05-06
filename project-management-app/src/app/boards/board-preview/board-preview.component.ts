@@ -10,7 +10,7 @@ import { Board } from 'src/app/models/board.model';
 @Component({
   selector: 'app-board-preview',
   templateUrl: './board-preview.component.html',
-  styleUrls: ['./board-preview.component.scss']
+  styleUrls: ['./board-preview.component.scss'],
 })
 export class BoardPreviewComponent implements OnInit {
 
@@ -31,12 +31,12 @@ export class BoardPreviewComponent implements OnInit {
     this.dialogRef = this.dialog.open(ConfirmationComponent, {
       panelClass: 'custom-dialog-container',
       data: this.data,
-    })
+    });
     this.dialogRef.afterClosed().subscribe(event => {
       if (event === 'action') {
         this.boardsService.removeBoard(id);
       }
-    })
+    });
   }
 
 }

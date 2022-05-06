@@ -21,7 +21,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
 
-  private data = 'Are you sure to delete profile?'
+  private data = 'Are you sure to delete profile?';
 
   public subscriptions: Subscription[] = [];
 
@@ -83,12 +83,12 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     this.dialogRef = this.dialog.open(ConfirmationComponent, {
       panelClass: 'custom-dialog-container',
       data: this.data,
-    })
+    });
     this.dialogRef.afterClosed().subscribe(event => {
       if (event === 'action') {
         this.apiService.deleteUser(this.storageService.getToken()!, this.storageService.getUserId()!);
       }
-    })
+    });
   }
 
   // getCustomValidatorKey(message: string): string {

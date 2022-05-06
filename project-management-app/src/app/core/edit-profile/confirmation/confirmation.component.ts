@@ -22,7 +22,7 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
     public translate: TranslateService,
     public coreService: CoreService,
     public dialogRef: MatDialogRef<ConfirmationComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: string
+    @Inject(MAT_DIALOG_DATA) public data: string,
   ) {}
 
   ngOnInit(): void {

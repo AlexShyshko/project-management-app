@@ -54,3 +54,40 @@
   padding-left: 15px;
   font-weight: 500;
 }
+
+
+@media (max-width: 830px) {
+  .board-title {
+    font-size: 1.5rem;
+  }
+  .board-preview-item {
+    width: 230px;
+  }
+  .board-preview-container {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 770px) {
+  .board-preview-item {
+    width: 280px;
+  }
+}
+
+@media (max-width: 630px) {
+  .board-preview-item {
+    width: 230px;
+  }
+}
+
+@media (max-width: 520px) {
+  .board-title {
+    font-size: 1.1rem;
+  }
+  .board-preview-item {
+    width: 300px;
+  }
+  .board-preview-container {
+    justify-content: center;
+  }
+}
