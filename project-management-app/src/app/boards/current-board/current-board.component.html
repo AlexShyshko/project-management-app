@@ -1,1 +1,7 @@
-<p *ngIf="board$ | async as board">{{board.title}}</p>
+<div class="board-container" *ngIf="board$ | async as board">
+  <p >{{board.title}}</p>
+  <div class="columns-container" *ngFor="let column of board.columns">
+    {{column.title}}
+  </div>
+</div>
+
