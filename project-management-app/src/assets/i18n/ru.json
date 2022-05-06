@@ -75,7 +75,12 @@
     }
   },
   "boards": {
-    "boards": {},
+    "board-preview": {
+      "confirmation": "Удалить доску?"
+    },
+    "boards": {
+      "workspaces": "Ваши рабочие пространства"
+    },
     "new-board": {
       "new-project": "Новый проект",
       "title": "Заголовок",

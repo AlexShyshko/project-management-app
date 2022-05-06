@@ -75,7 +75,12 @@
     }
   },
   "boards": {
-    "boards": {},
+    "board-preview": {
+      "confirmation": "Are you sure to delete board?"
+    },
+    "boards": {
+      "workspaces": "Your workspaces"
+    },
     "new-board": {
       "new-project": "Create your new project",
       "title": "Board title",
