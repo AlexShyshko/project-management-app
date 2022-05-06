@@ -18,9 +18,21 @@ export class BoardsService {
   constructor(private apiService: ApiService, private storageService: StorageService) { }
 
   updateBoards() {
-    this.apiService.getBoards(this.storageService.getToken()!)
+    const token = this.storageService.getToken()!;
+    this.apiService.getBoards(token)
       .subscribe(collection => {
-        this.boardsArray = collection;
+        const boards = collection.map(board => {
+          this.apiService.getColumns(token, board.id!).subscribe(columnsResponse => {
+            const columns = columnsResponse.map(column => {
+              this.apiService.getTasks(token, board.id, column.id).subscribe(taskResponse => column.tasks = taskResponse);
+              return column;
+            });
+            board.columns = columns;
+          });
+          return board;
+        });
+        console.log(boards);
+        this.boardsArray = boards;
         this.boards.next(this.boardsArray);
       });
   }

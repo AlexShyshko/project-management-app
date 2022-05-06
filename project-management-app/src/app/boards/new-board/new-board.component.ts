@@ -27,6 +27,8 @@ export class NewBoardComponent implements OnInit {
   ngOnInit(): void {}
 
   submit() {
+    const token = this.storageService.getToken();
+    if (!token) return;
     if (this.form.valid) {
       this.router.navigate(['/main']);
       this.boardsService
