@@ -15,7 +15,20 @@ export class BoardEffect {
     return this.actions$.pipe(
       ofType(StateActions.GET_BOARDS),
       pluck('token'),
-      switchMap((action) => this.apiService.getBoards(action)),
+      switchMap((action) => this.apiService.getBoards(action)
+        .pipe(
+          map(boards => {
+            const x = boards.map(board => {
+              let b = {...board};
+              this.apiService.getColumns(action, board.id!).subscribe(col => b.columns = col);
+              console.log('x',b);
+              return b;
+            });
+            //console.log('x',x);
+            return x;
+          }),
+        ),
+      ),
       map(boards => {console.log(boards);
         return new SaveBoards(boards)})
     )
