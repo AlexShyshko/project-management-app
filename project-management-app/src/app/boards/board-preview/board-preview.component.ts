@@ -1,9 +1,11 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable, Subscription } from 'rxjs';
 import { ConfirmationComponent } from 'src/app/core/edit-profile/confirmation/confirmation.component';
 import { ApiService } from 'src/app/core/services/api';
 import { BoardsService } from 'src/app/core/services/boards.service';
+import { CoreService } from 'src/app/core/services/core.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { Board } from 'src/app/models/board.model';
 
@@ -12,19 +14,35 @@ import { Board } from 'src/app/models/board.model';
   templateUrl: './board-preview.component.html',
   styleUrls: ['./board-preview.component.scss'],
 })
-export class BoardPreviewComponent implements OnInit {
-
-  data: string = 'Are you sure to delete board?';
+export class BoardPreviewComponent implements OnInit, OnDestroy {
+  data!: string;
 
   boards$: Observable<Board[]>;
 
   dialogRef: MatDialogRef<ConfirmationComponent>;
 
-  constructor(private dialog: MatDialog, private boardsService: BoardsService) { }
+  public subscriptions: Subscription[] = [];
+
+  constructor(
+    private dialog: MatDialog,
+    private boardsService: BoardsService,
+    public translate: TranslateService,
+    public coreService: CoreService,
+  ) {}
 
   ngOnInit(): void {
     this.boardsService.updateBoards();
     this.boards$ = this.boardsService.boards$;
+    this.subscriptions.push(
+      this.coreService.currentLang.subscribe((lang) => {
+        this.translate.use(lang);
+        this.getConfirmTranslation();
+      }),
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   openDialog(id: string) {
@@ -32,11 +50,16 @@ export class BoardPreviewComponent implements OnInit {
       panelClass: 'custom-dialog-container',
       data: this.data,
     });
-    this.dialogRef.afterClosed().subscribe(event => {
+    this.dialogRef.afterClosed().subscribe((event) => {
       if (event === 'action') {
         this.boardsService.removeBoard(id);
       }
     });
   }
 
+  getConfirmTranslation(): void {
+    this.translate.get(['boards.board-preview.confirmation']).subscribe((translations) => {
+      this.data = translations['boards.board-preview.confirmation'];
+    });
+  }
 }
