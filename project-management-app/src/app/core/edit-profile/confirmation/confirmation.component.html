@@ -1,5 +1,5 @@
-<h1 mat-dialog-title>{{ 'core.edit-profile.confirmation.delete-question' | translate }}</h1>
+<h1 mat-dialog-title>{{ data }}</h1>
 <div mat-dialog-actions>
-  <button mat-button (click)="deleteUser()" mat-dialog-close>{{ 'yes' | translate }}</button>
-  <button mat-button mat-dialog-close>{{ 'no' | translate }}</button>
+  <button mat-button (click)="saveMessage()" mat-dialog-close>{{ 'yes' | translate }}</button>
+  <button mat-button (click)="closeDialog()" mat-dialog-close>{{ 'no' | translate }}</button>
 </div>
