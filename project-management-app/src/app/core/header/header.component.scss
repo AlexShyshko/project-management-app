@@ -21,17 +21,15 @@ header {
 }
 
 .left-block {
-  width: 50%;
+  width: 55%;
+}
+
+.right-block {
+  justify-content: flex-end;
 }
 
 .logo-icon {
   width: 60px;
-}
-
-.vertical-line {
-  border-left: 1px solid var(--text-color-light);
-  height: 20px;
-  margin-left: 15px;
 }
 
 .toggle-block {
@@ -65,6 +63,14 @@ header {
   }
 }
 
+.account-button ::ng-deep .mat-button-wrapper {
+  max-width: 150px;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .sticky {
   position: fixed;
   width: 100%;
@@ -88,7 +94,9 @@ header {
 }
 
 .lang-select {
-  width: 18%;
+  width: 100px;
+  height: 10px;
+  bottom: 17px;
 }
 
 @media (max-width: 1150px) {
@@ -107,39 +115,53 @@ header {
 }
 
 @media (max-width: 820px) {
-  .header-section {
-    flex-direction: column;
-  }
-  .left-block {
-    width: 100%;
-    height: 45%;
-    justify-content: start;
-  }
-  .right-block {
-    width: 100%;
-  }
   .new-board-btn {
-    margin-left: 30%;
     font-size: 16px;
     padding: 0 10px;
   }
   .logo-icon {
     width: 40px;
   }
-  .mat-form-field {
-    width: 150px;
+  .lang-select {
+    height: 5px;
+  }
+  .account-button ::ng-deep .mat-button-wrapper {
+    width: 110px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .left-block {
+    width: 50%;
   }
 }
 
 @media (max-width: 500px) {
-  .mat-form-field {
-    width: 100px;
+  .header-section {
+    flex-direction: column;
+    height: 12vh;
+  }
+  .left-block {
+    width: 100%;
+    height: 100%;
+    height: 45%;
+    justify-content: start;
+    margin-bottom: 10px;
   }
   .right-block {
     width: 100%;
+    height: 100%;
+    justify-content: space-between;
   }
   .new-board-btn {
-    margin-left: 20%;
+    margin-left: 30%;
+  }
+  .mat-form-field {
+    width: 120px;
+  }
+  .account-button ::ng-deep .mat-button-wrapper {
+    width: 150px;
   }
 }
 
@@ -147,11 +169,8 @@ header {
   .new-board-btn {
     margin-left: 10%;
   }
-  .mat-form-field {
-    width: 50px;
-  }
-  .vertical-line {
-    margin-left: 5px;
+  .account-button ::ng-deep .mat-button-wrapper {
+    width: 140px;
   }
 }
 

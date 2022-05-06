@@ -7,15 +7,75 @@
   flex-direction: column;
   overflow-y: scroll;
   background-image: url('../../../assets/boards/boards-background.png');
-  background-size: 500px;
+  background-size: 400px;
   background-repeat: no-repeat;
   background-position: right bottom;
   max-width: 1440px;
+}
+
+.header-block {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  align-items: center;
 }
 
 .page-title {
   font-size: 2rem;
   width: 100%;
   color: var(--main-color);
-  margin-bottom: 30px;
+}
+
+.search-block {
+  color: var(--main-color);
+  font-size: 2rem;
+}
+
+::ng-deep .mat-input-element {
+  font-size: 1rem;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: var(--main-color);
+  height: 3px;
+}
+
+.mat-form-field {
+  width: 350px;
+}
+
+@media (max-width: 750px) {
+  .mat-form-field {
+    width: 200px;
+  }
+  .boards-wrapper {
+    background-size: 400px;
+  }
+}
+
+@media (max-width: 600px) {
+  .boards-wrapper {
+    background-size: 200px;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+  }
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+}
+
+@media (max-width: 500px) {
+  .mat-form-field {
+    width: 150px;
+  }
+}
+
+@media (max-width: 400px) {
+  .header-block {
+    flex-direction: column;
+  }
+  .mat-form-field {
+    width: 250px;
+  }
 }
