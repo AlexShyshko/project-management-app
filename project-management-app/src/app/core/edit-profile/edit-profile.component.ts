@@ -74,8 +74,12 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       password,
     };
     if (this.form.valid) {
-      this.apiService.updateUser(user, this.storageService.getToken()!, this.storageService.getUserId()!);
-      this.router.navigate(['/main']);
+      this.apiService.updateUser(user, this.storageService.getToken()!, this.storageService.getUserId()!)
+        .subscribe((user) => {
+          const { password, ...newUser } = user;
+          this.storageService.setItem('user', JSON.stringify(newUser));
+          this.router.navigate(['/main']);
+        });
     }
   }
 
@@ -86,7 +90,11 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     });
     this.dialogRef.afterClosed().subscribe(event => {
       if (event === 'action') {
-        this.apiService.deleteUser(this.storageService.getToken()!, this.storageService.getUserId()!);
+        this.apiService.deleteUser(this.storageService.getToken()!, this.storageService.getUserId()!)
+          .subscribe(() => {
+            this.storageService.logout();
+            this.router.navigate(['/']);
+          });
       }
     });
   }
