@@ -1,0 +1,12 @@
+<div class="board-preview-container">
+  <div *ngFor="let boardPreview of (boards$ | async)!" class="board-preview-item">
+    <a [routerLink]="['/boards', boardPreview.id]" class="board-link">
+      <div class="board-title">
+        {{boardPreview.title}}
+      </div>
+    </a>
+    <button mat-icon-button (click)="openDialog(boardPreview.id!)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>
