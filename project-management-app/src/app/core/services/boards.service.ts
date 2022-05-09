@@ -54,4 +54,21 @@ export class BoardsService {
       });
   }
 
+  createColumn(boardId: string) {
+    const token = this.storageService.getToken()!;
+    this.apiService.getColumns(token, boardId).subscribe(res => {
+      const order = res.length + 1;
+      this.apiService.createColumn(token, boardId, { title: `test${order}`, order }).subscribe(() => {
+        this.updateBoards();
+      });
+    })
+  }
+
+  createTask(boardId: string, columnId: string) {
+    const token = this.storageService.getToken()!;
+    const userId = this.storageService.getUserId()!;
+    this.apiService.createTask(token, boardId, columnId, { title: 'test task', order: 1, description: 'desc', userId }).subscribe(() => {
+      this.updateBoards();
+    });
+  }
 }
