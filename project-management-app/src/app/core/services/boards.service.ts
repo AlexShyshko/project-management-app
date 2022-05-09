@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Board } from 'src/app/models/board.model';
 import { Column } from 'src/app/models/column.model';
+import { Task } from 'src/app/models/task.model';
 import { ApiService } from './api';
 import { StorageService } from './storage.service';
 
@@ -68,7 +69,7 @@ export class BoardsService {
   deleteColumn(boardId: string, columnId: string) {
     const token = this.storageService.getToken()!;
     this.apiService.getColumnById(token, boardId, columnId).subscribe(res => {
-      res.tasks.forEach(task => this.apiService.deleteTask(token, boardId, columnId, task.id));
+      res.tasks.forEach(task => this.deleteTask(task));
       this.apiService.deleteColumn(token, boardId, columnId).subscribe(() => this.updateBoards());
     });
   }
@@ -86,5 +87,10 @@ export class BoardsService {
     this.apiService.updateColumn(token, boardId, column.id, { title, order: column.order }).subscribe(() => {
       this.updateBoards();
     });
+  }
+
+  deleteTask(task: Task) {
+    const token = this.storageService.getToken()!;
+    this.apiService.deleteTask(token, task.boardId, task.columnId, task.id).subscribe(() => this.updateBoards());
   }
 }

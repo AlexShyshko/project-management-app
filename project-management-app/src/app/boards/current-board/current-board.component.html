@@ -14,6 +14,9 @@
       <span class="column-title" *ngIf="!isEditEnable" (click)="editColumn()">{{column.title}}</span>
       <div class="task-container" *ngFor="let task of column.tasks">
         {{task.title}}
+        <button mat-icon-button (click)="deleteTask(task)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </div>
       <button mat-icon-button (click)="addTask(board.id, column.id)">
         <mat-icon>add</mat-icon> Add task

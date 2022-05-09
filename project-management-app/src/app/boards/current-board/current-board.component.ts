@@ -4,6 +4,7 @@ import { map, Observable } from 'rxjs';
 import { BoardsService } from 'src/app/core/services/boards.service';
 import { Board } from 'src/app/models/board.model';
 import { Column } from 'src/app/models/column.model';
+import { Task } from 'src/app/models/task.model';
 
 @Component({
   selector: 'app-current-board',
@@ -43,12 +44,16 @@ export class CurrentBoardComponent implements OnInit {
     this.boardsService.deleteColumn(boardId, columnId);
   }
 
-  editColumn() {
+  public editColumn() {
     this.isEditEnable = !this.isEditEnable;
   }
 
-  submitTitle(boardId: string, column: Column) {
+  public submitTitle(boardId: string, column: Column) {
     this.boardsService.editColumnTitle(boardId, column, this.title);
     this.isEditEnable = !this.isEditEnable;
+  }
+
+  public deleteTask(task: Task) {
+    this.boardsService.deleteTask(task);
   }
 }
