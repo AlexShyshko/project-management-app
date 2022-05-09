@@ -1,0 +1,115 @@
+.board-wrapper {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.page-title {
+  font-size: 2rem;
+  width: 100%;
+  color: var(--main-color);
+  margin-bottom: 20px;
+}
+
+.wrapper {
+  max-width: 1440px;
+  height: 80vh;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-x: scroll;
+}
+
+.columns-container {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px 20px;
+}
+
+.column-container {
+  width: 300px;
+  background-color: var(--text-color-light);
+  border-radius: 5px;
+  border: 1px solid var(--main-color);
+  padding: 5px 10px;
+  max-height: 60vh;
+  overflow-y: scroll;
+}
+
+.add-new-column {
+  color: var(--main-color);
+  text-align: left;
+  width: 70%;
+}
+
+::ng-deep .mat-form-field-underline {
+  background-color: var(--main-color);
+  height: 3px;
+}
+
+::ng-deep .mat-form-field-label,
+.mat-icon {
+  color: var(--main-color);
+}
+
+.add-column-button {
+  background-color: var(--main-color);
+  color: var(--text-color-light);
+}
+
+.new-column-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-column-input {
+  width: 100%;
+}
+
+.column-title-block {
+  display: flex;
+  align-items: center;
+}
+
+.column-title {
+  cursor: pointer;
+  height: 65px;
+  color: var(--main-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-title {
+  padding: 5px 10px;
+  background-color: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6);
+  -moz-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6);
+  box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6);
+  margin-bottom: 8px;
+  border-radius: 5px;
+  transition: 0.4s ease-in-out;
+  &:hover {
+    transition: 0.4s ease-in-out;
+    transform: scale(1.01);
+    background-color: var(--main-color);
+    color: var(--text-color-light);
+  }
+}
+
+.column-control-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

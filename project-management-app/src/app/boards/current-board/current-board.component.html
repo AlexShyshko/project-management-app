@@ -1,7 +1,52 @@
-<div class="board-container" *ngIf="board$ | async as board">
-  <p >board {{board.title}}</p>
-  <div class="columns-container" *ngFor="let column of board.columns">
-    column {{column.title}}
+<div class="board-wrapper" [ngStyle]="{'background-image': 'url(' + backgroundImage + ')'}">
+  <div class="wrapper">
+
+    <div class="board-container" *ngIf="board$ | async as board">
+      <h1 class="page-title">Current workspace - {{board.title}}</h1>
+      <div class="columns-container">
+
+        <div class="column-container" *ngFor="let column of board.columns">
+
+          <h2 class="column-title" *ngIf="!isTitleClicked" (click)="toggleColumnTitle()">
+            column {{column.title}}
+          </h2>
+          <div class="column-title-block" *ngIf="isTitleClicked">
+            <button mat-icon-button>
+              <mat-icon>check_circle</mat-icon>
+            </button>
+            <button mat-icon-button (click)="toggleColumnTitle()">
+              <mat-icon>cancel</mat-icon>
+            </button>
+            <mat-form-field appearance="fill">
+              <mat-label>Enter column title...</mat-label>
+              <input matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="current-cards" *ngFor="let task of column.tasks">
+            <h5 class="card-title"(click)="openModalEditTask()">{{task.title}}</h5>
+          </div>
+
+          <div class="column-control-buttons">
+            <button mat-icon-button class="add-new-column" (click)="openModalCreateTask()">
+              <mat-icon>add_circle_outline</mat-icon>
+              Add new task
+            </button>
+            <button mat-icon-button (click)="openDialog()">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="column-container new-column">
+          <button mat-icon-button class="add-new-column"
+            (click)="openModalCreateColumn()">
+              <mat-icon>add_circle_outline</mat-icon>
+              Add new column
+          </button>
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>
-
