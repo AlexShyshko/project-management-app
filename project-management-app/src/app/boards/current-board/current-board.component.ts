@@ -34,9 +34,8 @@ export class CurrentBoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.boardId = this.route.snapshot.params.id;
-    this.board$ = this.boardsService.boards$.pipe(
-      map(boards => boards.filter(board => board.id === this.boardId)[0])
-    );
+    this.boardsService.updateCurrentBoard(this.boardId);
+    this.board$ = this.boardsService.board$;
   }
 
   openDialog(boardId: string, columnId: string, task?: Task) {
