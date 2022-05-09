@@ -1,0 +1,35 @@
+.current-board__wrapper {
+  height: 80vh;
+  width: 100%;
+  max-width: 1440px;
+  padding: 20px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.board-container {
+  display: flex;
+  gap: 20px;
+}
+
+.columns-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 200px;
+  max-height: 50vh;
+  border-radius: 5px;
+  background-color: gray;
+  overflow-y: auto;
+}
+
+.task-container {
+  width: 80%;
+  height: 40px;
+  margin: 0 auto;
+  background-color: antiquewhite;
+}
+
+.column-btn {
+  height: 25px;
+}
