@@ -64,8 +64,13 @@ export class CurrentBoardComponent implements OnInit {
     this.dialog.open(EditCardComponent, { panelClass: 'custom-dialog-container' });
   }
 
-  openModalCreateColumn() {
-    this.dialog.open(NewColumnComponent, { panelClass: 'custom-dialog-container' });
+  openModalCreateColumn(boardId: string) {
+    const modal = this.dialog.open(NewColumnComponent, { panelClass: 'custom-dialog-container', data: boardId });
+    // modal.afterClosed().subscribe((event) => {
+    //   if (event === 'action') {
+    //     this.addColumn(boardId);
+    //   }
+    // });
   }
 
   openModalCreateTask() {
@@ -82,10 +87,6 @@ export class CurrentBoardComponent implements OnInit {
         task ? this.deleteTask(task) : this.deleteColumn(boardId, columnId);
       }
     });
-  }
-
-  public addColumn(boardId: string) {
-    this.boardsService.createColumn(boardId);
   }
 
   public addTask(boardId: string, columnId: string) {

@@ -8,7 +8,7 @@
         <div class="column-container" *ngFor="let column of board.columns">
 
           <h2 class="column-title" *ngIf="!isTitleClicked" (click)="toggleColumnTitle()">
-            column {{column.title}}
+            {{column.title}}
           </h2>
           <div class="column-title-block" *ngIf="isTitleClicked">
             <button mat-icon-button>
@@ -40,7 +40,7 @@
 
         <div class="column-container new-column">
           <button mat-icon-button class="add-new-column"
-            (click)="openModalCreateColumn()">
+            (click)="openModalCreateColumn(board.id)">
               <mat-icon>add_circle_outline</mat-icon>
               Add new column
           </button>
@@ -48,6 +48,8 @@
 
       </div>
     </div>
+  </div>
+</div>
 
 <!-- <div class="current-board__wrapper">
   <p class="board-title" *ngIf="board$ | async as board">{{board.title}}</p>
@@ -78,7 +80,7 @@
     </div>
     <button mat-icon-button class="column-btn" (click)="addColumn(board.id)">
       <mat-icon>add</mat-icon> Add column
-    </button>
-  </div>
+    </button> -->
+  <!-- </div>
   <button class="back-btn" [routerLink]="['/main']" mat-raised-button>main</button>
 </div> -->

@@ -74,11 +74,11 @@ export class BoardsService {
       });
   }
 
-  createColumn(boardId: string) {
+  createColumn(boardId: string, title: string) {
     const token = this.storageService.getToken()!;
     this.apiService.getColumns(token, boardId).subscribe(res => {
       const order = res.length + 1;
-      this.apiService.createColumn(token, boardId, { title: `test${order}`, order }).subscribe(() => {
+      this.apiService.createColumn(token, boardId, { title: title, order }).subscribe(() => {
         this.updateCurrentBoard(boardId);
       });
     })
