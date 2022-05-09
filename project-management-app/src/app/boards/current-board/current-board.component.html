@@ -1,5 +1,5 @@
 <div class="current-board__wrapper">
-  <p *ngIf="board$ | async as board">{{board.title}}</p>
+  <p class="board-title" *ngIf="board$ | async as board">{{board.title}}</p>
   <div class="board-container" *ngIf="board$ | async as board">
     <div class="columns-container" *ngFor="let column of board.columns">
       <mat-form-field class="example-full-width" *ngIf="isEditEnable">
