@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable } from 'rxjs';
+import { ConfirmationComponent } from 'src/app/core/edit-profile/confirmation/confirmation.component';
 import { BoardsService } from 'src/app/core/services/boards.service';
 import { Board } from 'src/app/models/board.model';
 import { Column } from 'src/app/models/column.model';
@@ -22,9 +24,12 @@ export class CurrentBoardComponent implements OnInit {
 
   columnId: string = '';
 
+  dialogRef: MatDialogRef<ConfirmationComponent>;
+
   constructor(
     private route: ActivatedRoute,
     private boardsService: BoardsService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +37,18 @@ export class CurrentBoardComponent implements OnInit {
     this.board$ = this.boardsService.boards$.pipe(
       map(boards => boards.filter(board => board.id === this.boardId)[0])
     );
+  }
+
+  openDialog(boardId: string, columnId: string, task?: Task) {
+    this.dialogRef = this.dialog.open(ConfirmationComponent, {
+      panelClass: 'custom-dialog-container',
+      data: `Delete ${task ? 'task' : 'column'}?`,
+    });
+    this.dialogRef.afterClosed().subscribe((event) => {
+      if (event === 'action') {
+        task ? this.deleteTask(task) : this.deleteColumn(boardId, columnId);
+      }
+    });
   }
 
   public addColumn(boardId: string) {
