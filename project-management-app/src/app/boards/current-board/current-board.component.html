@@ -32,7 +32,7 @@
               <mat-icon>add_circle_outline</mat-icon>
               Add new task
             </button>
-            <button mat-icon-button (click)="openDialog()">
+            <button mat-icon-button (click)="openDialog(board.id, column.id)">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
@@ -48,5 +48,37 @@
 
       </div>
     </div>
+
+<!-- <div class="current-board__wrapper">
+  <p class="board-title" *ngIf="board$ | async as board">{{board.title}}</p>
+  <div class="board-container" *ngIf="board$ | async as board">
+    <div class="columns-container" *ngFor="let column of board.columns">
+      <mat-form-field class="example-full-width" *ngIf="isEditEnable && columnId === column.id">
+        <input matInput placeholder="{{column.title}}" [(ngModel)]="title">
+        <button mat-icon-button (click)="submitTitle(board.id, column)">
+          <mat-icon>check</mat-icon>
+        </button>
+        <button mat-icon-button (click)="isEditEnable = !isEditEnable">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-form-field>
+      <span class="column-title" *ngIf="!isEditEnable || columnId !== column.id" (click)="editColumn(column.id)">{{column.title}}</span>
+      <div class="task-container" *ngFor="let task of column.tasks">
+        {{task.title}}
+        <button mat-icon-button (click)="openDialog('', '', task)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <button mat-icon-button (click)="addTask(board.id, column.id)">
+        <mat-icon>add</mat-icon> Add task
+      </button>
+      <button mat-icon-button (click)="openDialog(board.id, column.id)">
+        <mat-icon>delete</mat-icon> Delete column
+      </button>
+    </div>
+    <button mat-icon-button class="column-btn" (click)="addColumn(board.id)">
+      <mat-icon>add</mat-icon> Add column
+    </button>
   </div>
-</div>
+  <button class="back-btn" [routerLink]="['/main']" mat-raised-button>main</button>
+</div> -->

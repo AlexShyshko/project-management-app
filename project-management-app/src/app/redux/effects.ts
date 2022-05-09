@@ -16,8 +16,7 @@ export class BoardEffect {
       ofType(StateActions.GET_BOARDS),
       pluck('token'),
       switchMap((action) => this.apiService.getBoards(action)),
-      map(boards => {console.log(boards);
-        return new SaveBoards(boards)})
+      map(boards => {return new SaveBoards(boards)})
     )
   })
 }
