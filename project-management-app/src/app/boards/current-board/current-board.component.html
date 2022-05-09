@@ -2,7 +2,7 @@
   <p class="board-title" *ngIf="board$ | async as board">{{board.title}}</p>
   <div class="board-container" *ngIf="board$ | async as board">
     <div class="columns-container" *ngFor="let column of board.columns">
-      <mat-form-field class="example-full-width" *ngIf="isEditEnable">
+      <mat-form-field class="example-full-width" *ngIf="isEditEnable && columnId === column.id">
         <input matInput placeholder="{{column.title}}" [(ngModel)]="title">
         <button mat-icon-button (click)="submitTitle(board.id, column)">
           <mat-icon>check</mat-icon>
@@ -11,7 +11,7 @@
           <mat-icon>cancel</mat-icon>
         </button>
       </mat-form-field>
-      <span class="column-title" *ngIf="!isEditEnable" (click)="editColumn()">{{column.title}}</span>
+      <span class="column-title" *ngIf="!isEditEnable || columnId !== column.id" (click)="editColumn(column.id)">{{column.title}}</span>
       <div class="task-container" *ngFor="let task of column.tasks">
         {{task.title}}
         <button mat-icon-button (click)="deleteTask(task)">

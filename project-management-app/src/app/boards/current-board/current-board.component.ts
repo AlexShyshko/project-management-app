@@ -20,6 +20,8 @@ export class CurrentBoardComponent implements OnInit {
 
   title: string = '';
 
+  columnId: string = '';
+
   constructor(
     private route: ActivatedRoute,
     private boardsService: BoardsService,
@@ -44,7 +46,8 @@ export class CurrentBoardComponent implements OnInit {
     this.boardsService.deleteColumn(boardId, columnId);
   }
 
-  public editColumn() {
+  public editColumn(columnId) {
+    this.columnId = columnId;
     this.isEditEnable = !this.isEditEnable;
   }
 
