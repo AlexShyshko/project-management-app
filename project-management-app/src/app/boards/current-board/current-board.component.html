@@ -11,7 +11,7 @@
           <mat-icon>cancel</mat-icon>
         </button>
       </mat-form-field>
-      <span *ngIf="!isEditEnable" (click)="editColumn()">{{column.title}}</span>
+      <span class="column-title" *ngIf="!isEditEnable" (click)="editColumn()">{{column.title}}</span>
       <div class="task-container" *ngFor="let task of column.tasks">
         {{task.title}}
       </div>
@@ -19,7 +19,7 @@
         <mat-icon>add</mat-icon> Add task
       </button>
       <button mat-icon-button (click)="deleteColumn(board.id, column.id)">
-        <mat-icon>delete</mat-icon>
+        <mat-icon>delete</mat-icon> Delete column
       </button>
     </div>
     <button mat-icon-button class="column-btn" (click)="addColumn(board.id)">

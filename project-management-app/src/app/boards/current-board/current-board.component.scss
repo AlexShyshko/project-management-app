@@ -17,6 +17,7 @@
   flex-direction: column;
   gap: 10px;
   width: 200px;
+  height: fit-content;
   max-height: 50vh;
   border-radius: 5px;
   background: var(--main-color);
@@ -32,6 +33,10 @@
     }
   }
   overflow-y: auto;
+}
+
+.column-title {
+  padding: 5px;
 }
 
 .task-container {
