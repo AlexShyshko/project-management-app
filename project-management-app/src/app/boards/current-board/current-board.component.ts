@@ -65,16 +65,11 @@ export class CurrentBoardComponent implements OnInit {
   }
 
   openModalCreateColumn(boardId: string) {
-    const modal = this.dialog.open(NewColumnComponent, { panelClass: 'custom-dialog-container', data: boardId });
-    // modal.afterClosed().subscribe((event) => {
-    //   if (event === 'action') {
-    //     this.addColumn(boardId);
-    //   }
-    // });
+    this.dialog.open(NewColumnComponent, { panelClass: 'custom-dialog-container', data: boardId });
   }
 
-  openModalCreateTask() {
-    this.dialog.open(NewTaskComponent, { panelClass: 'custom-dialog-container' });
+  openModalCreateTask(boardId: string, columnId: string) {
+    this.dialog.open(NewTaskComponent, { panelClass: 'custom-dialog-container', data: {boardId: boardId, columnId: columnId} });
   }
 
   openDialog(boardId: string, columnId: string, task?: Task) {
@@ -87,10 +82,6 @@ export class CurrentBoardComponent implements OnInit {
         task ? this.deleteTask(task) : this.deleteColumn(boardId, columnId);
       }
     });
-  }
-
-  public addTask(boardId: string, columnId: string) {
-    this.boardsService.createTask(boardId, columnId);
   }
 
   public deleteColumn(boardId: string, columnId: string) {

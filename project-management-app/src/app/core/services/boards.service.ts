@@ -92,10 +92,10 @@ export class BoardsService {
     });
   }
 
-  createTask(boardId: string, columnId: string) {
+  createTask(boardId: string, columnId: string, title: string, description: string) {
     const token = this.storageService.getToken()!;
     const userId = this.storageService.getUserId()!;
-    this.apiService.createTask(token, boardId, columnId, { title: 'test task', order: 1, description: 'desc', userId }).subscribe(() => {
+    this.apiService.createTask(token, boardId, columnId, { title, order: 1, description, userId }).subscribe(() => {
       this.updateCurrentBoard(boardId);
     });
   }

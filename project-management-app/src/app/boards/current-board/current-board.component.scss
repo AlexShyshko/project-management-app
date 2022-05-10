@@ -102,9 +102,9 @@
   box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.6);
   margin-bottom: 8px;
   border-radius: 5px;
-  transition: 0.4s ease-in-out;
+  transition: 0.3s ease-in-out;
   &:hover {
-    transition: 0.4s ease-in-out;
+    transition: 0.3s ease-in-out;
     transform: scale(1.01);
     background-color: var(--main-color);
     color: var(--text-color-light);
@@ -117,74 +117,8 @@
   align-items: center;
 }
 
-// here from zash
-.current-board__wrapper {
-  position: relative;
-  height: 80vh;
-  width: 100%;
-  max-width: 1440px;
-  padding: 20px;
-  margin: 0 auto;
-  overflow-x: auto;
-}
 
 .back-btn {
   position: absolute;
   bottom: 10px;
 }
-
-// .board-container {
-//   display: flex;
-//   gap: 20px;
-// }
-
-// .board-title {
-//   color: var(--main-color);
-//   font-size: 2rem;
-//   white-space: nowrap;
-//   overflow: hidden;
-//   text-overflow: ellipsis;
-//   padding-top: 5px;
-//   padding-left: 15px;
-//   font-weight: 500;
-// }
-
-// .columns-container {
-//   display: flex;
-//   flex-direction: column;
-//   gap: 10px;
-//   width: 200px;
-//   height: fit-content;
-//   max-height: 50vh;
-//   border-radius: 5px;
-//   background: var(--main-color);
-//   border: 1px solid var(--main-color);
-//   color: var(--text-color-light);;
-//   transition: 0.4s ease-out;
-//   &:hover {
-//     transition: 0.4s ease-out;
-//     background: var(--text-color-light);
-//     color: var(--main-color);
-//     .mat-icon-button {
-//       color: var(--error-color);
-//     }
-//   }
-//   overflow-y: auto;
-// }
-
-// .column-title {
-//   padding: 5px;
-// }
-
-// .task-container {
-//   width: 80%;
-//   height: 40px;
-//   margin: 0 auto;
-//   background: antiquewhite;
-//   border: 1px solid antiquewhite;
-//   color: var(--text-color-dark);
-// }
-
-// .column-btn {
-//   height: 25px;
-// }

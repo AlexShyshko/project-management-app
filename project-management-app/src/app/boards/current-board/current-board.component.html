@@ -7,19 +7,17 @@
 
         <div class="column-container" *ngFor="let column of board.columns">
 
-          <h2 class="column-title" *ngIf="!isTitleClicked" (click)="toggleColumnTitle()">
-            {{column.title}}
-          </h2>
-          <div class="column-title-block" *ngIf="isTitleClicked">
-            <button mat-icon-button>
+          <h2 class="column-title" *ngIf="!isEditEnable || columnId !== column.id"
+            (click)="editColumn(column.id)">{{column.title}}</h2>
+          <div class="column-title-block" *ngIf="isEditEnable && columnId === column.id">
+            <button mat-icon-button (click)="submitTitle(board.id, column)">
               <mat-icon>check_circle</mat-icon>
             </button>
-            <button mat-icon-button (click)="toggleColumnTitle()">
+            <button mat-icon-button (click)="isEditEnable = !isEditEnable">
               <mat-icon>cancel</mat-icon>
             </button>
-            <mat-form-field appearance="fill">
-              <mat-label>Enter column title...</mat-label>
-              <input matInput>
+            <mat-form-field appearance="fill" >
+              <input matInput placeholder="{{column.title}}" [(ngModel)]="title">
             </mat-form-field>
           </div>
 
@@ -28,7 +26,7 @@
           </div>
 
           <div class="column-control-buttons">
-            <button mat-icon-button class="add-new-column" (click)="openModalCreateTask()">
+            <button mat-icon-button class="add-new-column" (click)="openModalCreateTask(board.id, column.id)">
               <mat-icon>add_circle_outline</mat-icon>
               Add new task
             </button>

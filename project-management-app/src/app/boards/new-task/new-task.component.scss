@@ -1,0 +1,30 @@
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.submit-button {
+  background-color: var(--text-color-light);
+  color: var(--main-color);
+  transition: 0.3s ease-in-out;
+  &:disabled {
+    cursor: not-allowed;
+    background-color: rgba(255,255,255,.12);
+    &:hover {
+      background-color: rgba(255,255,255,.12);
+    }
+  }
+  &:hover {
+    background-color: #a8a5ff;
+    transition: 0.3s ease-in-out;
+  }
+}
+
+mat-error ::ng-deep{
+  color: rgb(254, 160, 160);
+}

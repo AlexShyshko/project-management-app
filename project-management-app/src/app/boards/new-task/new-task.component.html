@@ -1,1 +1,37 @@
-<p>new-task works!</p>
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <h1 mat-dialog-title>Create new task</h1>
+    <div mat-dialog-content class="content">
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input formControlName="title" matInput>
+        <mat-error *ngIf="form.get('title')!.errors?.['required']">
+          Please enter a title
+        </mat-error>
+        <mat-error *ngIf="form.get('title')!.errors?.['minlength']">
+          The title is too short
+        </mat-error>
+        <mat-error *ngIf="form.get('title')!.errors?.['maxlength']">
+          The title is too long
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input formControlName="description" matInput #message>
+        <mat-hint align="end">{{message.value.length}} / 255</mat-hint>
+        <mat-error *ngIf="form.get('description')!.errors?.['required']">
+          Please enter description
+        </mat-error>
+        <mat-error *ngIf="form.get('description')!.errors?.['maxlength']">
+          The description is too long
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="form-buttons">
+      <button mat-button class="submit-button" type="submit" [disabled]="form.invalid" mat-dialog-close>
+        Create
+      </button>
+      <button mat-stroked-button type="button" mat-dialog-close>Close</button>
+    </div>
+  </form>
+</div>
