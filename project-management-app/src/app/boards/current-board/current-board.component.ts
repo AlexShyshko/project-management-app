@@ -10,6 +10,7 @@ import { EditCardComponent } from '../edit-card/edit-card.component';
 import { NewColumnComponent } from '../new-column/new-column.component';
 import { NewTaskComponent } from '../new-task/new-task.component';
 import { Task } from 'src/app/models/task.model';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-current-board',
@@ -30,11 +31,7 @@ export class CurrentBoardComponent implements OnInit {
     '../../../assets/current-board/background4.png'
   ];
 
-  isTitleClicked = false;
-
   dialogRef: MatDialogRef<ConfirmationComponent>;
-
-  data = 'Are you sure to delete this column?';
 
   isEditEnable: boolean = false;
 
@@ -56,12 +53,8 @@ export class CurrentBoardComponent implements OnInit {
     this.backgroundImage = this.images[ran];
   }
 
-  toggleColumnTitle() {
-    this.isTitleClicked = !this.isTitleClicked;
-  }
-
-  openModalEditTask() {
-    this.dialog.open(EditCardComponent, { panelClass: 'custom-dialog-container' });
+  openModalEditTask(boardId: string, task: Task, columnId: string) {
+    this.dialog.open(EditCardComponent, { panelClass: 'custom-dialog-container', data: {boardId: boardId, task: task, columnId }  });
   }
 
   openModalCreateColumn(boardId: string) {
@@ -100,5 +93,18 @@ export class CurrentBoardComponent implements OnInit {
 
   public deleteTask(task: Task) {
     this.boardsService.deleteTask(task);
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
   }
 }

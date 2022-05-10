@@ -260,14 +260,14 @@ export class ApiService {
       );
   }
 
-  public updateTask(token: string, boardId: string, columnId: string, taskId: string, task: Task): Observable<Task> {
+  public updateTask(token: string, taskId: string, task: Task): Observable<Task> {
     const body = JSON.stringify(task);
     const headers = new HttpHeaders()
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
     return this.httpClient
-      .put<Task>(`${BOARDS}/${boardId}/columns/${columnId}/tasks/${taskId}`, body, { headers: headers })
+      .put<Task>(`${BOARDS}/${task.boardId}/columns/${task.columnId}/tasks/${taskId}`, body, { headers: headers })
       .pipe(
         catchError(error => this.handleError(error)),
       );

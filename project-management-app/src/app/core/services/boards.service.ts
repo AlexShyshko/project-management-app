@@ -111,4 +111,14 @@ export class BoardsService {
     const token = this.storageService.getToken()!;
     this.apiService.deleteTask(token, task.boardId, task.columnId, task.id).subscribe(() => this.updateCurrentBoard(task.boardId));
   }
+
+  editTask(
+    { boardId, id, title, description, columnId, order }: { boardId: string, id: string, title: string, description: string, columnId: string, order: number }
+  ) {
+    const token = this.storageService.getToken()!;
+    const userId = this.storageService.getUserId()!;
+    this.apiService.updateTask(token, id, { columnId, title, description, order, userId, boardId }).subscribe(() => {
+      this.updateCurrentBoard(boardId);
+    });
+  }
 }
