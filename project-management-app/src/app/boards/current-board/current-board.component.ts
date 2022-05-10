@@ -137,4 +137,8 @@ export class CurrentBoardComponent implements OnInit, OnDestroy {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
     }
   }
+
+  onPointerup() {
+    console.log('Now just update tasks order on server');
+  }
 }
