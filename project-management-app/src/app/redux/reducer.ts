@@ -1,5 +1,5 @@
-import { BoardsState } from ".";
-import { SaveBoards, StateActions } from "./actions";
+import { BoardsState } from '.';
+import { SaveBoards, StateActions } from './actions';
 
 const boardsInitialState: BoardsState = {
   boards: [],

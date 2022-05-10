@@ -1,0 +1,21 @@
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <h1 mat-dialog-title>Create new column</h1>
+    <div mat-dialog-content class="content">
+      <mat-form-field appearance="fill">
+        <mat-label>Column title</mat-label>
+        <input formControlName="title" matInput />
+        <mat-error *ngIf="form.get('title')!.errors?.['required']">Please enter title</mat-error>
+        <mat-error *ngIf="form.get('title')!.errors?.['minlength']">Minimum characters count:
+          {{form.get('title')!.errors?.['minlength'].requiredLength}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="form-buttons">
+      <button mat-button class="submit-button" type="submit" [disabled]="form.invalid" mat-dialog-close>
+       Create
+      </button>
+      <button mat-stroked-button type="button" mat-dialog-close>Close</button>
+    </div>
+  </form>
+</div>

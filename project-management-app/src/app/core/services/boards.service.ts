@@ -63,25 +63,25 @@ export class BoardsService {
     const token = this.storageService.getToken()!;
     this.apiService.getBoardById(token, boardId)
       .subscribe(board => {
-          this.apiService.getColumns(token, board.id!).subscribe(columnsResponse => {
-            const columns = columnsResponse.map(column => {
-              this.apiService.getTasks(token, board.id, column.id).subscribe(taskResponse => column.tasks = taskResponse);
-              return column;
-            });
-            board.columns = columns;
+        this.apiService.getColumns(token, board.id!).subscribe(columnsResponse => {
+          const columns = columnsResponse.map(column => {
+            this.apiService.getTasks(token, board.id, column.id).subscribe(taskResponse => column.tasks = taskResponse);
+            return column;
           });
-          this.board.next(board);
+          board.columns = columns;
+        });
+        this.board.next(board);
       });
   }
 
-  createColumn(boardId: string) {
+  createColumn(boardId: string, title: string) {
     const token = this.storageService.getToken()!;
     this.apiService.getColumns(token, boardId).subscribe(res => {
       const order = res.length + 1;
-      this.apiService.createColumn(token, boardId, { title: `test${order}`, order }).subscribe(() => {
+      this.apiService.createColumn(token, boardId, { title: title, order }).subscribe(() => {
         this.updateCurrentBoard(boardId);
       });
-    })
+    });
   }
 
   deleteColumn(boardId: string, columnId: string) {
@@ -92,10 +92,10 @@ export class BoardsService {
     });
   }
 
-  createTask(boardId: string, columnId: string) {
+  createTask(boardId: string, columnId: string, title: string, description: string) {
     const token = this.storageService.getToken()!;
     const userId = this.storageService.getUserId()!;
-    this.apiService.createTask(token, boardId, columnId, { title: 'test task', order: 1, description: 'desc', userId }).subscribe(() => {
+    this.apiService.createTask(token, boardId, columnId, { title, order: 1, description, userId }).subscribe(() => {
       this.updateCurrentBoard(boardId);
     });
   }
@@ -110,5 +110,15 @@ export class BoardsService {
   deleteTask(task: Task) {
     const token = this.storageService.getToken()!;
     this.apiService.deleteTask(token, task.boardId, task.columnId, task.id).subscribe(() => this.updateCurrentBoard(task.boardId));
+  }
+
+  editTask(
+    { boardId, id, title, description, columnId, order }: { boardId: string, id: string, title: string, description: string, columnId: string, order: number },
+  ) {
+    const token = this.storageService.getToken()!;
+    const userId = this.storageService.getUserId()!;
+    this.apiService.updateTask(token, id, { columnId, title, description, order, userId, boardId }).subscribe(() => {
+      this.updateCurrentBoard(boardId);
+    });
   }
 }
