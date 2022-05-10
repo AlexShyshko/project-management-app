@@ -19,7 +19,6 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  // overflow-x: scroll;
 }
 
 .columns-container {
@@ -40,8 +39,14 @@
   border: 1px solid var(--main-color);
   padding: 5px 10px;
   max-height: 60vh;
+  position: relative;
+  flex-shrink : 0;
+}
+
+.task-container {
   overflow-y: auto;
-  flex-shrink: 0;
+  overflow-x: hidden;
+  max-height: 48vh;
   position: relative;
   display: flex;
   flex-direction: column;
