@@ -30,7 +30,7 @@
           </div>
 
           <div class="column-control-buttons" [ngStyle]="{'order': column.tasks.length + 1}">
-            <button mat-icon-button class="add-new-column" (click)="openModalCreateTask(board.id, column.id)">
+            <button mat-icon-button class="add-new-column" (click)="openModalCreateTask(board.id, column.id, column)">
               <mat-icon>add_circle_outline</mat-icon>
               Add new task
             </button>

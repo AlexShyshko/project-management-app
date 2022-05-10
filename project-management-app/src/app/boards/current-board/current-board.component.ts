@@ -61,8 +61,8 @@ export class CurrentBoardComponent implements OnInit {
     this.dialog.open(NewColumnComponent, { panelClass: 'custom-dialog-container', data: boardId });
   }
 
-  openModalCreateTask(boardId: string, columnId: string) {
-    this.dialog.open(NewTaskComponent, { panelClass: 'custom-dialog-container', data: { boardId: boardId, columnId: columnId } });
+  openModalCreateTask(boardId: string, columnId: string, column: Column) {
+    this.dialog.open(NewTaskComponent, { panelClass: 'custom-dialog-container', data: { boardId: boardId, columnId: columnId, column: column } });
   }
 
   openDialog(boardId: string, columnId: string, task?: Task) {
