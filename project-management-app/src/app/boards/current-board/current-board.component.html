@@ -21,7 +21,7 @@
             </mat-form-field>
           </div>
 
-          <div class="current-cards" *ngFor="let task of column.tasks">
+          <div class="current-cards" [ngStyle]="{'order': task.order}" *ngFor="let task of column.tasks">
               <button mat-icon-button class="delete-task-btn"(click)="openDialog('', '', task)">
                 <mat-icon>delete</mat-icon>
               </button>
@@ -29,7 +29,7 @@
 
           </div>
 
-          <div class="column-control-buttons">
+          <div class="column-control-buttons" [ngStyle]="{'order': column.tasks.length + 1}">
             <button mat-icon-button class="add-new-column" (click)="openModalCreateTask(board.id, column.id)">
               <mat-icon>add_circle_outline</mat-icon>
               Add new task

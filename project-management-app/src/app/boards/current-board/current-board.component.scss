@@ -44,6 +44,8 @@
   overflow-y: auto;
   flex-shrink : 0;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .add-new-column {
