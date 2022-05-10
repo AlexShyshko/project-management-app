@@ -50,3 +50,7 @@ ul {
   top: 40%;
   left: calc(50% - 200px);
 }
+
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: var(--main-color);
+}

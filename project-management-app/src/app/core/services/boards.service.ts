@@ -25,8 +25,8 @@ export class BoardsService {
 
   updateBoards() {
     const token = this.storageService.getToken()!;
-    this.apiService.getBoards(token)
-      .subscribe(collection => {
+    const request = this.apiService.getBoards(token);
+    request.subscribe(collection => {
         const boards = collection.map(board => {
           this.apiService.getColumns(token, board.id!).subscribe(columnsResponse => {
             const columns = columnsResponse.map(column => {
@@ -40,6 +40,7 @@ export class BoardsService {
         this.boardsArray = boards;
         this.boards.next(this.boardsArray);
       });
+    return request;
   }
 
   addBoard(board: Board) {

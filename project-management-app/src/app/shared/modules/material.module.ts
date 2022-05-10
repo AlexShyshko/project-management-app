@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
@@ -35,6 +36,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatDialogModule,
     MatSnackBarModule,
     DragDropModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatIconModule,
@@ -53,6 +55,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatDialogModule,
     MatSnackBarModule,
     DragDropModule,
+    MatProgressSpinnerModule
   ],
 })
 export class MaterialModule {}
