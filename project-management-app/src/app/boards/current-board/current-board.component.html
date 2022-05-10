@@ -1,14 +1,12 @@
-<div class="board-wrapper" [ngStyle]="{'background-image': 'url(' + backgroundImage + ')'}">
+<div class="board-wrapper" [ngStyle]="{ 'background-image': 'url(' + backgroundImage + ')' }">
   <div class="wrapper">
-
     <div class="board-container" *ngIf="board$ | async as board">
-      <h1 class="page-title">Current workspace - {{board.title}}</h1>
+      <h1 class="page-title">{{ 'boards.current-board.workspace' | translate }} - {{ board.title }}</h1>
       <div class="columns-container">
-
         <div class="column-container" *ngFor="let column of board.columns">
-
-          <h2 class="column-title" *ngIf="!isEditEnable || columnId !== column.id"
-            (click)="editColumn(column.id)">{{column.title}}</h2>
+          <h2 class="column-title" *ngIf="!isEditEnable || columnId !== column.id" (click)="editColumn(column.id)">
+            {{ column.title }}
+          </h2>
           <div class="column-title-block" *ngIf="isEditEnable && columnId === column.id">
             <button mat-icon-button (click)="submitTitle(board.id, column)">
               <mat-icon>check_circle</mat-icon>
@@ -16,23 +14,22 @@
             <button mat-icon-button (click)="isEditEnable = !isEditEnable">
               <mat-icon>cancel</mat-icon>
             </button>
-            <mat-form-field appearance="fill" >
-              <input matInput placeholder="{{column.title}}" [(ngModel)]="title">
+            <mat-form-field appearance="fill">
+              <input matInput placeholder="{{ column.title }}" [(ngModel)]="title" />
             </mat-form-field>
           </div>
 
           <div class="current-cards" *ngFor="let task of column.tasks">
-              <button mat-icon-button class="delete-task-btn"(click)="openDialog('', '', task)">
-                <mat-icon>delete</mat-icon>
-              </button>
-              <h5 class="card-title" (click)="openModalEditTask(board.id, task, column.id)">{{task.title}}</h5>
-
+            <button mat-icon-button class="delete-task-btn" (click)="openDialog('', '', task)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <h5 class="card-title" (click)="openModalEditTask(board.id, task, column.id)">{{ task.title }}</h5>
           </div>
 
           <div class="column-control-buttons">
             <button mat-icon-button class="add-new-column" (click)="openModalCreateTask(board.id, column.id)">
               <mat-icon>add_circle_outline</mat-icon>
-              Add new task
+              {{ 'boards.current-board.add-task' | translate }}
             </button>
             <button mat-icon-button (click)="openDialog(board.id, column.id)">
               <mat-icon>delete</mat-icon>
@@ -41,13 +38,11 @@
         </div>
 
         <div class="column-container new-column">
-          <button mat-icon-button class="add-new-column"
-            (click)="openModalCreateColumn(board.id)">
-              <mat-icon>add_circle_outline</mat-icon>
-              Add new column
+          <button mat-icon-button class="add-new-column" (click)="openModalCreateColumn(board.id)">
+            <mat-icon>add_circle_outline</mat-icon>
+            {{ 'boards.current-board.add-column' | translate }}
           </button>
         </div>
-
       </div>
     </div>
   </div>

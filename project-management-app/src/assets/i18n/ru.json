@@ -3,6 +3,9 @@
   "yes": "Да",
   "no": "Нет",
   "home": "Домой",
+  "create": "Создать",
+  "close": "Закрыть",
+  "edit": "Изменить",
   "core": {
     "header": {
       "new-button": "Новая доска",
@@ -81,6 +84,16 @@
     "boards": {
       "workspaces": "Ваши рабочие пространства"
     },
+    "current-board": {
+      "workspace": "Текущее рабочее пространство",
+      "add-column": "Добавить колонку",
+      "add-task": "Добавить задачу",
+      "delete-column": "Удалить колонку",
+      "delete-task": "Удалить задачу"
+    },
+    "edit-card": {
+      "edit-task": "Изменить задачу"
+    },
     "new-board": {
       "new-project": "Новый проект",
       "title": "Заголовок",
@@ -88,6 +101,22 @@
       "minimum-length": "Минимальная длина заголовка: ",
       "create": "Создать",
       "close": "Закрыть"
+    },
+    "new-column": {
+      "create-column": "Создать колонку",
+      "column-title": "Заголовок колонки",
+      "enter-title": "Введите заголовок",
+      "minimum-characters": "Минимальное количество символов"
+    },
+    "new-task": {
+      "create-task": "Создать задачу",
+      "title": "Заголовок",
+      "enter-title": "Введите заголовок",
+      "title-short": "Заголовок слишком короткий",
+      "title-long": "Заголовок слишком длинный",
+      "description": "Описание",
+      "enter-description": "Введите описание",
+      "description-long": "Описание слишком длинное"
     }
   }
 }

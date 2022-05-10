@@ -3,6 +3,9 @@
   "yes": "Yes",
   "no": "No",
   "home": "Home",
+  "create": "Create",
+  "close": "Close",
+  "edit": "Edit",
   "core": {
     "header": {
       "new-button": "Create new board",
@@ -81,6 +84,16 @@
     "boards": {
       "workspaces": "Your workspaces"
     },
+    "current-board": {
+      "workspace": "Current workspace",
+      "add-column": "Add new column",
+      "add-task": "Add new task",
+      "delete-column": "Delete column",
+      "delete-task": "Delete task"
+    },
+    "edit-card": {
+      "edit-task": "Edit task"
+    },
     "new-board": {
       "new-project": "Create your new project",
       "title": "Board title",
@@ -88,6 +101,22 @@
       "minimum-length": "Minimum title length is",
       "create": "Create board",
       "close": "Close"
+    },
+    "new-column": {
+      "create-column": "Create new column",
+      "column-title": "Column title",
+      "enter-title": "Please enter title",
+      "minimum-characters": "Minimum characters count"
+    },
+    "new-task": {
+      "create-task": "Create new task",
+      "title": "Title",
+      "enter-title": "Please enter a title",
+      "title-short": "The title is too short",
+      "title-long": "The title is too long",
+      "description": "Description",
+      "enter-description": "Please enter description",
+      "description-long": "The description is too long"
     }
   }
 }
