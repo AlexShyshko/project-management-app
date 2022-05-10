@@ -1,7 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 import { BoardsService } from 'src/app/core/services/boards.service';
+import { CoreService } from 'src/app/core/services/core.service';
 import { Task } from 'src/app/models/task.model';
 
 @Component({
@@ -9,15 +12,31 @@ import { Task } from 'src/app/models/task.model';
   templateUrl: './edit-card.component.html',
   styleUrls: ['./edit-card.component.scss'],
 })
-export class EditCardComponent implements OnInit {
+export class EditCardComponent implements OnInit, OnDestroy {
   form: FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]),
     description: new FormControl('', [Validators.required, Validators.maxLength(55)]),
   });
 
-  constructor(private boardsService: BoardsService,  @Inject(MAT_DIALOG_DATA) public data: { boardId: string, task: Task, columnId: string }) { }
+  public subscriptions: Subscription[] = [];
+
+  constructor(
+    private boardsService: BoardsService,
+    @Inject(MAT_DIALOG_DATA) public data: { boardId: string; task: Task; columnId: string },
+    public translate: TranslateService,
+    public coreService: CoreService,
+  ) {}
 
   ngOnInit(): void {
+    this.subscriptions.push(
+      this.coreService.currentLang.subscribe((lang) => {
+        this.translate.use(lang);
+      }),
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   submit() {
@@ -32,5 +51,4 @@ export class EditCardComponent implements OnInit {
       });
     }
   }
-
 }
