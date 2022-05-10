@@ -129,4 +129,12 @@ export class CurrentBoardComponent implements OnInit, OnDestroy {
         this.delColumnTrans = translations['boards.current-board.delete-column'] + ' ?';
       });
   }
+
+  drop(event: CdkDragDrop<Task[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+    }
+  }
 }
