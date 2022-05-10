@@ -1,8 +1,7 @@
-<div class="board-wrapper" [ngStyle]="{'background-image': 'url(' + backgroundImage + ')'}">
+<div class="board-wrapper" [ngStyle]="{ 'background-image': 'url(' + backgroundImage + ')' }">
   <div class="wrapper">
-
     <div class="board-container" *ngIf="board$ | async as board">
-      <h1 class="page-title">Current workspace - {{board.title}}</h1>
+      <h1 class="page-title">{{ 'boards.current-board.workspace' | translate }} - {{ board.title }}</h1>
       <div class="columns-container">
 
         <div class="column-container" [ngStyle]="{'order': column.order}" *ngFor="let column of board.columns">
@@ -16,8 +15,8 @@
             <button mat-icon-button (click)="isEditEnable = !isEditEnable">
               <mat-icon>cancel</mat-icon>
             </button>
-            <mat-form-field appearance="fill" >
-              <input matInput placeholder="{{column.title}}" [(ngModel)]="title">
+            <mat-form-field appearance="fill">
+              <input matInput placeholder="{{ column.title }}" [(ngModel)]="title" />
             </mat-form-field>
           </div>
 
@@ -32,7 +31,7 @@
           <div class="column-control-buttons" [ngStyle]="{'order': column.tasks.length + 1}">
             <button mat-icon-button class="add-new-column" (click)="openModalCreateTask(board.id, column.id, column)">
               <mat-icon>add_circle_outline</mat-icon>
-              Add new task
+              {{ 'boards.current-board.add-task' | translate }}
             </button>
             <button mat-icon-button (click)="openDialog(board.id, column.id)">
               <mat-icon>delete</mat-icon>
@@ -44,10 +43,9 @@
           <button mat-icon-button class="add-new-column"
             (click)="openModalCreateColumn(board.id)">
               <mat-icon>add_circle_outline</mat-icon>
-              Add new column
+              {{ 'boards.current-board.add-column' | translate }}
           </button>
         </div>
-
       </div>
     </div>
   </div>

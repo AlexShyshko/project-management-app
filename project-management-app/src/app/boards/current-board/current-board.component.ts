@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ConfirmationComponent } from 'src/app/core/edit-profile/confirmation/confirmation.component';
 import { BoardsService } from 'src/app/core/services/boards.service';
 import { Board } from 'src/app/models/board.model';
@@ -11,13 +11,15 @@ import { NewColumnComponent } from '../new-column/new-column.component';
 import { NewTaskComponent } from '../new-task/new-task.component';
 import { Task } from 'src/app/models/task.model';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { TranslateService } from '@ngx-translate/core';
+import { CoreService } from 'src/app/core/services/core.service';
 
 @Component({
   selector: 'app-current-board',
   templateUrl: './current-board.component.html',
   styleUrls: ['./current-board.component.scss'],
 })
-export class CurrentBoardComponent implements OnInit {
+export class CurrentBoardComponent implements OnInit, OnDestroy {
   boardId: string;
 
   board$: Observable<Board>;
@@ -39,11 +41,19 @@ export class CurrentBoardComponent implements OnInit {
 
   columnId: string = '';
 
+  delTaskTrans: string;
+
+  delColumnTrans: string;
+
+  public subscriptions: Subscription[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private boardsService: BoardsService,
     private dialog: MatDialog,
-  ) { }
+    public translate: TranslateService,
+    public coreService: CoreService,
+  ) {}
 
   ngOnInit(): void {
     this.boardId = this.route.snapshot.params.id;
@@ -51,10 +61,23 @@ export class CurrentBoardComponent implements OnInit {
     this.board$ = this.boardsService.board$;
     let ran = Math.round((Math.random() * 100) % 3);
     this.backgroundImage = this.images[ran];
+    this.subscriptions.push(
+      this.coreService.currentLang.subscribe((lang) => {
+        this.translate.use(lang);
+        this.getConfirmTranslation();
+      }),
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   openModalEditTask(boardId: string, task: Task, columnId: string) {
-    this.dialog.open(EditCardComponent, { panelClass: 'custom-dialog-container', data: { boardId: boardId, task: task, columnId }  });
+    this.dialog.open(EditCardComponent, {
+      panelClass: 'custom-dialog-container',
+      data: { boardId: boardId, task: task, columnId },
+    });
   }
 
   openModalCreateColumn(boardId: string) {
@@ -62,13 +85,16 @@ export class CurrentBoardComponent implements OnInit {
   }
 
   openModalCreateTask(boardId: string, columnId: string, column: Column) {
-    this.dialog.open(NewTaskComponent, { panelClass: 'custom-dialog-container', data: { boardId: boardId, columnId: columnId, column: column } });
+    this.dialog.open(NewTaskComponent, {
+      panelClass: 'custom-dialog-container',
+      data: { boardId: boardId, columnId: columnId, column: column },
+    });
   }
 
   openDialog(boardId: string, columnId: string, task?: Task) {
     this.dialogRef = this.dialog.open(ConfirmationComponent, {
       panelClass: 'custom-dialog-container',
-      data: `Delete ${task ? 'task' : 'column'}?`,
+      data: task ? this.delTaskTrans : this.delColumnTrans,
     });
     this.dialogRef.afterClosed().subscribe((event) => {
       if (event === 'action') {
@@ -93,5 +119,14 @@ export class CurrentBoardComponent implements OnInit {
 
   public deleteTask(task: Task) {
     this.boardsService.deleteTask(task);
+  }
+
+  getConfirmTranslation(): void {
+    this.translate
+      .get(['boards.current-board.delete-task', 'boards.current-board.delete-column'])
+      .subscribe((translations) => {
+        this.delTaskTrans = translations['boards.current-board.delete-task'] + ' ?';
+        this.delColumnTrans = translations['boards.current-board.delete-column'] + ' ?';
+      });
   }
 }

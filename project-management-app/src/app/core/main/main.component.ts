@@ -26,11 +26,6 @@ export class MainComponent implements OnInit, OnDestroy {
         this.translate.use(lang);
       }),
     );
-    const isUserLogged = this.storageService.isLogged();
-    if (isUserLogged && this.coreService.isFirstTimeDownloaded) {
-      this.coreService.isFirstTimeDownloaded = false;
-      this.router.navigateByUrl('/main');
-    }
   }
 
   ngOnDestroy(): void {
