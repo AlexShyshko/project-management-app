@@ -81,6 +81,12 @@
     "boards": {
       "workspaces": "Ваши рабочие пространства"
     },
+    "current-board": {
+      "add-column": "Добавить колонку",
+      "add-task": "Добавить задачу",
+      "delete-column": "Удалить колонку",
+      "delete-task": "Удалить задачу"
+    },
     "new-board": {
       "new-project": "Новый проект",
       "title": "Заголовок",

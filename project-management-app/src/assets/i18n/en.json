@@ -81,6 +81,12 @@
     "boards": {
       "workspaces": "Your workspaces"
     },
+    "current-board": {
+      "add-column": "Add column",
+      "add-task": "Add task",
+      "delete-column": "Delete column",
+      "delete-task": "Delete task"
+    },
     "new-board": {
       "new-project": "Create your new project",
       "title": "Board title",
