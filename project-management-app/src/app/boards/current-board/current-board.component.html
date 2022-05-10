@@ -28,7 +28,7 @@
 
           </div>
 
-          <div class="column-control-buttons" [ngStyle]="{'order': column.tasks.length + 1}">
+          <div class="column-control-buttons" [ngStyle]="{'order': 1000}">
             <button mat-icon-button class="add-new-column" (click)="openModalCreateTask(board.id, column.id, column)">
               <mat-icon>add_circle_outline</mat-icon>
               {{ 'boards.current-board.add-task' | translate }}
@@ -39,7 +39,7 @@
           </div>
         </div>
 
-        <div class="column-container new-column" [ngStyle]="{'order': board.columns.length + 1}">
+        <div class="column-container new-column" [ngStyle]="{'order': 1000}">
           <button mat-icon-button class="add-new-column"
             (click)="openModalCreateColumn(board.id)">
               <mat-icon>add_circle_outline</mat-icon>
