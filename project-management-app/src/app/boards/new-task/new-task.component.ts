@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { BoardsService } from 'src/app/core/services/boards.service';
+import { Column } from 'src/app/models/column.model';
 import { CoreService } from 'src/app/core/services/core.service';
 
 @Component({
@@ -21,7 +22,7 @@ export class NewTaskComponent implements OnInit, OnDestroy {
 
   constructor(
     private boardsService: BoardsService,
-    @Inject(MAT_DIALOG_DATA) public data: { boardId: string; columnId: string },
+    @Inject(MAT_DIALOG_DATA) public data: { boardId: string, columnId: string, column: Column },
     public translate: TranslateService,
     public coreService: CoreService,
   ) {}
@@ -45,6 +46,7 @@ export class NewTaskComponent implements OnInit, OnDestroy {
         this.data.columnId,
         this.form.get('title')?.value,
         this.form.get('description')?.value,
+        this.data.column,
       );
     }
   }

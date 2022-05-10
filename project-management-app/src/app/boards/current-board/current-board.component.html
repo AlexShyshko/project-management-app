@@ -3,10 +3,11 @@
     <div class="board-container" *ngIf="board$ | async as board">
       <h1 class="page-title">{{ 'boards.current-board.workspace' | translate }} - {{ board.title }}</h1>
       <div class="columns-container">
-        <div class="column-container" *ngFor="let column of board.columns">
-          <h2 class="column-title" *ngIf="!isEditEnable || columnId !== column.id" (click)="editColumn(column.id)">
-            {{ column.title }}
-          </h2>
+
+        <div class="column-container" [ngStyle]="{'order': column.order}" *ngFor="let column of board.columns">
+
+          <h2 class="column-title" *ngIf="!isEditEnable || columnId !== column.id"
+            (click)="editColumn(column.id)">{{column.title}}</h2>
           <div class="column-title-block" *ngIf="isEditEnable && columnId === column.id">
             <button mat-icon-button (click)="submitTitle(board.id, column)">
               <mat-icon>check_circle</mat-icon>
@@ -19,15 +20,16 @@
             </mat-form-field>
           </div>
 
-          <div class="current-cards" *ngFor="let task of column.tasks">
-            <button mat-icon-button class="delete-task-btn" (click)="openDialog('', '', task)">
-              <mat-icon>delete</mat-icon>
-            </button>
-            <h5 class="card-title" (click)="openModalEditTask(board.id, task, column.id)">{{ task.title }}</h5>
+          <div class="current-cards" [ngStyle]="{'order': task.order}" *ngFor="let task of column.tasks">
+              <button mat-icon-button class="delete-task-btn"(click)="openDialog('', '', task)">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <h5 class="card-title" (click)="openModalEditTask(board.id, task, column.id)">{{task.title}}</h5>
+
           </div>
 
-          <div class="column-control-buttons">
-            <button mat-icon-button class="add-new-column" (click)="openModalCreateTask(board.id, column.id)">
+          <div class="column-control-buttons" [ngStyle]="{'order': 1000}">
+            <button mat-icon-button class="add-new-column" (click)="openModalCreateTask(board.id, column.id, column)">
               <mat-icon>add_circle_outline</mat-icon>
               {{ 'boards.current-board.add-task' | translate }}
             </button>
@@ -37,10 +39,11 @@
           </div>
         </div>
 
-        <div class="column-container new-column">
-          <button mat-icon-button class="add-new-column" (click)="openModalCreateColumn(board.id)">
-            <mat-icon>add_circle_outline</mat-icon>
-            {{ 'boards.current-board.add-column' | translate }}
+        <div class="column-container new-column" [ngStyle]="{'order': 1000}">
+          <button mat-icon-button class="add-new-column"
+            (click)="openModalCreateColumn(board.id)">
+              <mat-icon>add_circle_outline</mat-icon>
+              {{ 'boards.current-board.add-column' | translate }}
           </button>
         </div>
       </div>

@@ -84,10 +84,10 @@ export class CurrentBoardComponent implements OnInit, OnDestroy {
     this.dialog.open(NewColumnComponent, { panelClass: 'custom-dialog-container', data: boardId });
   }
 
-  openModalCreateTask(boardId: string, columnId: string) {
+  openModalCreateTask(boardId: string, columnId: string, column: Column) {
     this.dialog.open(NewTaskComponent, {
       panelClass: 'custom-dialog-container',
-      data: { boardId: boardId, columnId: columnId },
+      data: { boardId: boardId, columnId: columnId, column: column },
     });
   }
 
