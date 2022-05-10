@@ -46,7 +46,7 @@ export class NewTaskComponent implements OnInit, OnDestroy {
         this.data.columnId,
         this.form.get('title')?.value,
         this.form.get('description')?.value,
-        this.data.column
+        this.data.column,
       );
     }
   }
