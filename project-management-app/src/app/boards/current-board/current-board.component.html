@@ -19,16 +19,15 @@
               <input matInput placeholder="{{ column.title }}" [(ngModel)]="title" />
             </mat-form-field>
           </div>
-
-          <div class="current-cards" [ngStyle]="{'order': task.order}" *ngFor="let task of column.tasks">
-              <button mat-icon-button class="delete-task-btn"(click)="openDialog('', '', task)">
-                <mat-icon>delete</mat-icon>
-              </button>
-              <h5 class="card-title" (click)="openModalEditTask(board.id, task, column.id)">{{task.title}}</h5>
-
+          <div class="task-container">
+            <div class="current-cards" [ngStyle]="{'order': task.order}" *ngFor="let task of column.tasks">
+                <button mat-icon-button class="delete-task-btn"(click)="openDialog('', '', task)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <h5 class="card-title" (click)="openModalEditTask(board.id, task, column.id)">{{task.title}}</h5>
+            </div>
           </div>
-
-          <div class="column-control-buttons" [ngStyle]="{'order': 1000}">
+          <div class="column-control-buttons">
             <button mat-icon-button class="add-new-column" (click)="openModalCreateTask(board.id, column.id, column)">
               <mat-icon>add_circle_outline</mat-icon>
               {{ 'boards.current-board.add-task' | translate }}
