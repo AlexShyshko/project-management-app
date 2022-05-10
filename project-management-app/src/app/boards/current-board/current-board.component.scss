@@ -41,7 +41,7 @@
   border: 1px solid var(--main-color);
   padding: 5px 10px;
   max-height: 60vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   flex-shrink : 0;
   position: relative;
 }
