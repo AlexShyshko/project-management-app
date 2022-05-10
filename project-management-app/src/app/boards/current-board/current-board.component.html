@@ -5,7 +5,7 @@
       <h1 class="page-title">Current workspace - {{board.title}}</h1>
       <div class="columns-container">
 
-        <div class="column-container" *ngFor="let column of board.columns">
+        <div class="column-container" [ngStyle]="{'order': column.order}" *ngFor="let column of board.columns">
 
           <h2 class="column-title" *ngIf="!isEditEnable || columnId !== column.id"
             (click)="editColumn(column.id)">{{column.title}}</h2>
@@ -40,7 +40,7 @@
           </div>
         </div>
 
-        <div class="column-container new-column">
+        <div class="column-container new-column" [ngStyle]="{'order': board.columns.length + 1}">
           <button mat-icon-button class="add-new-column"
             (click)="openModalCreateColumn(board.id)">
               <mat-icon>add_circle_outline</mat-icon>
