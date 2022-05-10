@@ -6,7 +6,7 @@ import { BoardsService } from 'src/app/core/services/boards.service';
 @Component({
   selector: 'app-new-column',
   templateUrl: './new-column.component.html',
-  styleUrls: ['./new-column.component.scss']
+  styleUrls: ['./new-column.component.scss'],
 })
 export class NewColumnComponent implements OnInit {
 
@@ -14,7 +14,7 @@ export class NewColumnComponent implements OnInit {
     title: new FormControl('', [Validators.required, Validators.minLength(1)]),
   });
 
-  constructor(private boardsService: BoardsService,  @Inject(MAT_DIALOG_DATA) public data: string,) {}
+  constructor(private boardsService: BoardsService,  @Inject(MAT_DIALOG_DATA) public data: string) {}
 
   ngOnInit(): void {
   }

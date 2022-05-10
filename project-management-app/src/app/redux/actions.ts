@@ -1,5 +1,5 @@
-import { Action } from "@ngrx/store";
-import { Board } from "../models/board.model";
+import { Action } from '@ngrx/store';
+import { Board } from '../models/board.model';
 
 export enum StateActions {
   GET_BOARDS = '[board page] get boards',

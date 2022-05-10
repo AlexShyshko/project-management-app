@@ -7,14 +7,15 @@ import { Task } from 'src/app/models/task.model';
 @Component({
   selector: 'app-edit-card',
   templateUrl: './edit-card.component.html',
-  styleUrls: ['./edit-card.component.scss']
+  styleUrls: ['./edit-card.component.scss'],
 })
 export class EditCardComponent implements OnInit {
   form: FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]),
     description: new FormControl('', [Validators.required, Validators.maxLength(55)]),
   });
-  constructor(private boardsService: BoardsService,  @Inject(MAT_DIALOG_DATA) public data: { boardId: string, task: Task, columnId: string },) { }
+
+  constructor(private boardsService: BoardsService,  @Inject(MAT_DIALOG_DATA) public data: { boardId: string, task: Task, columnId: string }) { }
 
   ngOnInit(): void {
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ConfirmationComponent } from 'src/app/core/edit-profile/confirmation/confirmation.component';
 import { BoardsService } from 'src/app/core/services/boards.service';
 import { Board } from 'src/app/models/board.model';
@@ -15,7 +15,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 @Component({
   selector: 'app-current-board',
   templateUrl: './current-board.component.html',
-  styleUrls: ['./current-board.component.scss']
+  styleUrls: ['./current-board.component.scss'],
 })
 export class CurrentBoardComponent implements OnInit {
   boardId: string;
@@ -28,7 +28,7 @@ export class CurrentBoardComponent implements OnInit {
     '../../../assets/current-board/background1.png',
     '../../../assets/current-board/background2.png',
     '../../../assets/current-board/background3.png',
-    '../../../assets/current-board/background4.png'
+    '../../../assets/current-board/background4.png',
   ];
 
   dialogRef: MatDialogRef<ConfirmationComponent>;
@@ -49,12 +49,12 @@ export class CurrentBoardComponent implements OnInit {
     this.boardId = this.route.snapshot.params.id;
     this.boardsService.updateCurrentBoard(this.boardId);
     this.board$ = this.boardsService.board$;
-    let ran = Math.round((Math.random()*100)%3);
+    let ran = Math.round((Math.random() * 100) % 3);
     this.backgroundImage = this.images[ran];
   }
 
   openModalEditTask(boardId: string, task: Task, columnId: string) {
-    this.dialog.open(EditCardComponent, { panelClass: 'custom-dialog-container', data: {boardId: boardId, task: task, columnId }  });
+    this.dialog.open(EditCardComponent, { panelClass: 'custom-dialog-container', data: { boardId: boardId, task: task, columnId }  });
   }
 
   openModalCreateColumn(boardId: string) {
@@ -62,7 +62,7 @@ export class CurrentBoardComponent implements OnInit {
   }
 
   openModalCreateTask(boardId: string, columnId: string) {
-    this.dialog.open(NewTaskComponent, { panelClass: 'custom-dialog-container', data: {boardId: boardId, columnId: columnId} });
+    this.dialog.open(NewTaskComponent, { panelClass: 'custom-dialog-container', data: { boardId: boardId, columnId: columnId } });
   }
 
   openDialog(boardId: string, columnId: string, task?: Task) {
@@ -93,18 +93,5 @@ export class CurrentBoardComponent implements OnInit {
 
   public deleteTask(task: Task) {
     this.boardsService.deleteTask(task);
-  }
-
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-    }
   }
 }

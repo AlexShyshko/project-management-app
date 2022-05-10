@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, pluck, switchMap } from "rxjs";
-import { ApiService } from "../core/services/api";
-import { SaveBoards, StateActions } from "./actions";
+import { map, pluck, switchMap } from 'rxjs';
+import { ApiService } from '../core/services/api';
+import { SaveBoards, StateActions } from './actions';
 
 @Injectable()
 export class BoardEffect {
@@ -16,7 +16,7 @@ export class BoardEffect {
       ofType(StateActions.GET_BOARDS),
       pluck('token'),
       switchMap((action) => this.apiService.getBoards(action)),
-      map(boards => {return new SaveBoards(boards)})
-    )
-  })
+      map(boards => {return new SaveBoards(boards);}),
+    );
+  });
 }

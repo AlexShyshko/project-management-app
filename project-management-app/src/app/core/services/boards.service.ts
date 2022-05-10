@@ -63,14 +63,14 @@ export class BoardsService {
     const token = this.storageService.getToken()!;
     this.apiService.getBoardById(token, boardId)
       .subscribe(board => {
-          this.apiService.getColumns(token, board.id!).subscribe(columnsResponse => {
-            const columns = columnsResponse.map(column => {
-              this.apiService.getTasks(token, board.id, column.id).subscribe(taskResponse => column.tasks = taskResponse);
-              return column;
-            });
-            board.columns = columns;
+        this.apiService.getColumns(token, board.id!).subscribe(columnsResponse => {
+          const columns = columnsResponse.map(column => {
+            this.apiService.getTasks(token, board.id, column.id).subscribe(taskResponse => column.tasks = taskResponse);
+            return column;
           });
-          this.board.next(board);
+          board.columns = columns;
+        });
+        this.board.next(board);
       });
   }
 
@@ -81,7 +81,7 @@ export class BoardsService {
       this.apiService.createColumn(token, boardId, { title: title, order }).subscribe(() => {
         this.updateCurrentBoard(boardId);
       });
-    })
+    });
   }
 
   deleteColumn(boardId: string, columnId: string) {
@@ -113,7 +113,7 @@ export class BoardsService {
   }
 
   editTask(
-    { boardId, id, title, description, columnId, order }: { boardId: string, id: string, title: string, description: string, columnId: string, order: number }
+    { boardId, id, title, description, columnId, order }: { boardId: string, id: string, title: string, description: string, columnId: string, order: number },
   ) {
     const token = this.storageService.getToken()!;
     const userId = this.storageService.getUserId()!;

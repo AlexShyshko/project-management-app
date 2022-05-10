@@ -6,14 +6,15 @@ import { BoardsService } from 'src/app/core/services/boards.service';
 @Component({
   selector: 'app-new-task',
   templateUrl: './new-task.component.html',
-  styleUrls: ['./new-task.component.scss']
+  styleUrls: ['./new-task.component.scss'],
 })
 export class NewTaskComponent implements OnInit {
   form: FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]),
     description: new FormControl('', [Validators.required, Validators.maxLength(55)]),
   });
-  constructor(private boardsService: BoardsService,  @Inject(MAT_DIALOG_DATA) public data: {boardId: string, columnId: string},) { }
+
+  constructor(private boardsService: BoardsService,  @Inject(MAT_DIALOG_DATA) public data: { boardId: string, columnId: string }) { }
 
   ngOnInit(): void {
   }
