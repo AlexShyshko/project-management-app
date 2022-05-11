@@ -13,6 +13,8 @@ import { Task } from 'src/app/models/task.model';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TranslateService } from '@ngx-translate/core';
 import { CoreService } from 'src/app/core/services/core.service';
+import { ApiService } from 'src/app/core/services/api';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'app-current-board',
@@ -53,6 +55,8 @@ export class CurrentBoardComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     public translate: TranslateService,
     public coreService: CoreService,
+    public api: ApiService,
+    public storage: StorageService,
   ) {}
 
   ngOnInit(): void {
@@ -136,9 +140,9 @@ export class CurrentBoardComponent implements OnInit, OnDestroy {
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
     }
-  }
-
-  onPointerup() {
-    console.log('Now just update tasks order on server');
+    let afterRequest: Observable<Board>;
+    this.board$.subscribe((result) => {
+      afterRequest = this.api.updateBoard(this.storage.getToken(), this.storage.getUserId(), result);
+    });
   }
 }

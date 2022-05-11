@@ -34,7 +34,7 @@
             </div>
           </div> -->
 
-          <div (pointerup)="onPointerup()" class="task-container">
+          <div class="task-container">
             <div cdkDrag class="current-cards task-box" *ngFor="let task of column.tasks">
               <button mat-icon-button class="delete-task-btn" (click)="openDialog('', '', task)">
                 <mat-icon>delete</mat-icon>
