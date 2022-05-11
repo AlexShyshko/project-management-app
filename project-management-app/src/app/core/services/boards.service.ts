@@ -78,8 +78,11 @@ export class BoardsService {
   createColumn(boardId: string, title: string) {
     const token = this.storageService.getToken()!;
     this.apiService.getColumns(token, boardId).subscribe(res => {
-      const order = res.length + 1;
-      this.apiService.createColumn(token, boardId, { title: title, order }).subscribe(() => {
+      const orders = res.map(column => column.order);
+      const order = orders.length !== Math.max(...orders)
+        ? res.findIndex((column, index) => column.order !== index + 1) + 1
+        : res.length + 1;
+      this.apiService.createColumn(token, boardId, { title: title, order: order === 0 ? order + 1 : order }).subscribe(() => {
         this.updateCurrentBoard(boardId);
       });
     });
@@ -93,10 +96,14 @@ export class BoardsService {
     });
   }
 
-  createTask(boardId: string, columnId: string, title: string, description: string) {
+  createTask(boardId: string, columnId: string, title: string, description: string, column: Column) {
     const token = this.storageService.getToken()!;
     const userId = this.storageService.getUserId()!;
-    this.apiService.createTask(token, boardId, columnId, { title, order: 1, description, userId }).subscribe(() => {
+    const orders = column.tasks.map(task => task.order);
+    const order = orders.length !== Math.max(...orders)
+      ? column.tasks.findIndex((task, index) => task.order !== index + 1) + 1
+      : column.tasks.length + 1;
+    this.apiService.createTask(token, boardId, columnId, { title, order: order === 0 ? order + 1 : order, description, userId }).subscribe(() => {
       this.updateCurrentBoard(boardId);
     });
   }
