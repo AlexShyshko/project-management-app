@@ -48,14 +48,14 @@ export class EditCardComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-      this.boardsService.editTask({
-        boardId: this.data.boardId,
-        id: this.data.task.id!,
-        title: this.title,
-        description: this.description,
-        columnId: this.data.columnId,
-        order: this.data.task.order,
-      });
+    this.boardsService.editTask({
+      boardId: this.data.boardId,
+      id: this.data.task.id!,
+      title: this.title,
+      description: this.description,
+      columnId: this.data.columnId,
+      order: this.data.task.order,
+    });
   }
 
   editTitle() {
@@ -68,7 +68,7 @@ export class EditCardComponent implements OnInit, OnDestroy {
 
   editDescription() {
     const descriptionLength = this.form.get('description')?.value.trim().length;
-      this.description = this.form.get('description')?.value;
-      this.isEditDescriptionEnable = !this.isEditDescriptionEnable;
+    this.description = this.form.get('description')?.value;
+    this.isEditDescriptionEnable = !this.isEditDescriptionEnable;
   }
 }

@@ -27,19 +27,19 @@ export class BoardsService {
     const token = this.storageService.getToken()!;
     const request = this.apiService.getBoards(token);
     request.subscribe(collection => {
-        const boards = collection.map(board => {
-          this.apiService.getColumns(token, board.id!).subscribe(columnsResponse => {
-            const columns = columnsResponse.map(column => {
-              this.apiService.getTasks(token, board.id, column.id).subscribe(taskResponse => column.tasks = taskResponse);
-              return column;
-            });
-            board.columns = columns;
+      const boards = collection.map(board => {
+        this.apiService.getColumns(token, board.id!).subscribe(columnsResponse => {
+          const columns = columnsResponse.map(column => {
+            this.apiService.getTasks(token, board.id, column.id).subscribe(taskResponse => column.tasks = taskResponse);
+            return column;
           });
-          return board;
+          board.columns = columns;
         });
-        this.boardsArray = boards;
-        this.boards.next(this.boardsArray);
+        return board;
       });
+      this.boardsArray = boards;
+      this.boards.next(this.boardsArray);
+    });
     return request;
   }
 
@@ -103,7 +103,7 @@ export class BoardsService {
     const order = orders.length !== Math.max(...orders)
       ? column.tasks.findIndex((task, index) => task.order !== index + 1) + 1
       : column.tasks.length + 1;
-    this.apiService.createTask(token, boardId, columnId, { title, order: order === 0 ? order + 1 : order, description, userId }).subscribe(() => {
+    this.apiService.createTask(token, boardId, columnId, { title, order: order === 0 ? order + 1 : order, done: false, description, userId }).subscribe(() => {
       this.updateCurrentBoard(boardId);
     });
   }
@@ -125,7 +125,7 @@ export class BoardsService {
   ) {
     const token = this.storageService.getToken()!;
     const userId = this.storageService.getUserId()!;
-    this.apiService.updateTask(token, id, { columnId, title, description, order, userId, boardId }).subscribe(() => {
+    this.apiService.updateTask(token, id, { columnId, title, description, order, userId, boardId, done: false }).subscribe(() => {
       this.updateCurrentBoard(boardId);
     });
   }
