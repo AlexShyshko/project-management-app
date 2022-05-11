@@ -2,30 +2,48 @@
   <form [formGroup]="form" (ngSubmit)="submit()">
     <h1 mat-dialog-title>{{ 'boards.edit-card.edit-task' | translate }}</h1>
     <div mat-dialog-content class="content">
-      <mat-form-field appearance="fill">
-        <mat-label>{{ 'boards.new-task.title' | translate }}</mat-label>
-        <input formControlName="title" matInput />
-        <mat-error *ngIf="form.get('title')!.errors?.['required']">
-          {{ 'boards.new-task.enter-title' | translate }}
-        </mat-error>
-        <mat-error *ngIf="form.get('title')!.errors?.['minlength']">
-          {{ 'boards.new-task.title-short' | translate }}
-        </mat-error>
-        <mat-error *ngIf="form.get('title')!.errors?.['maxlength']">
-          {{ 'boards.new-task.title-long' | translate }}
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>{{ 'boards.new-task.description' | translate }}</mat-label>
-        <input formControlName="description" matInput #message />
-        <mat-hint align="end">{{ message.value.length }} / 255</mat-hint>
-        <mat-error *ngIf="form.get('description')!.errors?.['required']">
-          {{ 'boards.new-task.enter-description' | translate }}
-        </mat-error>
-        <mat-error *ngIf="form.get('description')!.errors?.['maxlength']">
-          {{ 'boards.new-task.description-long' | translate }}
-        </mat-error>
-      </mat-form-field>
+
+      <div class="edit-block title-block" *ngIf="!isEditTitleEnable" (click)="isEditTitleEnable = !isEditTitleEnable">
+        <mat-icon class="icon">title</mat-icon>
+        <h4>{{this.title}}</h4>
+      </div>
+
+      <div class="edit-block" *ngIf="isEditTitleEnable">
+        <mat-form-field appearance="fill" >
+          <mat-label>{{ 'boards.new-task.title' | translate }}</mat-label>
+          <input formControlName="title" matInput [placeholder]="this.title"/>
+          <mat-error *ngIf="form.get('title')!.errors?.['minlength']">
+            {{ 'boards.new-task.title-short' | translate }}
+          </mat-error>
+          <mat-error *ngIf="form.get('title')!.errors?.['maxlength']">
+            {{ 'boards.new-task.title-long' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <button mat-icon-button (click)="editTitle()">
+          <mat-icon>check_circle </mat-icon>
+        </button>
+        <button mat-icon-button (click)="isEditTitleEnable = !isEditTitleEnable">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+
+      <div class="edit-block description-block" *ngIf="!isEditDescriptionEnable"
+        (click)="isEditDescriptionEnable = !isEditDescriptionEnable">
+        <mat-icon class="icon">view_headline</mat-icon>
+        <p class="description">{{this.description}}</p>
+      </div>
+      <div class="edit-block" *ngIf="isEditDescriptionEnable">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'boards.new-task.description' | translate }}</mat-label>
+          <textarea matInput formControlName="description" [placeholder]="this.description"></textarea>
+        </mat-form-field>
+        <button mat-icon-button (click)="editDescription()">
+          <mat-icon>check_circle </mat-icon>
+        </button>
+        <button mat-icon-button (click)="isEditDescriptionEnable = !isEditDescriptionEnable">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
     </div>
     <div mat-dialog-actions class="form-buttons">
       <button mat-button class="submit-button" type="submit" [disabled]="form.invalid" mat-dialog-close>

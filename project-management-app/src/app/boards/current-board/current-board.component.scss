@@ -46,7 +46,7 @@
 .task-container {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 48vh;
+  max-height: 45vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -63,8 +63,7 @@
   height: 3px;
 }
 
-::ng-deep .mat-form-field-label,
-.mat-icon {
+::ng-deep .mat-icon {
   color: var(--main-color);
 }
 
@@ -94,7 +93,7 @@
 
 .column-title {
   cursor: pointer;
-  height: 61px;
+  height: 65px;
   color: var(--main-color);
   white-space: nowrap;
   overflow: hidden;
@@ -135,6 +134,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 30px;
 }
 
 .back-btn {
@@ -166,4 +166,8 @@
     background-color: var(--buttons-hover-color);
     transition: 0.3s ease-in-out;
   }
+}
+
+.mat-input-element::-webkit-input-placeholder {
+    color: var(--main-color);
 }

@@ -14,11 +14,19 @@ import { Task } from 'src/app/models/task.model';
 })
 export class EditCardComponent implements OnInit, OnDestroy {
   form: FormGroup = new FormGroup({
-    title: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]),
-    description: new FormControl('', [Validators.required, Validators.maxLength(55)]),
+    title: new FormControl('', [Validators.minLength(1), Validators.maxLength(50)]),
+    description: new FormControl(''),
   });
 
   public subscriptions: Subscription[] = [];
+
+  isEditTitleEnable = false;
+
+  isEditDescriptionEnable = false;
+
+  title = this.data.task.title;
+
+  description = this.data.task.description;
 
   constructor(
     private boardsService: BoardsService,
@@ -40,15 +48,27 @@ export class EditCardComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    if (this.form.valid) {
       this.boardsService.editTask({
         boardId: this.data.boardId,
         id: this.data.task.id!,
-        title: this.form.get('title')?.value,
-        description: this.form.get('description')?.value,
+        title: this.title,
+        description: this.description,
         columnId: this.data.columnId,
         order: this.data.task.order,
       });
+  }
+
+  editTitle() {
+    const titleLength = this.form.get('title')?.value.trim().length;
+    if (titleLength && titleLength <= 50) {
+      this.title = this.form.get('title')?.value;
+      this.isEditTitleEnable = !this.isEditTitleEnable;
     }
+  }
+
+  editDescription() {
+    const descriptionLength = this.form.get('description')?.value.trim().length;
+      this.description = this.form.get('description')?.value;
+      this.isEditDescriptionEnable = !this.isEditDescriptionEnable;
   }
 }
