@@ -29,17 +29,7 @@ export class BoardsService {
     const token = this.storageService.getToken()!;
     const request = this.apiService.getBoards(token);
     request.subscribe(collection => {
-      const boards = collection.map(board => {
-        this.apiService.getColumns(token, board.id!).subscribe(columnsResponse => {
-          const columns = columnsResponse.map(column => {
-            this.apiService.getTasks(token, board.id, column.id).subscribe(taskResponse => column.tasks = taskResponse);
-            return column;
-          });
-          board.columns = columns;
-        });
-        return board;
-      });
-      this.boardsArray = boards;
+      this.boardsArray = collection;
       this.boards.next(this.boardsArray);
     });
     return request;
