@@ -272,4 +272,15 @@ export class ApiService {
         catchError(error => this.handleError(error)),
       );
   }
+
+  public searchTasks(token: string): Observable<Task[]> {
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    return this.httpClient
+      .get<Task[]>(`${BASE}/search/tasks`, { headers: headers })
+      .pipe(
+        catchError(error => this.handleError(error)),
+      );
+  }
 }
