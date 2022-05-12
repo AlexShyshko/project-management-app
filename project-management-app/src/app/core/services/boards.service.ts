@@ -133,7 +133,8 @@ export class BoardsService {
         case 'number':
           return task.order === value;
         case 'string':
-          return task.title.includes(value) || task.description.includes(value);
+          return task.title.toLocaleLowerCase().includes(value.toLocaleLowerCase())
+            || task.description.toLocaleLowerCase().includes(value.toLocaleLowerCase());
       }
     })));
   }
