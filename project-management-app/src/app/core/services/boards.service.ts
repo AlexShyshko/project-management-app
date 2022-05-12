@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Board } from 'src/app/models/board.model';
 import { Column } from 'src/app/models/column.model';
 import { Task } from 'src/app/models/task.model';
@@ -20,6 +20,8 @@ export class BoardsService {
   private board = new BehaviorSubject<Board>({} as Board);
 
   board$ = this.board.asObservable();
+
+  tasks$ = new Observable<Task[]>();
 
   constructor(private apiService: ApiService, private storageService: StorageService) { }
 
@@ -128,5 +130,21 @@ export class BoardsService {
     this.apiService.updateTask(token, id, { columnId, title, description, order, userId, boardId, done: false }).subscribe(() => {
       this.updateCurrentBoard(boardId);
     });
+  }
+
+  getTasksForSearch() {
+    const token = this.storageService.getToken()!;
+    this.tasks$ = this.apiService.searchTasks(token);
+  }
+
+  searchTaskByInput(value: string | number) {
+    return this.tasks$.pipe(map(tasks => tasks.filter(task => {
+      switch(typeof value) {
+        case 'number':
+          return task.order === value;
+        case 'string':
+          return task.title.includes(value) || task.description.includes(value);
+      }
+    })));
   }
 }
