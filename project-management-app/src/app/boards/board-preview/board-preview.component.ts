@@ -23,6 +23,8 @@ export class BoardPreviewComponent implements OnInit, OnDestroy {
 
   public subscriptions: Subscription[] = [];
 
+  isLoading = true;
+
   constructor(
     private dialog: MatDialog,
     private boardsService: BoardsService,
@@ -31,7 +33,7 @@ export class BoardPreviewComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.boardsService.updateBoards();
+    this.boardsService.updateBoards().subscribe(() => this.isLoading = false);
     this.boards$ = this.boardsService.boards$;
     this.subscriptions.push(
       this.coreService.currentLang.subscribe((lang) => {
