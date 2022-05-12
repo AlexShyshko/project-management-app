@@ -28,3 +28,40 @@
 mat-error ::ng-deep{
   color: rgb(254, 160, 160);
 }
+
+.edit-block ::ng-deep .mat-icon {
+  color: var(--text-color-light);
+}
+
+.edit-block ::ng-deep .mat-icon:hover {
+  color: var(--error-color);
+}
+
+.content h4, .content p {
+  cursor: pointer;
+}
+
+.description {
+  max-height: 30vh;
+  max-width: 300px;
+  overflow-y: auto;
+  word-wrap: break-word;
+  font-size: 0.8rem;
+  background-color: rgb(239, 243, 255, 0.15);
+}
+
+.title-block, .description-block {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+
+}
+
+.description-block {
+  align-items: start;
+}
+
+.icon {
+  margin-right: 10px;
+}

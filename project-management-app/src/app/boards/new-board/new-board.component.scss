@@ -3,7 +3,7 @@ mat-error ::ng-deep{
 }
 
 .container {
-  height: 200px;
+  height: 300px;
   text-align: center;
 }
 
@@ -31,4 +31,9 @@ mat-error ::ng-deep{
     background-color: #a8a5ff;
     transition: 0.3s ease-in-out;
   }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
 }

@@ -46,7 +46,7 @@
 .task-container {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 48vh;
+  max-height: 45vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -63,8 +63,7 @@
   height: 3px;
 }
 
-::ng-deep .mat-form-field-label,
-.mat-icon {
+::ng-deep .mat-icon {
   color: var(--main-color);
 }
 
@@ -93,7 +92,7 @@
 }
 
 .column-title {
-  height: 61px;
+  height: 65px;
   color: var(--main-color);
   white-space: nowrap;
   overflow: hidden;
@@ -134,6 +133,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 30px;
 }
 
 .back-btn {
@@ -194,4 +194,8 @@
 
 .task-list.cdk-drop-list-dragging .task-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.mat-input-element::-webkit-input-placeholder {
+    color: var(--main-color);
 }

@@ -14,6 +14,7 @@ import { BoardsService } from 'src/app/core/services/boards.service';
 export class NewBoardComponent implements OnInit {
   form: FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    description: new FormControl('', [Validators.required]),
   });
 
   constructor(
@@ -32,7 +33,7 @@ export class NewBoardComponent implements OnInit {
     if (this.form.valid) {
       this.router.navigate(['/main']);
       this.boardsService
-        .addBoard({ title: this.form.get('title')?.value });
+        .addBoard({ title: this.form.get('title')?.value, description: this.form.get('description')?.value });
     }
   }
 }
