@@ -51,6 +51,8 @@ export class CurrentBoardComponent implements OnInit, OnDestroy {
 
   isDone = false;
 
+  currentUserId: string;
+
   constructor(
     private route: ActivatedRoute,
     private boardsService: BoardsService,
@@ -73,6 +75,7 @@ export class CurrentBoardComponent implements OnInit, OnDestroy {
         this.getConfirmTranslation();
       }),
     );
+    this.currentUserId = this.storage.getUserId();
   }
 
   ngOnDestroy(): void {
@@ -151,4 +154,5 @@ export class CurrentBoardComponent implements OnInit, OnDestroy {
   toggleTaskStatus(boardId: string, task: Task, columnId: string) {
     this.boardsService.editTask({...task, id: task.id, boardId, columnId });
   }
+
 }

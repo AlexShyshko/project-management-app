@@ -65,10 +65,9 @@
 
 ::ng-deep .mat-icon {
   color: var(--main-color);
-}
-
-::ng-deep .mat-icon:hover {
-  color: var(--error-color);
+  &:hover {
+    color: var(--error-color);
+  }
 }
 
 .add-column-button {
@@ -127,6 +126,11 @@
   width: 20px;
   height: 20px;
   line-height: 30px;
+}
+
+.mat-icon-button:disabled .mat-icon {
+  cursor: not-allowed;
+  color: grey;
 }
 
 .column-control-buttons {
