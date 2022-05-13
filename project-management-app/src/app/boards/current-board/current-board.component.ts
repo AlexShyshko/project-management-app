@@ -152,7 +152,7 @@ export class CurrentBoardComponent implements OnInit, OnDestroy {
   }
 
   toggleTaskStatus(boardId: string, task: Task, columnId: string) {
-    this.boardsService.editTask({...task, id: task.id, boardId, columnId });
+    this.boardsService.editTask({ ...task, id: task.id, boardId, columnId });
   }
 
 }
