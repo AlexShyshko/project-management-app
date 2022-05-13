@@ -36,10 +36,15 @@
 
           <div class="task-container">
             <div cdkDrag class="current-cards task-box" *ngFor="let task of column.tasks">
+              <mat-checkbox class="checkbox" [(ngModel)]="task.done" (change)="toggleTaskStatus(board.id, task, column.id)"></mat-checkbox>
               <button mat-icon-button class="delete-task-btn" (click)="openDialog('', '', task)">
                 <mat-icon>delete</mat-icon>
               </button>
-              <h5 class="card-title" (click)="openModalEditTask(board.id, task, column.id)">{{ task.title }}</h5>
+              <h5 class="card-title"
+                [ngClass]="{'task-done': task.done === true}"
+                (click)="openModalEditTask(board.id, task, column.id)">
+                {{ task.title }}
+              </h5>
             </div>
           </div>
           <div class="column-control-buttons">

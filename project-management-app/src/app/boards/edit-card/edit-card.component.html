@@ -1,6 +1,7 @@
 <div class="container">
   <form [formGroup]="form" (ngSubmit)="submit()">
     <h1 mat-dialog-title>{{ 'boards.edit-card.edit-task' | translate }}</h1>
+    <div class="avatar">{{userName}}</div>
     <div mat-dialog-content class="content">
 
       <div class="edit-block title-block" *ngIf="!isEditTitleEnable" (click)="isEditTitleEnable = !isEditTitleEnable">
