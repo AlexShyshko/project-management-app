@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Board } from 'src/app/models/board.model';
 import { Column } from 'src/app/models/column.model';
 import { Task } from 'src/app/models/task.model';
@@ -21,23 +21,15 @@ export class BoardsService {
 
   board$ = this.board.asObservable();
 
+  tasks$ = new Observable<Task[]>();
+
   constructor(private apiService: ApiService, private storageService: StorageService) { }
 
   updateBoards() {
     const token = this.storageService.getToken()!;
     const request = this.apiService.getBoards(token);
     request.subscribe(collection => {
-      const boards = collection.map(board => {
-        this.apiService.getColumns(token, board.id!).subscribe(columnsResponse => {
-          const columns = columnsResponse.map(column => {
-            this.apiService.getTasks(token, board.id, column.id).subscribe(taskResponse => column.tasks = taskResponse);
-            return column;
-          });
-          board.columns = columns;
-        });
-        return board;
-      });
-      this.boardsArray = boards;
+      this.boardsArray = collection;
       this.boards.next(this.boardsArray);
     });
     return request;
@@ -128,5 +120,22 @@ export class BoardsService {
     this.apiService.updateTask(token, id, { columnId, title, description, order, userId, boardId, done: false }).subscribe(() => {
       this.updateCurrentBoard(boardId);
     });
+  }
+
+  getTasksForSearch() {
+    const token = this.storageService.getToken()!;
+    this.tasks$ = this.apiService.searchTasks(token);
+  }
+
+  searchTaskByInput(value: string | number) {
+    return this.tasks$.pipe(map(tasks => tasks.filter(task => {
+      switch(typeof value) {
+        case 'number':
+          return task.order === value;
+        case 'string':
+          return task.title.toLocaleLowerCase().includes(value.toLocaleLowerCase())
+            || task.description.toLocaleLowerCase().includes(value.toLocaleLowerCase());
+      }
+    })));
   }
 }

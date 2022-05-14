@@ -4,9 +4,19 @@
     <div class="search-block">
       <mat-form-field>
         <mat-icon matPrefix>search</mat-icon>
-        <input matInput type="search" />
+        <input matInput type="search" [ngModel]="searchValue" (ngModelChange)="searchHandler($event)" />
       </mat-form-field>
     </div>
   </div>
   <app-board-preview></app-board-preview>
+  <div class="search-task__container" *ngIf="tasks$ | async as tasks">
+    <div class="search-task__item" *ngFor="let task of tasks">
+      <a [routerLink]="['/boards', task.boardId]" class="board-link">
+        <div class="task-title">
+          {{task.title}}
+        </div>
+        <p class="task-description">{{task.description}}</p>
+      </a>
+    </div>
+  </div>
 </div>
