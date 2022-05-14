@@ -113,11 +113,11 @@ export class BoardsService {
   }
 
   editTask(
-    { boardId, id, title, description, columnId, order }: { boardId: string, id: string, title: string, description: string, columnId: string, order: number },
+    { boardId, id, title, description, columnId, order, done }: { boardId: string, id: string, title: string, description: string, columnId: string, order: number, done: boolean },
   ) {
     const token = this.storageService.getToken()!;
     const userId = this.storageService.getUserId()!;
-    this.apiService.updateTask(token, id, { columnId, title, description, order, userId, boardId, done: false }).subscribe(() => {
+    this.apiService.updateTask(token, id, { columnId, title, description, order, userId, boardId, done }).subscribe(() => {
       this.updateCurrentBoard(boardId);
     });
   }

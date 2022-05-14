@@ -65,10 +65,9 @@
 
 ::ng-deep .mat-icon {
   color: var(--main-color);
-}
-
-::ng-deep .mat-icon:hover {
-  color: var(--error-color);
+  &:hover {
+    color: var(--error-color);
+  }
 }
 
 .add-column-button {
@@ -101,7 +100,7 @@
 }
 
 .card-title {
-  padding: 5px 10px;
+  padding: 5px 40px;
   background-color: #fff;
   white-space: nowrap;
   overflow: hidden;
@@ -127,6 +126,11 @@
   width: 20px;
   height: 20px;
   line-height: 30px;
+}
+
+.mat-icon-button:disabled .mat-icon {
+  cursor: not-allowed;
+  color: grey;
 }
 
 .column-control-buttons {
@@ -198,4 +202,34 @@
 
 .mat-input-element::-webkit-input-placeholder {
     color: var(--main-color);
+}
+
+.checkbox {
+  position: absolute;
+  left: 5%;
+  z-index: 100;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+::ng-deep .checkbox .mat-checkbox-background {
+  border: 1px solid var(--main-color);
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: var(--main-color);
+}
+
+::ng-deep .mat-checkbox-checkmark-path {
+    stroke: var(--text-color-light) !important;
+}
+
+::ng-deep .mat-checkbox:not(.mat-checkbox-disabled) .mat-checkbox-ripple .mat-ripple-element {
+  background-color: var(--main-color) !important;
+}
+
+.task-done {
+  text-decoration: line-through;
+  color: var(--main-color);
 }

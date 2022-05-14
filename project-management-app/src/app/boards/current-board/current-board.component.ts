@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { concatAll, Observable, Subscription } from 'rxjs';
 import { ConfirmationComponent } from 'src/app/core/edit-profile/confirmation/confirmation.component';
 import { BoardsService } from 'src/app/core/services/boards.service';
 import { Board } from 'src/app/models/board.model';
@@ -49,6 +49,10 @@ export class CurrentBoardComponent implements OnInit, OnDestroy {
 
   public subscriptions: Subscription[] = [];
 
+  isDone = false;
+
+  currentUserId: string;
+
   constructor(
     private route: ActivatedRoute,
     private boardsService: BoardsService,
@@ -71,6 +75,7 @@ export class CurrentBoardComponent implements OnInit, OnDestroy {
         this.getConfirmTranslation();
       }),
     );
+    this.currentUserId = this.storage.getUserId();
   }
 
   ngOnDestroy(): void {
@@ -145,4 +150,9 @@ export class CurrentBoardComponent implements OnInit, OnDestroy {
       afterRequest = this.api.updateBoard(this.storage.getToken(), this.storage.getUserId(), result);
     });
   }
+
+  toggleTaskStatus(boardId: string, task: Task, columnId: string) {
+    this.boardsService.editTask({ ...task, id: task.id, boardId, columnId });
+  }
+
 }

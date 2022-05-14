@@ -16,6 +16,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 @NgModule({
   declarations: [],
@@ -37,6 +39,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSnackBarModule,
     DragDropModule,
     MatProgressSpinnerModule,
+    MatCheckboxModule,
   ],
   exports: [
     MatIconModule,
@@ -56,6 +59,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSnackBarModule,
     DragDropModule,
     MatProgressSpinnerModule,
+    MatCheckboxModule,
   ],
 })
 export class MaterialModule {}

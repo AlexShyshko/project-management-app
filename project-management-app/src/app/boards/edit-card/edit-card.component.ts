@@ -3,8 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+import { ApiService } from 'src/app/core/services/api';
 import { BoardsService } from 'src/app/core/services/boards.service';
 import { CoreService } from 'src/app/core/services/core.service';
+import { StorageService } from 'src/app/core/services/storage.service';
 import { Task } from 'src/app/models/task.model';
 
 @Component({
@@ -28,11 +30,15 @@ export class EditCardComponent implements OnInit, OnDestroy {
 
   description = this.data.task.description;
 
+  userName: string;
+
   constructor(
     private boardsService: BoardsService,
     @Inject(MAT_DIALOG_DATA) public data: { boardId: string; task: Task; columnId: string },
     public translate: TranslateService,
     public coreService: CoreService,
+    private storageService: StorageService,
+    private apiService: ApiService,
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +47,7 @@ export class EditCardComponent implements OnInit, OnDestroy {
         this.translate.use(lang);
       }),
     );
+    this.getOwnerTaskName();
   }
 
   ngOnDestroy(): void {
@@ -55,6 +62,7 @@ export class EditCardComponent implements OnInit, OnDestroy {
       description: this.description,
       columnId: this.data.columnId,
       order: this.data.task.order,
+      done: this.data.task.done,
     });
   }
 
@@ -70,5 +78,12 @@ export class EditCardComponent implements OnInit, OnDestroy {
     const descriptionLength = this.form.get('description')?.value.trim().length;
     this.description = this.form.get('description')?.value;
     this.isEditDescriptionEnable = !this.isEditDescriptionEnable;
+  }
+
+  getOwnerTaskName() {
+    const token = this.storageService.getToken()!;
+    return this.apiService.getUserById(token, this.data.task.userId).subscribe(collection => {
+      this.userName = collection.name.trim()[0].toUpperCase();
+    });
   }
 }
