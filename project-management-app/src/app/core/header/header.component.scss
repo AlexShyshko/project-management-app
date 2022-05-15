@@ -63,6 +63,10 @@ header {
   }
 }
 
+.account-button .mat-icon {
+  color: var(--text-color-light);
+}
+
 .account-button ::ng-deep .mat-button-wrapper {
   max-width: 150px;
   display: block;

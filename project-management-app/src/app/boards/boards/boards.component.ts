@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { debounceTime, distinctUntilChanged, Observable, Subject, Subscription } from 'rxjs';
+import { ApiService } from 'src/app/core/services/api';
 import { BoardsService } from 'src/app/core/services/boards.service';
 import { CoreService } from 'src/app/core/services/core.service';
+import { StorageService } from 'src/app/core/services/storage.service';
 import { Task } from 'src/app/models/task.model';
 
 @Component({
@@ -19,7 +21,11 @@ export class BoardsComponent implements OnInit, OnDestroy {
 
   searchValue = '';
 
-  constructor(public translate: TranslateService, public coreService: CoreService, private boardService: BoardsService) {
+  columnTitle: string;
+
+  boardTitle: string;
+
+  constructor(public translate: TranslateService, public coreService: CoreService, private boardService: BoardsService, private apiService: ApiService, private storageService: StorageService) {
     this.inputSearchString();
   }
 
@@ -30,6 +36,7 @@ export class BoardsComponent implements OnInit, OnDestroy {
         this.translate.use(lang);
       }),
     );
+
   }
 
   ngOnDestroy(): void {
@@ -52,7 +59,8 @@ export class BoardsComponent implements OnInit, OnDestroy {
   }
 
   search(value: string) {
-    const searcValue = isNaN(+value) ? value : +value;
-    this.tasks$ = this.boardService.searchTaskByInput(searcValue);
+    const searchValue = isNaN(+value) ? value : +value;
+    this.tasks$ = this.boardService.searchTaskByInput(searchValue);
   }
+
 }
