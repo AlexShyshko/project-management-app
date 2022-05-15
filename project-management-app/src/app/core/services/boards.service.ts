@@ -52,17 +52,30 @@ export class BoardsService {
   updateCurrentBoard(boardId: string) {
     const token = this.storageService.getToken()!;
     this.apiService.getBoardById(token, boardId).subscribe((board) => {
+      board.columns.sort(this.sort);
+      board.columns.forEach((column) => {
+        column.tasks.sort(this.sort);
+      });
       this.apiService.getColumns(token, board.id!).subscribe((columnsResponse) => {
+        columnsResponse.sort(this.sort);
+        columnsResponse.forEach((column) => {
+          column.tasks.sort(this.sort);
+        });
         const columns = columnsResponse.map((column) => {
-          this.apiService
-            .getTasks(token, board.id, column.id)
-            .subscribe((taskResponse) => (column.tasks = taskResponse));
+          this.apiService.getTasks(token, board.id, column.id).subscribe((taskResponse) => {
+            taskResponse.sort(this.sort);
+            column.tasks = taskResponse;
+          });
           return column;
         });
         board.columns = columns;
       });
       this.board.next(board);
     });
+  }
+
+  sort(a: Column | Task, b: Column | Task) {
+    return a.order - b.order;
   }
 
   createColumn(boardId: string, title: string) {

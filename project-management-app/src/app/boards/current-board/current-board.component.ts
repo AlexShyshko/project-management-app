@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { concatAll, Observable, Subscription, of, mergeMap, debounceTime } from 'rxjs';
+import { Observable, Subscription, from, concatMap } from 'rxjs';
 import { ConfirmationComponent } from 'src/app/core/edit-profile/confirmation/confirmation.component';
 import { BoardsService } from 'src/app/core/services/boards.service';
 import { Board } from 'src/app/models/board.model';
@@ -126,7 +126,7 @@ export class CurrentBoardComponent implements OnInit, OnDestroy, OnChanges {
     this.boardsService.deleteColumn(boardId, columnId);
   }
 
-  public editColumn(columnId) {
+  public editColumn(columnId: string) {
     this.columnId = columnId;
     this.isEditEnable = !this.isEditEnable;
   }
@@ -161,9 +161,9 @@ export class CurrentBoardComponent implements OnInit, OnDestroy, OnChanges {
     let newBoard: Board;
     this.dragSubscriptions.push(
       this.getOldBoard().subscribe((result) => {
-        result.columns.sort(this.sort);
+        result.columns.sort(this.boardsService.sort);
         result.columns.forEach((column) => {
-          column.tasks.sort(this.sort);
+          column.tasks.sort(this.boardsService.sort);
         });
         oldBoard = result;
         this.updateAllDragNDroppedTasks(oldBoard, newBoard);
@@ -174,16 +174,11 @@ export class CurrentBoardComponent implements OnInit, OnDestroy, OnChanges {
     );
   }
 
-  sort(a: Column | Task, b: Column | Task) {
-    return a.order - b.order;
-  }
-
   getOldBoard() {
     return this.api.getBoardById(this.storage.getToken(), this.boardId);
   }
 
   updateAllDragNDroppedTasks(oldBoard: Board, newBoard: Board) {
-    console.log('NEW');
     let differentTasks: Array<[Task, Task]> = [];
     newBoard.columns.forEach((newColumn, newColumnIndex) => {
       newColumn.tasks.forEach((newTask, newTaskIndex) => {
@@ -195,8 +190,8 @@ export class CurrentBoardComponent implements OnInit, OnDestroy, OnChanges {
           isSameId = false;
         }
         if (!isTask || !isSameId) {
-          oldBoard.columns.forEach((oldColumn, oldColumnIndex) => {
-            oldColumn.tasks.forEach((oldTask, oldTaskIndex) => {
+          oldBoard.columns.forEach((oldColumn) => {
+            oldColumn.tasks.forEach((oldTask) => {
               if (newTask.id === oldTask.id) {
                 const oldPushing: Task = {
                   id: oldTask.id,
@@ -209,7 +204,6 @@ export class CurrentBoardComponent implements OnInit, OnDestroy, OnChanges {
                   columnId: oldColumn.id,
                 };
                 const newPushing: Task = {
-                  //id: newTask.id,
                   title: newTask.title,
                   done: newTask.done,
                   order: newTaskIndex + 1,
@@ -226,26 +220,15 @@ export class CurrentBoardComponent implements OnInit, OnDestroy, OnChanges {
       });
     });
     if (differentTasks.length !== 0) {
-      //const srcObservable = of(differentTasks);
-      differentTasks.forEach((task, index) => {
-        const response = this.updateTask(task);
-        this.dragSubscriptions.push(
-          response.subscribe((result) => {
-            if (index === differentTasks.length - 1) {
-              this.boardsService.updateCurrentBoard(this.boardId);
-              this.deleteDragSubscriptions();
-            }
-          }),
-        );
-        console.log(
-          `
-          title OLD: ${task[0].title}
-          order OLD: ${task[0].order}
-          title NEW: ${task[1].title}
-          order NEW: ${task[1].order}
-
-          `,
-        );
+      const observableLength = differentTasks.length;
+      let index = 0;
+      const srcObservable = from(differentTasks);
+      srcObservable.pipe(concatMap((task) => this.updateTask(task))).subscribe((result) => {
+        index++;
+        if (index === observableLength) {
+          this.boardsService.updateCurrentBoard(this.boardId);
+          this.deleteDragSubscriptions();
+        }
       });
     } else {
       this.deleteDragSubscriptions();
@@ -262,53 +245,6 @@ export class CurrentBoardComponent implements OnInit, OnDestroy, OnChanges {
     });
     this.dragSubscriptions = [];
   }
-
-  // kill() {
-  //   this.updateTasksInfo = [];
-  //   let updateTask: Task;
-  //   //let updateTaskDescription: TaskDescription;
-  //   const userId = this.storage.getUserId();
-  //   const token = this.storage.getToken();
-  //   let boardId: string;
-  //   this.subscriptions.push(
-  //     this.board$.subscribe((board) => {
-  //       //console.log(board);
-  //       boardId = board.id;
-  //       board.columns.forEach((column) => {
-  //         const columnId = column.id;
-  //         column.tasks.forEach((task, index) => {
-  //           updateTask = {
-  //             boardId: task.boardId,
-  //             id: task.id,
-  //             title: task.title,
-  //             description: task.description,
-  //             done: task.done,
-  //             columnId: columnId,
-  //             order: index + 1,
-  //             userId: userId,
-  //           };
-  //           // updateTaskDescription = {
-  //           //   boardId: task.boardId,
-  //           //   id: task.id,
-  //           //   columnId: columnId,
-  //           // };
-  //           this.updateTasksInfo.push(updateTask);
-  //         });
-  //       });
-  //       // this.updateTasksInfo.forEach((updateTaskInfo, index) => {
-  //       //   const response = this.api.updateTask(token, updateTaskInfo[1].id, updateTaskInfo[0]);
-  //       //   if (index === this.updateTasksInfo.length - 1) {
-  //       //     this.subscriptions.push(
-  //       //       response.subscribe((res) => {
-  //       //         console.log(res);
-  //       //         this.boardsService.updateCurrentBoard(boardId);
-  //       //       }),
-  //       //     );
-  //       //   }
-  //       // });
-  //     }),
-  //   );
-  // }
 
   toggleTaskStatus(boardId: string, task: Task, columnId: string) {
     this.boardsService.editTask({ ...task, id: task.id, boardId, columnId });
