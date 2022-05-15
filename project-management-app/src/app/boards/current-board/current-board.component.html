@@ -3,14 +3,7 @@
     <div class="board-container" *ngIf="board$ | async as board">
       <h1 class="page-title">{{ 'boards.current-board.workspace' | translate }} - {{ board.title }}</h1>
       <div cdkDropListGroup class="columns-container">
-        <div
-          cdkDropList
-          [cdkDropListData]="column.tasks"
-          (cdkDropListDropped)="drop($event)"
-          class="column-container task-list"
-          [ngStyle]="{ order: column.order }"
-          *ngFor="let column of board.columns"
-        >
+        <div class="column-container" [ngStyle]="{ order: column.order }" *ngFor="let column of board.columns">
           <h2 class="column-title" *ngIf="!isEditEnable || columnId !== column.id" (click)="editColumn(column.id)">
             {{ column.title }}
           </h2>
@@ -25,26 +18,31 @@
               <input matInput placeholder="{{ column.title }}" [(ngModel)]="title" />
             </mat-form-field>
           </div>
-          <!-- <div class="task-container">
-            <div cdkDrag class="current-cards task-box" [ngStyle]="{ order: task.order }" *ngFor="let task of column.tasks">
-              <button mat-icon-button class="delete-task-btn" (click)="openDialog('', '', task)">
+          <div
+            cdkDropList
+            [cdkDropListData]="column.tasks"
+            (cdkDropListDropped)="drop($event)"
+            class="task-container task-list cdk-drop-list-dragging"
+          >
+            <div cdkDrag class="current-cards task-box" *ngFor="let task of column.tasks">
+              <mat-checkbox
+                class="checkbox"
+                [(ngModel)]="task.done"
+                (change)="toggleTaskStatus(board.id, task, column.id)"
+              ></mat-checkbox>
+              <button
+                mat-icon-button
+                class="delete-task-btn"
+                [disabled]="task.userId !== currentUserId"
+                (click)="openDialog('', '', task)"
+              >
                 <mat-icon>delete</mat-icon>
               </button>
-              <h5 class="card-title" (click)="openModalEditTask(board.id, task, column.id)">{{ task.title }}</h5>
-            </div>
-          </div> -->
-
-          <div class="task-container">
-            <div cdkDrag class="current-cards task-box" *ngFor="let task of column.tasks">
-              <mat-checkbox class="checkbox" [(ngModel)]="task.done" (change)="toggleTaskStatus(board.id, task, column.id)"></mat-checkbox>
-              <button mat-icon-button class="delete-task-btn"
-                [disabled]="task.userId !== currentUserId"
-                (click)="openDialog('', '', task)">
-                  <mat-icon>delete</mat-icon>
-              </button>
-              <h5 class="card-title"
-                [ngClass]="{'task-done': task.done === true}"
-                (click)="openModalEditTask(board.id, task, column.id)">
+              <h5
+                class="card-title"
+                [ngClass]="{ 'task-done': task.done === true }"
+                (click)="openModalEditTask(board.id, task, column.id)"
+              >
                 {{ task.title }}
               </h5>
             </div>
