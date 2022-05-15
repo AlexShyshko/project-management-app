@@ -131,7 +131,9 @@ export class BoardsService {
     return this.tasks$.pipe(map(tasks => tasks.filter(task => {
       switch(typeof value) {
         case 'number':
-          return task.order === value;
+          return task.order === value
+           || task.title.includes(value.toString())
+           || task.description.includes(value.toString());
         case 'string':
           return task.title.toLocaleLowerCase().includes(value.toLocaleLowerCase())
             || task.description.toLocaleLowerCase().includes(value.toLocaleLowerCase());
