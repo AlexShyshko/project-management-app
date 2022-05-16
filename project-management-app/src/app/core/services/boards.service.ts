@@ -171,24 +171,16 @@ export class BoardsService {
   }
 
   searchTaskByInput(value: string | number) {
-    return this.tasks$.pipe(
-      map((tasks) =>
-        tasks.filter((task) => {
-          switch (typeof value) {
-            case 'number':
-              return (
-                task.order === value ||
-                task.title.includes(value.toString()) ||
-                task.description.includes(value.toString())
-              );
-            case 'string':
-              return (
-                task.title.toLocaleLowerCase().includes(value.toLocaleLowerCase()) ||
-                task.description.toLocaleLowerCase().includes(value.toLocaleLowerCase())
-              );
-          }
-        }),
-      ),
-    );
+    return this.tasks$.pipe(map(tasks => tasks.filter(task => {
+      switch (typeof value) {
+        case 'number':
+          return task.order === value
+           || task.title.includes(value.toString())
+           || task.description.includes(value.toString());
+        case 'string':
+          return task.title.toLocaleLowerCase().includes(value.toLocaleLowerCase())
+            || task.description.toLocaleLowerCase().includes(value.toLocaleLowerCase());
+      }
+    })));
   }
 }
