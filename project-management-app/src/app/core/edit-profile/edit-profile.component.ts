@@ -21,7 +21,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
 
-  private data = 'Are you sure to delete profile?';
+  private data!: string;
 
   public subscriptions: Subscription[] = [];
 
@@ -59,6 +59,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.coreService.currentLang.subscribe((lang) => {
         this.translate.use(lang);
+        this.getConfirmTranslation();
       }),
     );
   }
@@ -74,7 +75,8 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       password,
     };
     if (this.form.valid) {
-      this.apiService.updateUser(user, this.storageService.getToken()!, this.storageService.getUserId()!)
+      this.apiService
+        .updateUser(user, this.storageService.getToken()!, this.storageService.getUserId()!)
         .subscribe((user) => {
           const { password, ...newUser } = user;
           this.storageService.setItem('user', JSON.stringify(newUser));
@@ -88,31 +90,19 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       panelClass: 'custom-dialog-container',
       data: this.data,
     });
-    this.dialogRef.afterClosed().subscribe(event => {
+    this.dialogRef.afterClosed().subscribe((event) => {
       if (event === 'action') {
-        this.apiService.deleteUser(this.storageService.getToken()!, this.storageService.getUserId()!)
-          .subscribe(() => {
-            this.storageService.logout();
-            this.router.navigate(['/']);
-          });
+        this.apiService.deleteUser(this.storageService.getToken()!, this.storageService.getUserId()!).subscribe(() => {
+          this.storageService.logout();
+          this.router.navigate(['/']);
+        });
       }
     });
   }
 
-  // getCustomValidatorKey(message: string): string {
-  //   switch (message) {
-  //     case '- at least one lowercase letter':
-  //       return 'core.edit-profile.lower-case';
-  //     case '- at least one number':
-  //       return 'core.edit-profile.numbers';
-  //     case '- at least one special symbol (!@#$%^&*,?])':
-  //       return 'core.edit-profile.symbols';
-  //     case '- at least one uppercase letter':
-  //       return 'core.edit-profile.upper-case';
-  //     case undefined:
-  //       return '';
-  //     default:
-  //       return '';
-  //   }
-  // }
+  getConfirmTranslation() {
+    this.translate.get(['core.edit-profile.confirmation.delete-question']).subscribe((translations) => {
+      this.data = translations['core.edit-profile.confirmation.delete-question'];
+    });
+  }
 }

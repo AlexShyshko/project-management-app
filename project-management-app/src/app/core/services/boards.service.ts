@@ -59,7 +59,9 @@ export class BoardsService {
       this.apiService.getColumns(token, board.id!).subscribe((columnsResponse) => {
         columnsResponse.sort(this.sort);
         columnsResponse.forEach((column) => {
-          column.tasks.sort(this.sort);
+          if (column.tasks) {
+            column.tasks.sort(this.sort);
+          }
         });
         const columns = columnsResponse.map((column) => {
           this.apiService.getTasks(token, board.id, column.id).subscribe((taskResponse) => {
@@ -169,16 +171,24 @@ export class BoardsService {
   }
 
   searchTaskByInput(value: string | number) {
-    return this.tasks$.pipe(map(tasks => tasks.filter(task => {
-      switch(typeof value) {
-        case 'number':
-          return task.order === value
-           || task.title.includes(value.toString())
-           || task.description.includes(value.toString());
-        case 'string':
-          return task.title.toLocaleLowerCase().includes(value.toLocaleLowerCase())
-            || task.description.toLocaleLowerCase().includes(value.toLocaleLowerCase());
-      }
-    })));
+    return this.tasks$.pipe(
+      map((tasks) =>
+        tasks.filter((task) => {
+          switch (typeof value) {
+            case 'number':
+              return (
+                task.order === value ||
+                task.title.includes(value.toString()) ||
+                task.description.includes(value.toString())
+              );
+            case 'string':
+              return (
+                task.title.toLocaleLowerCase().includes(value.toLocaleLowerCase()) ||
+                task.description.toLocaleLowerCase().includes(value.toLocaleLowerCase())
+              );
+          }
+        }),
+      ),
+    );
   }
 }
