@@ -59,7 +59,9 @@ export class BoardsService {
       this.apiService.getColumns(token, board.id!).subscribe((columnsResponse) => {
         columnsResponse.sort(this.sort);
         columnsResponse.forEach((column) => {
-          column.tasks.sort(this.sort);
+          if (column.tasks) {
+            column.tasks.sort(this.sort);
+          }
         });
         const columns = columnsResponse.map((column) => {
           this.apiService.getTasks(token, board.id, column.id).subscribe((taskResponse) => {
