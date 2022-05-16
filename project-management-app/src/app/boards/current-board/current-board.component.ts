@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { concatAll, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, from, concatMap } from 'rxjs';
 import { ConfirmationComponent } from 'src/app/core/edit-profile/confirmation/confirmation.component';
 import { BoardsService } from 'src/app/core/services/boards.service';
 import { Board } from 'src/app/models/board.model';
@@ -21,7 +21,7 @@ import { StorageService } from 'src/app/core/services/storage.service';
   templateUrl: './current-board.component.html',
   styleUrls: ['./current-board.component.scss'],
 })
-export class CurrentBoardComponent implements OnInit, OnDestroy {
+export class CurrentBoardComponent implements OnInit, OnDestroy, OnChanges {
   boardId: string;
 
   board$: Observable<Board>;
@@ -53,6 +53,8 @@ export class CurrentBoardComponent implements OnInit, OnDestroy {
 
   currentUserId: string;
 
+  public dragSubscriptions: Subscription[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private boardsService: BoardsService,
@@ -82,6 +84,12 @@ export class CurrentBoardComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
+  ngOnChanges() {
+    this.dragSubscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
+  }
+
   openModalEditTask(boardId: string, task: Task, columnId: string) {
     this.dialog.open(EditCardComponent, {
       panelClass: 'custom-dialog-container',
@@ -105,18 +113,20 @@ export class CurrentBoardComponent implements OnInit, OnDestroy {
       panelClass: 'custom-dialog-container',
       data: task ? this.delTaskTrans : this.delColumnTrans,
     });
-    this.dialogRef.afterClosed().subscribe((event) => {
-      if (event === 'action') {
-        task ? this.deleteTask(task) : this.deleteColumn(boardId, columnId);
-      }
-    });
+    this.subscriptions.push(
+      this.dialogRef.afterClosed().subscribe((event) => {
+        if (event === 'action') {
+          return task ? this.deleteTask(task) : this.deleteColumn(boardId, columnId);
+        }
+      }),
+    );
   }
 
   public deleteColumn(boardId: string, columnId: string) {
     this.boardsService.deleteColumn(boardId, columnId);
   }
 
-  public editColumn(columnId) {
+  public editColumn(columnId: string) {
     this.columnId = columnId;
     this.isEditEnable = !this.isEditEnable;
   }
@@ -131,12 +141,14 @@ export class CurrentBoardComponent implements OnInit, OnDestroy {
   }
 
   getConfirmTranslation(): void {
-    this.translate
-      .get(['boards.current-board.delete-task', 'boards.current-board.delete-column'])
-      .subscribe((translations) => {
-        this.delTaskTrans = translations['boards.current-board.delete-task'] + ' ?';
-        this.delColumnTrans = translations['boards.current-board.delete-column'] + ' ?';
-      });
+    this.subscriptions.push(
+      this.translate
+        .get(['boards.current-board.delete-task', 'boards.current-board.delete-column'])
+        .subscribe((translations) => {
+          this.delTaskTrans = translations['boards.current-board.delete-task'] + ' ?';
+          this.delColumnTrans = translations['boards.current-board.delete-column'] + ' ?';
+        }),
+    );
   }
 
   drop(event: CdkDragDrop<Task[]>) {
@@ -145,14 +157,96 @@ export class CurrentBoardComponent implements OnInit, OnDestroy {
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
     }
-    let afterRequest: Observable<Board>;
-    this.board$.subscribe((result) => {
-      afterRequest = this.api.updateBoard(this.storage.getToken(), this.storage.getUserId(), result);
+    let oldBoard: Board;
+    let newBoard: Board;
+    this.dragSubscriptions.push(
+      this.getOldBoard().subscribe((result) => {
+        result.columns.sort(this.boardsService.sort);
+        result.columns.forEach((column) => {
+          column.tasks.sort(this.boardsService.sort);
+        });
+        oldBoard = result;
+        this.updateAllDragNDroppedTasks(oldBoard, newBoard);
+      }),
+      this.board$.subscribe((result) => {
+        newBoard = result;
+      }),
+    );
+  }
+
+  getOldBoard() {
+    return this.api.getBoardById(this.storage.getToken(), this.boardId);
+  }
+
+  updateAllDragNDroppedTasks(oldBoard: Board, newBoard: Board) {
+    let differentTasks: Array<[Task, Task]> = [];
+    newBoard.columns.forEach((newColumn, newColumnIndex) => {
+      newColumn.tasks.forEach((newTask, newTaskIndex) => {
+        const isTask = Boolean(oldBoard.columns[newColumnIndex].tasks[newTaskIndex]);
+        let isSameId: boolean;
+        if (isTask) {
+          isSameId = newTask.id === oldBoard.columns[newColumnIndex].tasks[newTaskIndex].id;
+        } else {
+          isSameId = false;
+        }
+        if (!isTask || !isSameId) {
+          oldBoard.columns.forEach((oldColumn) => {
+            oldColumn.tasks.forEach((oldTask) => {
+              if (newTask.id === oldTask.id) {
+                const oldPushing: Task = {
+                  id: oldTask.id,
+                  title: oldTask.title,
+                  done: oldTask.done,
+                  order: oldTask.order,
+                  description: oldTask.description,
+                  userId: oldTask.userId,
+                  boardId: this.boardId,
+                  columnId: oldColumn.id,
+                };
+                const newPushing: Task = {
+                  title: newTask.title,
+                  done: newTask.done,
+                  order: newTaskIndex + 1,
+                  description: newTask.description,
+                  userId: newTask.userId,
+                  boardId: this.boardId,
+                  columnId: newColumn.id,
+                };
+                differentTasks.push([oldPushing, newPushing]);
+              }
+            });
+          });
+        }
+      });
     });
+    if (differentTasks.length !== 0) {
+      const observableLength = differentTasks.length;
+      let index = 0;
+      const srcObservable = from(differentTasks);
+      srcObservable.pipe(concatMap((task) => this.updateTask(task))).subscribe((result) => {
+        index++;
+        if (index === observableLength) {
+          this.boardsService.updateCurrentBoard(this.boardId);
+          this.deleteDragSubscriptions();
+        }
+      });
+    } else {
+      this.deleteDragSubscriptions();
+    }
+  }
+
+  updateTask(task: [Task, Task]) {
+    return this.api.updateCertainTask(this.storage.getToken(), task[0], task[1]);
+  }
+
+  deleteDragSubscriptions(): void {
+    this.dragSubscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
+    this.dragSubscriptions = [];
   }
 
   toggleTaskStatus(boardId: string, task: Task, columnId: string) {
     this.boardsService.editTask({ ...task, id: task.id, boardId, columnId });
   }
-
 }

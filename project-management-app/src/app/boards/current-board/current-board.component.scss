@@ -40,12 +40,13 @@
   padding: 5px 10px;
   max-height: 60vh;
   position: relative;
-  flex-shrink : 0;
+  flex-shrink: 0;
 }
 
 .task-container {
   overflow-y: auto;
   overflow-x: hidden;
+  min-height: 20px;
   max-height: 45vh;
   position: relative;
   display: flex;
@@ -201,7 +202,7 @@
 }
 
 .mat-input-element::-webkit-input-placeholder {
-    color: var(--main-color);
+  color: var(--main-color);
 }
 
 .checkbox {
@@ -222,7 +223,7 @@
 }
 
 ::ng-deep .mat-checkbox-checkmark-path {
-    stroke: var(--text-color-light) !important;
+  stroke: var(--text-color-light) !important;
 }
 
 ::ng-deep .mat-checkbox:not(.mat-checkbox-disabled) .mat-checkbox-ripple .mat-ripple-element {
