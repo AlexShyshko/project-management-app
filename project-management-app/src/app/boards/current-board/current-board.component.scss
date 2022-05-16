@@ -59,7 +59,7 @@
   width: 70%;
 }
 
-::ng-deep .mat-form-field-underline {
+.column-title-block ::ng-deep .mat-form-field-underline {
   background-color: var(--main-color);
   height: 3px;
 }
@@ -172,10 +172,6 @@
   }
 }
 
-.task-list {
-  overflow: hidden;
-}
-
 .task-box {
   cursor: move;
 }
@@ -233,4 +229,13 @@
 .task-done {
   text-decoration: line-through;
   color: var(--main-color);
+}
+
+@media (max-width: 500px) {
+  .page-title {
+    font-size: 1.2rem;
+  }
+  .wrapper {
+    padding: 5px;
+  }
 }

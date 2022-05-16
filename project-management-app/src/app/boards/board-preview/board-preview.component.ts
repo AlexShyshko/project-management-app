@@ -1,12 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { ConfirmationComponent } from 'src/app/core/edit-profile/confirmation/confirmation.component';
-import { ApiService } from 'src/app/core/services/api';
 import { BoardsService } from 'src/app/core/services/boards.service';
 import { CoreService } from 'src/app/core/services/core.service';
-import { StorageService } from 'src/app/core/services/storage.service';
 import { Board } from 'src/app/models/board.model';
 
 @Component({

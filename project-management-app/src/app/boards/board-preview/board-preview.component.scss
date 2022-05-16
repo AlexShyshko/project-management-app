@@ -95,3 +95,10 @@
     justify-content: center;
   }
 }
+
+::ng-deep .mat-icon {
+  color: var(--main-color);
+  &:hover {
+    color: var(--error-color);
+  }
+}
