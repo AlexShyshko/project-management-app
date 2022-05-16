@@ -170,7 +170,7 @@ export class BoardsService {
 
   searchTaskByInput(value: string | number) {
     return this.tasks$.pipe(map(tasks => tasks.filter(task => {
-      switch(typeof value) {
+      switch (typeof value) {
         case 'number':
           return task.order === value
            || task.title.includes(value.toString())

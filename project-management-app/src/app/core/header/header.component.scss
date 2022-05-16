@@ -167,6 +167,9 @@ header {
   .account-button ::ng-deep .mat-button-wrapper {
     width: 150px;
   }
+  ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    padding: 0.2em 0.2em 0 0.2em !important;
+  }
 }
 
 @media (max-width: 375px) {
@@ -184,4 +187,8 @@ header {
 
 ::ng-deep .mat-form-field {
   font-size: 12px;
+}
+
+.lang-select-option ::ng-deep .mat-form-field-underline {
+  background-color: none;
 }
