@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, concatMap, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { concatAll } from 'rxjs/operators';
 import { Board } from 'src/app/models/board.model';
 import { Column } from 'src/app/models/column.model';
