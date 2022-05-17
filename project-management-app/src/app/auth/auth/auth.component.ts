@@ -60,8 +60,8 @@ export class AuthComponent implements OnInit, OnDestroy {
       if (!resIn.token) return;
       this.storageService.setItem('token', resIn.token);
       this.apiService.getUsers(resIn.token).subscribe((resUsers) => {
-        const user = resUsers.filter((item) => item.login === login)[0];
-        this.storageService.setItem('user', JSON.stringify(user));
+        const foundUser = resUsers.filter((item) => item.login === login)[0];
+        this.storageService.setItem('user', JSON.stringify(foundUser));
       });
       if (this.form.valid && this.storageService.isLogged()) {
         this.router.navigate(['/main']);
