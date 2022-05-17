@@ -251,18 +251,24 @@ export class CurrentBoardComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   dropColumns(event: CdkDragDrop<Column[]>) {
-    let array = this.board$.subscribe(board => {
-      moveItemInArray(board.columns, event.previousIndex, event.currentIndex);
-      const previousColumn = board.columns[event.previousIndex];
-      const currentColumn = board.columns[event.currentIndex];
-      this.boardsService.updateColumn({
-        boardId: board.id,
-        previousColumnId: previousColumn.id,
-        currentColumnId: currentColumn.id,
-        previousColumn: {title: previousColumn.title, order: currentColumn.order},
-        currentColumn: {title: currentColumn.title, order: previousColumn.order}
-      });
+    if (event.currentIndex === event.previousIndex) return;
+    let board;
+    let array = this.board$.subscribe(b => board = b);
+    moveItemInArray(board.columns, event.previousIndex, event.currentIndex);
+    const previousColumn = board.columns[event.previousIndex];
+    const currentColumn = board.columns[event.currentIndex];
+    this.boardsService.updateColumn({
+      boardId: board.id,
+      numberOfColumns: Math.max(...board.columns.map(c => c.order)),
+      previousColumnId: previousColumn.id,
+      currentColumnId: currentColumn.id,
+      previousColumn: { title: previousColumn.title, order: currentColumn.order },
+      currentColumn: { title: currentColumn.title, order: previousColumn.order },
     });
     this.subscriptions.push(array);
+  }
+
+  boardColumnsIds(board: Board) {
+    return board.columns.map(e => e.id);
   }
 }

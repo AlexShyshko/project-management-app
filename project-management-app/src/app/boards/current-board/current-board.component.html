@@ -2,8 +2,15 @@
   <div class="wrapper">
     <div class="board-container" *ngIf="board$ | async as board">
       <h1 class="page-title">{{ 'boards.current-board.workspace' | translate }} - {{ board.title }}</h1>
-      <div cdkDropListGroup class="columns-container" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="dropColumns($event)">
-        <div class="column-container" cdkDrag [ngStyle]="{ order: column.order }" *ngFor="let column of board.columns">
+      <div cdkDropListGroup class="columns-container"
+          cdkDropList
+          cdkDropListOrientation="horizontal"
+          (cdkDropListDropped)="dropColumns($event)">
+        <div class="column-container"
+          [ngStyle]="{ order: column.order }"
+          *ngFor="let column of board.columns"
+          cdkDrag
+          [id]="boardColumnsIds(board)">
           <h2 class="column-title" *ngIf="!isEditEnable || columnId !== column.id" (click)="editColumn(column.id)">
             {{ column.title }}
           </h2>
@@ -20,7 +27,9 @@
           </div>
           <div
             cdkDropList
+            [id]="column.id"
             [cdkDropListData]="column.tasks"
+            [cdkDropListConnectedTo]="boardColumnsIds(board)"
             (cdkDropListDropped)="drop($event)"
             class="task-container task-list cdk-drop-list-dragging"
           >

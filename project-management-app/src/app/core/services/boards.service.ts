@@ -185,16 +185,15 @@ export class BoardsService {
     })));
   }
 
-  updateColumn({ boardId, previousColumnId, currentColumnId, previousColumn, currentColumn }: { boardId: string, previousColumnId: string, currentColumnId: string, previousColumn: Column, currentColumn: Column }) {
+  updateColumn({ boardId, previousColumnId, currentColumnId, previousColumn, currentColumn, numberOfColumns }: { boardId: string, previousColumnId: string, currentColumnId: string, previousColumn: Column, currentColumn: Column, numberOfColumns: number }) {
     const token = this.storageService.getToken()!;
-    const defaultShift = 1000;
-
-    const updatePreviousTemp = this.apiService.updateColumn(token, boardId, previousColumnId, {...previousColumn, order: previousColumn.order + defaultShift});
+    const defaultShift = numberOfColumns + 1;
+    const updatePreviousTemp = this.apiService.updateColumn(token, boardId, previousColumnId, { ...previousColumn, order: previousColumn.order + defaultShift });
     const updateNext = this.apiService.updateColumn(token, boardId, currentColumnId, currentColumn);
     const updatePrevious = this.apiService.updateColumn(token, boardId, previousColumnId, previousColumn);
     const pipeOfRequests = of(updatePreviousTemp, updateNext, updatePrevious);
     pipeOfRequests.pipe(concatAll()).subscribe(
-      () => this.updateCurrentBoard(boardId)
+      () => this.updateCurrentBoard(boardId),
     );
   }
 }
