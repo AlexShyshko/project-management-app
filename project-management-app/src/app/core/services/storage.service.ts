@@ -42,10 +42,9 @@ export class StorageService {
   }
 
   public getUserId() {
-    const item = localStorage.getItem('user');
-    if (!item) return;
-    const user = JSON.parse(item) as User;
-    return user.id;
+    const token = this.getToken();
+    const decode = JSON.parse(atob(token.split('.')[1]));
+    return decode.userId;
   }
 
   public getUserName() {
