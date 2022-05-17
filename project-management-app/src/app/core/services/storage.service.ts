@@ -1,15 +1,29 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/models/user.model';
+
+const TOKEN_TIME_CHECK = 1000 * 60;
 
 @Injectable()
 export class StorageService {
   public isLogged$ = new BehaviorSubject(this.isLogged());
 
+  constructor(private router: Router) {}
+
   public setItem(key: string, item?: string): void {
     if (!item) return;
     localStorage.setItem(key, item);
     this.isLogged$.next(this.isLogged());
+  }
+
+  private checkToken() {
+    const token = localStorage.getItem('token');
+    const decode = JSON.parse(atob(token.split('.')[1]));
+    const now = new Date().getTime();
+    if (now - decode.iat * 1000 < TOKEN_TIME_CHECK) return;
+    this.logout();
+    this.router.navigate(['/']);
   }
 
   public isLogged(): boolean {
@@ -23,6 +37,7 @@ export class StorageService {
   }
 
   public getToken() {
+    this.checkToken();
     return localStorage.getItem('token');
   }
 
