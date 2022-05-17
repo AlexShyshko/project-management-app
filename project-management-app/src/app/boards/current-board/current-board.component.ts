@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription, from, concatMap } from 'rxjs';
+import { Observable, Subscription, from, concatMap, toArray } from 'rxjs';
 import { ConfirmationComponent } from 'src/app/core/edit-profile/confirmation/confirmation.component';
 import { BoardsService } from 'src/app/core/services/boards.service';
 import { Board } from 'src/app/models/board.model';
@@ -248,5 +248,21 @@ export class CurrentBoardComponent implements OnInit, OnDestroy, OnChanges {
 
   toggleTaskStatus(boardId: string, task: Task, columnId: string) {
     this.boardsService.editTask({ ...task, id: task.id, boardId, columnId });
+  }
+
+  dropColumns(event: CdkDragDrop<Column[]>) {
+    let array = this.board$.subscribe(board => {
+      moveItemInArray(board.columns, event.previousIndex, event.currentIndex);
+      const previousColumn = board.columns[event.previousIndex];
+      const currentColumn = board.columns[event.currentIndex];
+      this.boardsService.updateColumn({
+        boardId: board.id,
+        previousColumnId: previousColumn.id,
+        currentColumnId: currentColumn.id,
+        previousColumn: {title: previousColumn.title, order: currentColumn.order},
+        currentColumn: {title: currentColumn.title, order: previousColumn.order}
+      });
+    });
+    this.subscriptions.push(array);
   }
 }

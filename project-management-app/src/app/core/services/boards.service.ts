@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, concatMap, map, Observable, of } from 'rxjs';
+import { concatAll } from 'rxjs/operators';
 import { Board } from 'src/app/models/board.model';
 import { Column } from 'src/app/models/column.model';
 import { Task } from 'src/app/models/task.model';
@@ -180,5 +181,18 @@ export class BoardsService {
             || task.description.toLocaleLowerCase().includes(value.toLocaleLowerCase());
       }
     })));
+  }
+
+  updateColumn({ boardId, previousColumnId, currentColumnId, previousColumn, currentColumn }: { boardId: string, previousColumnId: string, currentColumnId: string, previousColumn: Column, currentColumn: Column }) {
+    const token = this.storageService.getToken()!;
+    const defaultShift = 1000;
+
+    const updatePreviousTemp = this.apiService.updateColumn(token, boardId, previousColumnId, {...previousColumn, order: previousColumn.order + defaultShift});
+    const updateNext = this.apiService.updateColumn(token, boardId, currentColumnId, currentColumn);
+    const updatePrevious = this.apiService.updateColumn(token, boardId, previousColumnId, previousColumn);
+    const pipeOfRequests = of(updatePreviousTemp, updateNext, updatePrevious);
+    pipeOfRequests.pipe(concatAll()).subscribe(
+      () => this.updateCurrentBoard(boardId)
+    );
   }
 }
