@@ -55,6 +55,12 @@
   font-weight: 500;
 }
 
+.board-title-preview {
+  margin: 0 15px;
+  color: var(--main-color);
+  overflow: hidden;
+}
+
 .mat-progress-spinner {
   margin: 0 auto;
   margin-top: 10vh;
