@@ -83,8 +83,7 @@ export class BoardsService {
 
   deleteColumn(boardId: string, columnId: string) {
     const token = this.storageService.getToken()!;
-    this.apiService.getColumnById(token, boardId, columnId).subscribe((res) => {
-      res.tasks.forEach((task) => this.deleteTask(boardId, columnId, task));
+    this.apiService.getColumnById(token, boardId, columnId).subscribe(() => {
       this.apiService.deleteColumn(token, boardId, columnId).subscribe(() => this.updateCurrentBoard(boardId));
     });
   }
