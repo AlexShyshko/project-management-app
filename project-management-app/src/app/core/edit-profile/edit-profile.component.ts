@@ -77,8 +77,8 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     if (this.form.valid) {
       this.apiService
         .updateUser(user, this.storageService.getToken()!, this.storageService.getUserId()!)
-        .subscribe((user) => {
-          const { password, ...newUser } = user;
+        .subscribe((updatedUser) => {
+          const { password: newPassword, ...newUser } = updatedUser;
           this.storageService.setItem('user', JSON.stringify(newUser));
           this.router.navigate(['/main']);
         });

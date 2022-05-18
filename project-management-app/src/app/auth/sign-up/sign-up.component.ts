@@ -71,9 +71,8 @@ export class SignUpComponent implements OnInit, OnDestroy {
       this.apiService.authenticate({ login, password }, 'signin').subscribe((resIn) => {
         if (!resIn.token) return;
         this.storageService.setItem('token', resIn.token);
-        this.apiService.getUsers(resIn.token).subscribe((resUsers) => {
-          const user = resUsers.filter((item) => item.login === login)[0];
-          this.storageService.setItem('user', JSON.stringify(user));
+        this.apiService.getUserById(resIn.token, this.storageService.getUserId()).subscribe((resUser) => {
+          this.storageService.setItem('user', JSON.stringify(resUser));
         });
         if (this.form.valid && this.storageService.isLogged()) {
           this.router.navigate(['/main']);
