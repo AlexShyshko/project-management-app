@@ -84,7 +84,7 @@ export class BoardsService {
   deleteColumn(boardId: string, columnId: string) {
     const token = this.storageService.getToken()!;
     this.apiService.getColumnById(token, boardId, columnId).subscribe((res) => {
-      res.tasks.forEach((task) => this.deleteTask(task));
+      res.tasks.forEach((task) => this.deleteTask(boardId, columnId, task));
       this.apiService.deleteColumn(token, boardId, columnId).subscribe(() => this.updateCurrentBoard(boardId));
     });
   }
@@ -117,11 +117,9 @@ export class BoardsService {
     });
   }
 
-  deleteTask(task: Task) {
+  deleteTask(boardId: string, columnId: string, task: Task) {
     const token = this.storageService.getToken()!;
-    this.apiService
-      .deleteTask(token, task.boardId, task.columnId, task.id)
-      .subscribe(() => this.updateCurrentBoard(task.boardId));
+    this.apiService.deleteTask(token, boardId, columnId, task.id).subscribe(() => this.updateCurrentBoard(boardId));
   }
 
   editTask({
