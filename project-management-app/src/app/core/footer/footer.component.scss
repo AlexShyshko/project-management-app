@@ -1,0 +1,72 @@
+footer {
+  background: var(--main-color);
+}
+
+.footer-section {
+  margin: 0 auto;
+  color: var(--text-color-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1440px;
+  padding: 10px 20px;
+  height: 10vh;
+}
+
+.footer-section .git {
+  display: flex;
+  min-width: 25%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.git-acc {
+  color: var(--text-color-light);
+  transition: 0.5s ease-out;
+}
+
+.git-acc:hover {
+  color: #83dde0;
+  transition: 0.5s ease-out;
+  transform: scale(1.05);
+}
+
+.logo-icon {
+  width: 90px;
+}
+@media (max-width: 970px) {
+  .footer-section .git {
+    width: 40%;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-section .git {
+    width: 50%;
+  }
+}
+
+@media (max-width: 400px) {
+
+  .footer-section {
+    flex-flow:column;
+    position: relative;
+    align-items: start;
+    height: 14vh;
+  }
+  .footer-section :nth-child(1) {
+    order: 2;
+  }
+  .footer-section :nth-child(3) {
+    order: 2;
+  }
+  .footer-section .git {
+    width: 100%;
+    margin: 10px 0;
+  }
+  .footer-year {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+  }
+}

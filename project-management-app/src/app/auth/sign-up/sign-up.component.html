@@ -1,0 +1,88 @@
+<main>
+  <div class="container">
+    <form [formGroup]="form" (ngSubmit)="submit(name.value, login.value, password.value)">
+      <div class="signUp-wrapper">
+        <div class="first-part">
+          <p class="signUp-title">{{ 'auth.sign-up.title' | translate }}</p>
+          <mat-form-field appearance="fill">
+            <mat-label>{{ 'core.edit-profile.name' | translate }}</mat-label>
+            <input formControlName="name" matInput #name />
+            <mat-error *ngIf="form.get('name')!.errors?.['required']">
+              {{ 'core.edit-profile.enter-name' | translate }}
+            </mat-error>
+            <mat-error *ngIf="form.get('name')!.errors?.['minlength']">
+              {{ 'core.edit-profile.minimum-characters' | translate }}:
+              {{form.get('name')!.errors?.['minlength'].requiredLength}}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>{{ 'auth.auth.login' | translate }}</mat-label>
+            <input formControlName="login" matInput #login />
+            <mat-error *ngIf="form.get('login')!.errors?.['required']">{{
+              'auth.auth.enter-mail' | translate
+            }}</mat-error>
+            <mat-error *ngIf="form.get('login')!.errors?.['email']">{{
+              'auth.auth.mail-invalid' | translate
+            }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>{{ 'auth.auth.password' | translate }}</mat-label>
+            <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" #password />
+            <mat-error *ngIf="form.get('password')!.errors?.['required']">{{
+              'auth.auth.enter-password' | translate
+            }}</mat-error>
+            <mat-error *ngIf="form.dirty && form.get('password')!.value.length">
+              {{ 'auth.auth.unsecure-password' | translate }}
+              <mat-error *ngIf="form.get('password')!.errors?.['minlength']">
+                - {{ 'auth.auth.minimum-characters' | translate | lowercase }}:
+                {{form.get('password')!.errors?.['minlength'].requiredLength}}
+              </mat-error>
+              <mat-error *ngFor="let item of form.get('password')!.errors | keyvalue">
+                {{ coreService.getCustomValidatorKey(item.value.message) | translate }}
+              </mat-error>
+            </mat-error>
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </mat-form-field>
+          <mat-form-field appearance="fill" *ngIf="form.controls['password'].valid">
+            <mat-label>{{ 'core.edit-profile.confirm-password' | translate }}</mat-label>
+            <input formControlName="confirmPassword" matInput [type]="hide ? 'password' : 'text'" />
+            <mat-error
+              *ngIf="form.controls['confirmPassword'].pristine || form.controls['confirmPassword'].errors?.['MatchPassword']"
+            >
+              {{ 'core.edit-profile.password-not-match' | translate }}
+            </mat-error>
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="second-part">
+          <button type="submit" [disabled]="form.invalid" mat-flat-button class="signUp-button">
+            {{ 'auth.sign-up.sign-up-button' | translate }}
+          </button>
+          <p class="sign-up">
+            {{ 'auth.sign-up.already-registered' | translate }}
+            <a [routerLink]="['/auth']">{{ 'auth.sign-up.login' | translate }}</a
+            >.
+          </p>
+        </div>
+      </div>
+    </form>
+  </div>
+</main>

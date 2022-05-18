@@ -1,0 +1,115 @@
+main {
+  background: url('../../../assets/auth/line.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top;
+  height: 80vh;
+}
+
+.container {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  height: 85vh;
+  background-image: url('../../../assets/auth/auth-background.png');
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: 25%;
+}
+
+.signUp-wrapper {
+  width: 350px;
+  height: 510px;
+  margin: 0 auto;
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(88, 84, 183);
+  padding: 0 20px;
+  border-radius: 15px;
+}
+
+.first-part,
+.second-part {
+  display: flex;
+  flex-direction: column;
+}
+
+.signUp-title {
+  margin-top: 28px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 21px;
+  color: var(--text-color-light);
+  text-align: center;
+}
+
+.signUp-name {
+  height: 37px;
+  width: 100%;
+}
+
+.signUp-button {
+  margin-top: 20px;
+  width: 130px;
+  height: 40px;
+  background-color: var(--text-color-light);
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 14px;
+  color: var(--main-color);
+  align-self: flex-end;
+  transition: 0.3s ease-in-out;
+  &:disabled {
+    cursor: not-allowed;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+  &:hover {
+    background-color: #a8a5ff;
+    transition: 0.3s ease-in-out;
+  }
+}
+
+.sign-up {
+  margin-top: 30px;
+  font-size: 0.7rem;
+  color: var(--text-color-dark);
+  margin-bottom: 15px;
+}
+
+mat-error ::ng-deep {
+  color: rgb(254, 160, 160);
+}
+
+@media (max-width: 1200px) {
+  .container {
+    background-size: 350px;
+  }
+}
+
+@media (max-width: 850px) {
+  .container {
+    background-size: 300px;
+    background-position: left bottom;
+  }
+   .signUp-wrapper {
+    margin-top: 7vh;
+  }
+}
+
+@media (max-width: 550px) {
+  .container {
+    background-image: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .signUp-wrapper {
+    width: 300px;
+    margin-top: 2vh;
+  }
+}

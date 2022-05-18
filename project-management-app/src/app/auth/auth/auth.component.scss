@@ -1,0 +1,122 @@
+main {
+  background: url('../../../assets/auth/line.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top;
+  height: 80vh;
+}
+
+.container {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  height: 85vh;
+  background-image: url('../../../assets/auth/auth-background-2.png');
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-size: 500px;
+}
+
+.login-wrapper {
+  width: 350px;
+  height: 370px;
+  margin: 0 auto;
+  margin-top: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(88, 84, 183);
+  padding: 0 20px;
+  border-radius: 15px;
+}
+
+.first-part {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.second-part {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.login-title {
+  margin-top: 28px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 21px;
+  color: var(--text-color-light);
+  text-align: center;
+}
+
+.login-name {
+  height: 37px;
+  width: 100%;
+}
+
+.login-button {
+  margin-top: 20px;
+  width: 130px;
+  height: 40px;
+  background-color: var(--text-color-light);
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 14px;
+  color: var(--main-color);
+  align-self: flex-end;
+  transition: 0.3s ease-in-out;
+  &:disabled {
+    cursor: not-allowed;
+    &:hover {
+      background-color: var(--buttons-disabled-hover-color);
+    }
+  }
+  &:hover {
+    background-color: var(--buttons-hover-color);
+    transition: 0.3s ease-in-out;
+  }
+}
+
+.sign-up {
+  margin-top: 30px;
+  font-size: 0.7rem;
+  color: var(--text-color-dark);
+}
+
+mat-error ::ng-deep {
+  color: rgb(254, 160, 160);
+}
+
+@media (max-width: 1200px) {
+  .container {
+    background-size: 350px;
+  }
+}
+
+@media (max-width: 850px) {
+  .container {
+    background-size: 300px;
+    background-position: right bottom;
+  }
+  .login-wrapper {
+    margin-top: 10vh;
+  }
+}
+
+@media (max-width: 550px) {
+  .container {
+    background-image: none;
+    height: 75vh;
+  }
+}
+
+@media (max-width: 400px) {
+  .login-wrapper {
+    width: 300px;
+    margin-top: 5vh;
+  }
+}

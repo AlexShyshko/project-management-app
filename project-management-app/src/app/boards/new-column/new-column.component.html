@@ -1,0 +1,24 @@
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <h1 mat-dialog-title>{{ 'boards.new-column.create-column' | translate }}</h1>
+    <div mat-dialog-content class="content">
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'boards.new-column.column-title' | translate }}</mat-label>
+        <input formControlName="title" matInput />
+        <mat-error *ngIf="form.get('title')!.errors?.['required']">{{
+          'boards.new-column.enter-title' | translate
+        }}</mat-error>
+        <mat-error *ngIf="form.get('title')!.errors?.['minlength']"
+          >{{ 'boards.new-column.minimum-characters' | translate }}:
+          {{form.get('title')!.errors?.['minlength'].requiredLength}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="form-buttons">
+      <button mat-button class="submit-button" type="submit" [disabled]="form.invalid" mat-dialog-close>
+        {{ 'create' | translate }}
+      </button>
+      <button mat-stroked-button type="button" mat-dialog-close>{{ 'close' | translate }}</button>
+    </div>
+  </form>
+</div>

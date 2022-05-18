@@ -1,0 +1,37 @@
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <h1 mat-dialog-title>{{ 'boards.new-task.create-task' | translate }}</h1>
+    <div mat-dialog-content class="content">
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'boards.new-task.title' | translate }}</mat-label>
+        <input formControlName="title" matInput />
+        <mat-error *ngIf="form.get('title')!.errors?.['required']">
+          {{ 'boards.new-task.enter-title' | translate }}
+        </mat-error>
+        <mat-error *ngIf="form.get('title')!.errors?.['minlength']">
+          {{ 'boards.new-task.title-short' | translate }}
+        </mat-error>
+        <mat-error *ngIf="form.get('title')!.errors?.['maxlength']">
+          {{ 'boards.new-task.title-long' | translate }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'boards.new-task.description' | translate }}</mat-label>
+        <input formControlName="description" matInput #message />
+        <mat-hint align="end">{{ message.value.length }} / 255</mat-hint>
+        <mat-error *ngIf="form.get('description')!.errors?.['required']">
+          {{ 'boards.new-task.enter-description' | translate }}
+        </mat-error>
+        <mat-error *ngIf="form.get('description')!.errors?.['maxlength']">
+          {{ 'boards.new-task.description-long' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="form-buttons">
+      <button mat-button class="submit-button" type="submit" [disabled]="form.invalid" mat-dialog-close>
+        {{ 'create' | translate }}
+      </button>
+      <button mat-stroked-button type="button" mat-dialog-close>{{ 'close' | translate }}</button>
+    </div>
+  </form>
+</div>

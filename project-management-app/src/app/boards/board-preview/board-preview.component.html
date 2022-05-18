@@ -1,0 +1,18 @@
+<div *ngIf="!isLoading" class="board-preview-container">
+  <div *ngFor="let boardPreview of (boards$ | async)!" class="board-preview-item">
+    <a [routerLink]="['/boards', boardPreview.id]" class="board-link">
+      <div class="board-title">
+        {{ boardPreview.title }}
+      </div>
+      <h6 class="board-title-preview">
+        {{ boardPreview.description }}
+      </h6>
+    </a>
+    <button mat-icon-button (click)="openDialog(boardPreview.id!)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>
+<div *ngIf="isLoading" class="loader-container">
+  <mat-progress-spinner mode="indeterminate" diameter="100" strokeWidth="10"></mat-progress-spinner>
+</div>

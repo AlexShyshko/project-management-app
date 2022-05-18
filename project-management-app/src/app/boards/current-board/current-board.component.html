@@ -1,0 +1,87 @@
+<div class="board-wrapper" [ngStyle]="{ 'background-image': 'url(' + backgroundImage + ')' }">
+  <div class="wrapper">
+    <div class="board-container" *ngIf="board$ | async as board">
+      <h1 class="page-title">{{ 'boards.current-board.workspace' | translate }} - {{ board.title }}</h1>
+      <div
+        cdkDropListGroup
+        class="columns-container"
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="dropColumns($event)"
+      >
+        <div
+          class="column-container"
+          [ngStyle]="{ order: column.order }"
+          *ngFor="let column of board.columns"
+          cdkDrag
+          [id]="boardColumnsIds(board)"
+        >
+          <h2 class="column-title" *ngIf="!isEditEnable || columnId !== column.id" (click)="editColumn(column.id)">
+            {{ column.title }}
+          </h2>
+          <div class="column-title-block" *ngIf="isEditEnable && columnId === column.id">
+            <button mat-icon-button (click)="submitTitle(board.id, column)">
+              <mat-icon>check_circle</mat-icon>
+            </button>
+            <button mat-icon-button (click)="isEditEnable = !isEditEnable">
+              <mat-icon>cancel</mat-icon>
+            </button>
+            <mat-form-field appearance="fill">
+              <input matInput placeholder="{{ column.title }}" [(ngModel)]="title" />
+            </mat-form-field>
+          </div>
+          <div
+            cdkDropList
+            [id]="column.id"
+            [cdkDropListData]="column.tasks"
+            [cdkDropListConnectedTo]="boardColumnsIds(board)"
+            (cdkDropListDropped)="drop($event)"
+            class="task-container task-list cdk-drop-list-dragging"
+          >
+            <div cdkDrag class="current-cards task-box" *ngFor="let task of column.tasks">
+              <mat-checkbox
+                class="checkbox"
+                [(ngModel)]="task.done"
+                (change)="toggleTaskStatus(board.id, task, column.id)"
+              ></mat-checkbox>
+              <button
+                mat-icon-button
+                class="delete-task-btn"
+                [disabled]="task.userId !== currentUserId"
+                (click)="openDialog(board.id, column.id, task)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              <h5
+                class="card-title"
+                [ngClass]="{ 'task-done': task.done === true }"
+                (click)="openModalEditTask(board.id, task, column.id)"
+              >
+                {{ task.title }}
+              </h5>
+            </div>
+          </div>
+          <div class="column-control-buttons">
+            <button mat-icon-button class="add-new-column" (click)="openModalCreateTask(board.id, column.id, column)">
+              <mat-icon>add_circle_outline</mat-icon>
+              {{ 'boards.current-board.add-task' | translate }}
+            </button>
+            <button mat-icon-button (click)="openDialog(board.id, column.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="column-container new-column" [ngStyle]="{ order: 1000 }">
+          <button mat-icon-button class="add-new-column" (click)="openModalCreateColumn(board.id)">
+            <mat-icon>add_circle_outline</mat-icon>
+            {{ 'boards.current-board.add-column' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <button [routerLink]="['/main']" class="home-button" mat-raised-button color="primary">
+      {{ 'main' | translate }}
+    </button>
+  </div>
+</div>

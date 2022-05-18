@@ -1,0 +1,123 @@
+{
+  "TITLE": "Welcome",
+  "yes": "Yes",
+  "no": "No",
+  "home": "Home",
+  "main": "Boards",
+  "create": "Create",
+  "close": "Close",
+  "edit": "Edit",
+  "core": {
+    "header": {
+      "new-button": "Create new board",
+      "language": "Language",
+      "my-account": "My account",
+      "login": "Login",
+      "register": "Register",
+      "edit-profile": "Edit profile",
+      "logout": "Logout"
+    },
+    "main": {
+      "kanby-description": "Kanby is the flexible work management tool where teams can ideate plans, collaborate on projects, organize workflows, and track progress in a visual, productive, and rewarding way.",
+      "team-info": "RSS 2022Q1. Team #4. Project management app",
+      "shyshko": "Aliaksei Shyshko",
+      "komosko": "Anna Komosko",
+      "shapialevich": "Aliaksei Shapialevich",
+      "shyshko-work": "Architecture, translation, routes, Welcome section, drag-n-drop",
+      "komosko-work": "UI, forms and validation, deploy of BE, modal windows, pop-ups with BE errors, drag-n-drop",
+      "shapialevich-work": "Service for working with API, Service for working with Storage, Board components"
+    },
+    "footer": {
+      "team": "Developers team"
+    },
+    "edit-profile": {
+      "confirmation": {
+        "delete-question": "Are you sure to delete profile?"
+      },
+      "edit-title": "Edit profile",
+      "name": "name",
+      "enter-name": "Please enter your name",
+      "minimum-characters": "Minimum characters count",
+      "login": "login",
+      "enter-mail": "Please enter e-mail",
+      "invalid-mail": "The login e-mail is invalid",
+      "password": "password",
+      "enter-password": "Please enter password",
+      "unsecure-password": "Your password isn't secure enough",
+      "lower-case": "- at least one lowercase letter",
+      "numbers": "- at least one number",
+      "symbols": "- at least one special symbol (!@#$%^&*,?])",
+      "upper-case": "- at least one uppercase letter",
+      "confirm-password": "confirm password",
+      "password-not-match": "Password doesn't match",
+      "update": "Update prodile",
+      "delete": "Delete profile"
+    },
+    "incorrect-page": {
+      "wrong": "Something went wrong..."
+    }
+  },
+  "auth": {
+    "auth": {
+      "title": "Login",
+      "login": "login",
+      "enter-mail": "Please enter e-mail",
+      "mail-invalid": "The login e-mail is invalid",
+      "password": "password",
+      "enter-password": "Please enter password",
+      "unsecure-password": "Your password isn't secure enough",
+      "minimum-characters": "Minimum characters count",
+      "login-button": "Login",
+      "havent-registered": "Haven't registered yet?",
+      "sign-up": "Sign up"
+    },
+    "sign-up": {
+      "title": "Sign up",
+      "sign-up-button": "Sign Up",
+      "already-registered": "Already have an account?",
+      "login": "Login"
+    }
+  },
+  "boards": {
+    "board-preview": {
+      "confirmation": "Are you sure to delete board?"
+    },
+    "boards": {
+      "workspaces": "Your workspaces"
+    },
+    "current-board": {
+      "workspace": "Current workspace",
+      "add-column": "Add new column",
+      "add-task": "Add new task",
+      "delete-column": "Delete column",
+      "delete-task": "Delete task"
+    },
+    "edit-card": {
+      "edit-task": "Edit task"
+    },
+    "new-board": {
+      "new-project": "Create your new project",
+      "title": "Board title",
+      "enter-title": "Please enter a board title",
+      "minimum-length": "Minimum title length is",
+      "create": "Create board",
+      "close": "Close"
+    },
+    "new-column": {
+      "create-column": "Create new column",
+      "column-title": "Column title",
+      "enter-title": "Please enter title",
+      "minimum-characters": "Minimum characters count"
+    },
+    "new-task": {
+      "create-task": "Create new task",
+      "title": "Title",
+      "enter-title": "Please enter a title",
+      "title-short": "The title is too short",
+      "title-long": "The title is too long",
+      "description": "Description",
+      "enter-description": "Please enter description",
+      "description-long": "The description is too long"
+    }
+  }
+}
