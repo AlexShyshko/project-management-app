@@ -95,6 +95,33 @@ main {
   align-items: center;
 }
 
+.home-button {
+  margin-top: 5vh;
+  margin-left: 13%;
+  width: 130px;
+  height: 40px;
+  border-radius: 5px;
+
+  font-size: 14px;
+  line-height: 14px;
+
+  color: var(--main-color);
+  background-color: var(--text-color-light);
+
+  transition: 0.3s ease-in-out;
+
+  &:disabled {
+    cursor: not-allowed;
+    &:hover {
+      background-color: var(--buttons-disabled-hover-color);
+    }
+  }
+  &:hover {
+    background-color: var(--buttons-hover-color);
+    transition: 0.3s ease-in-out;
+  }
+}
+
 @media (max-width: 1250px) {
   .app-background {
     background-size: 600px;
@@ -122,6 +149,9 @@ main {
   }
   .developer-description {
     font-size: 0.8rem;
+  }
+  .home-button {
+    margin-left: 45%;
   }
 }
 
@@ -160,6 +190,9 @@ main {
     width: fit-content;
     height: fit-content;
   }
+  .home-button {
+    margin-left: 40%;
+  }
 }
 
 @media (max-width: 400px) {
@@ -174,5 +207,8 @@ main {
   .app-description {
     width: 90%;
     line-height: 1.7rem;
+  }
+  .home-button {
+    margin-left: 34%;
   }
 }

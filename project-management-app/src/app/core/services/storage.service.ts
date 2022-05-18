@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 
-const TOKEN_TIME_CHECK = 1000 * 60;
+const TOKEN_TIME_CHECK = 1000 * 60 * 60 * 24;
 
 @Injectable()
 export class StorageService {
