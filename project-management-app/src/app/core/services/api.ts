@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { User } from '../../models/user.model';
 import { Board } from 'src/app/models/board.model';
@@ -218,6 +218,24 @@ export class ApiService {
     const path = `${BOARDS}/${oldTask.boardId}/columns/${oldTask.columnId}/tasks/${oldTask.id}`;
     return this.httpClient
       .put<Task>(path, body, { headers: headers })
+      .pipe(catchError((error) => this.handleError(error)));
+  }
+
+  uploadFile(token: string, taskId: string, file: File) {
+    const headers = new HttpHeaders()
+      .set('Accept', '*/*')
+      .set('Content-Type', 'multipart/form-data;boundary=------WebKitFormBoundary0NiA8QAeDjgtSeDd')
+      .set('Authorization', `Bearer ${token}`);
+    const formData = new FormData();
+    formData.append('taskId', taskId);
+    formData.append('file', file);
+    return this.httpClient.post(`${BASE}/file`, formData, { headers: headers });
+  }
+
+  downloadFile(token: string, taskId: string, fileName: string) {
+    const headers = new HttpHeaders().set('Accept', 'application/json').set('Authorization', `Bearer ${token}`);
+    return this.httpClient
+      .get(`${BASE}/file/${taskId}/${fileName}`, { headers: headers })
       .pipe(catchError((error) => this.handleError(error)));
   }
 }

@@ -32,6 +32,10 @@ export class EditCardComponent implements OnInit, OnDestroy {
 
   userName: string;
 
+  fileName = '';
+
+  file = this.data.task.files[0];
+
   constructor(
     private boardsService: BoardsService,
     @Inject(MAT_DIALOG_DATA) public data: { boardId: string; task: Task; columnId: string },
@@ -85,5 +89,17 @@ export class EditCardComponent implements OnInit, OnDestroy {
     return this.apiService.getUserById(token, this.data.task.userId).subscribe(collection => {
       this.userName = collection.name.trim()[0].toUpperCase();
     });
+  }
+
+  onFileSelected(event) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.fileName = file.name;
+      this.apiService.uploadFile(this.storageService.getToken(), this.data.task.id, file).subscribe(res => console.log(res));
+    }
+  }
+
+  download(fileName: string) {
+    this.apiService.downloadFile(this.storageService.getToken(), this.data.task.id, fileName).subscribe(res => console.log(res));
   }
 }

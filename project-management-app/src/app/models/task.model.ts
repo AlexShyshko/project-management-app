@@ -7,4 +7,10 @@ export interface Task {
   userId: string,
   boardId?: string,
   columnId?: string,
+  files?: CFile[],
+}
+
+interface CFile {
+  filename: string,
+  fileSize: number,
 }
