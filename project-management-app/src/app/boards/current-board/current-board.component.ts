@@ -249,4 +249,26 @@ export class CurrentBoardComponent implements OnInit, OnDestroy, OnChanges {
   toggleTaskStatus(boardId: string, task: Task, columnId: string) {
     this.boardsService.editTask({ ...task, id: task.id, boardId, columnId });
   }
+
+  dropColumns(event: CdkDragDrop<Column[]>) {
+    if (event.currentIndex === event.previousIndex) return;
+    let board;
+    let array = this.board$.subscribe(b => board = b);
+    moveItemInArray(board.columns, event.previousIndex, event.currentIndex);
+    const previousColumn = board.columns[event.previousIndex];
+    const currentColumn = board.columns[event.currentIndex];
+    this.boardsService.updateColumn({
+      boardId: board.id,
+      numberOfColumns: Math.max(...board.columns.map(c => c.order)),
+      previousColumnId: previousColumn.id,
+      currentColumnId: currentColumn.id,
+      previousColumn: { title: previousColumn.title, order: currentColumn.order },
+      currentColumn: { title: currentColumn.title, order: previousColumn.order },
+    });
+    this.subscriptions.push(array);
+  }
+
+  boardColumnsIds(board: Board) {
+    return board.columns.map(e => e.id);
+  }
 }
