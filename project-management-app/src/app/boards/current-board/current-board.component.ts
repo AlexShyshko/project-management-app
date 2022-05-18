@@ -116,7 +116,7 @@ export class CurrentBoardComponent implements OnInit, OnDestroy, OnChanges {
     this.subscriptions.push(
       this.dialogRef.afterClosed().subscribe((event) => {
         if (event === 'action') {
-          return task ? this.deleteTask(task) : this.deleteColumn(boardId, columnId);
+          return task ? this.deleteTask(boardId, columnId, task) : this.deleteColumn(boardId, columnId);
         }
       }),
     );
@@ -136,8 +136,8 @@ export class CurrentBoardComponent implements OnInit, OnDestroy, OnChanges {
     this.isEditEnable = !this.isEditEnable;
   }
 
-  public deleteTask(task: Task) {
-    this.boardsService.deleteTask(task);
+  public deleteTask(boardId: string, columnId: string, task: Task) {
+    this.boardsService.deleteTask(boardId, columnId, task);
   }
 
   getConfirmTranslation(): void {
@@ -253,13 +253,13 @@ export class CurrentBoardComponent implements OnInit, OnDestroy, OnChanges {
   dropColumns(event: CdkDragDrop<Column[]>) {
     if (event.currentIndex === event.previousIndex) return;
     let board;
-    let array = this.board$.subscribe(b => board = b);
+    let array = this.board$.subscribe((b) => (board = b));
     moveItemInArray(board.columns, event.previousIndex, event.currentIndex);
     const previousColumn = board.columns[event.previousIndex];
     const currentColumn = board.columns[event.currentIndex];
     this.boardsService.updateColumn({
       boardId: board.id,
-      numberOfColumns: Math.max(...board.columns.map(c => c.order)),
+      numberOfColumns: Math.max(...board.columns.map((c) => c.order)),
       previousColumnId: previousColumn.id,
       currentColumnId: currentColumn.id,
       previousColumn: { title: previousColumn.title, order: currentColumn.order },
@@ -269,6 +269,6 @@ export class CurrentBoardComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   boardColumnsIds(board: Board) {
-    return board.columns.map(e => e.id);
+    return board.columns.map((e) => e.id);
   }
 }

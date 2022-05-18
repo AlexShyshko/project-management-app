@@ -2,15 +2,20 @@
   <div class="wrapper">
     <div class="board-container" *ngIf="board$ | async as board">
       <h1 class="page-title">{{ 'boards.current-board.workspace' | translate }} - {{ board.title }}</h1>
-      <div cdkDropListGroup class="columns-container"
-          cdkDropList
-          cdkDropListOrientation="horizontal"
-          (cdkDropListDropped)="dropColumns($event)">
-        <div class="column-container"
+      <div
+        cdkDropListGroup
+        class="columns-container"
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="dropColumns($event)"
+      >
+        <div
+          class="column-container"
           [ngStyle]="{ order: column.order }"
           *ngFor="let column of board.columns"
           cdkDrag
-          [id]="boardColumnsIds(board)">
+          [id]="boardColumnsIds(board)"
+        >
           <h2 class="column-title" *ngIf="!isEditEnable || columnId !== column.id" (click)="editColumn(column.id)">
             {{ column.title }}
           </h2>
@@ -43,7 +48,7 @@
                 mat-icon-button
                 class="delete-task-btn"
                 [disabled]="task.userId !== currentUserId"
-                (click)="openDialog('', '', task)"
+                (click)="openDialog(board.id, column.id, task)"
               >
                 <mat-icon>delete</mat-icon>
               </button>
