@@ -45,6 +45,7 @@
           <mat-icon>cancel</mat-icon>
         </button>
       </div>
+      <div>
         <div>
           <input type="file" class="file-input"
           (change)="onFileSelected($event)" #fileUpload>
@@ -54,14 +55,13 @@
                 <mat-icon>attach_file</mat-icon>
           </button>
         </div>
-
-
-      <div class="file-upload" *ngIf="fileName||file.filename">
-        {{fileName || file.filename}}
-        <button mat-mini-fab color="primary" class="download-btn"
-            (click)="download(file.filename)">
-              <mat-icon>file_download</mat-icon>
-        </button>
+        <div class="file-upload" *ngIf="fileName || file.filename">
+          {{fileName || file.filename}}
+          <button mat-mini-fab color="primary" class="download-btn"
+              (click)="download(file.filename)">
+                <mat-icon>save_alt</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
     <div mat-dialog-actions class="form-buttons">
