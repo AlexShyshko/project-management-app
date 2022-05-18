@@ -57,22 +57,6 @@ export class BoardsService {
       board.columns.forEach((column) => {
         column.tasks.sort(this.sort);
       });
-      this.apiService.getColumns(token, board.id!).subscribe((columnsResponse) => {
-        columnsResponse.sort(this.sort);
-        columnsResponse.forEach((column) => {
-          if (column.tasks) {
-            column.tasks.sort(this.sort);
-          }
-        });
-        const columns = columnsResponse.map((column) => {
-          this.apiService.getTasks(token, board.id, column.id).subscribe((taskResponse) => {
-            taskResponse.sort(this.sort);
-            column.tasks = taskResponse;
-          });
-          return column;
-        });
-        board.columns = columns;
-      });
       this.board.next(board);
     });
   }
