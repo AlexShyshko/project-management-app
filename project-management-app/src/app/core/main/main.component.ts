@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, OnDestroy, Input, SimpleChange, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { CoreService } from '../services/core.service';
 import { StorageService } from '../services/storage.service';
 
@@ -12,6 +12,8 @@ import { StorageService } from '../services/storage.service';
 })
 export class MainComponent implements OnInit, OnDestroy {
   public subscriptions: Subscription[] = [];
+
+  public isLogged: boolean;
 
   constructor(
     public translate: TranslateService,
@@ -24,6 +26,9 @@ export class MainComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.coreService.currentLang.subscribe((lang) => {
         this.translate.use(lang);
+      }),
+      this.storageService.isLogged$.subscribe((loggedStatus) => {
+        this.isLogged = loggedStatus;
       }),
     );
   }

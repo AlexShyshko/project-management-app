@@ -172,28 +172,57 @@ export class BoardsService {
   }
 
   searchTaskByInput(value: string | number) {
-    return this.tasks$.pipe(map(tasks => tasks.filter(task => {
-      switch (typeof value) {
-        case 'number':
-          return task.order === value
-           || task.title.includes(value.toString())
-           || task.description.includes(value.toString());
-        case 'string':
-          return task.title.toLocaleLowerCase().includes(value.toLocaleLowerCase())
-            || task.description.toLocaleLowerCase().includes(value.toLocaleLowerCase());
-      }
-    })));
+    return this.tasks$.pipe(
+      map((tasks) =>
+        tasks.filter((task) => {
+          switch (typeof value) {
+            case 'number':
+              return (
+                task.order === value ||
+                task.title.includes(value.toString()) ||
+                task.description.includes(value.toString())
+              );
+            case 'string':
+              return (
+                task.title.toLocaleLowerCase().includes(value.toLocaleLowerCase()) ||
+                task.description.toLocaleLowerCase().includes(value.toLocaleLowerCase())
+              );
+          }
+        }),
+      ),
+    );
   }
 
-  updateColumn({ boardId, previousColumnId, currentColumnId, previousColumn, currentColumn, numberOfColumns }: { boardId: string, previousColumnId: string, currentColumnId: string, previousColumn: Column, currentColumn: Column, numberOfColumns: number }) {
+  updateColumn({
+    boardId,
+    previousColumnId,
+    currentColumnId,
+    previousColumn,
+    currentColumn,
+    numberOfColumns,
+  }: {
+    boardId: string;
+    previousColumnId: string;
+    currentColumnId: string;
+    previousColumn: Column;
+    currentColumn: Column;
+    numberOfColumns: number;
+  }) {
     const token = this.storageService.getToken()!;
     const defaultShift = numberOfColumns + 1;
-    const updatePreviousTemp = this.apiService.updateColumn(token, boardId, previousColumnId, { ...previousColumn, order: previousColumn.order + defaultShift });
+    const updatePreviousTemp = this.apiService.updateColumn(token, boardId, previousColumnId, {
+      ...previousColumn,
+      order: previousColumn.order + defaultShift,
+    });
     const updateNext = this.apiService.updateColumn(token, boardId, currentColumnId, currentColumn);
     const updatePrevious = this.apiService.updateColumn(token, boardId, previousColumnId, previousColumn);
     const pipeOfRequests = of(updatePreviousTemp, updateNext, updatePrevious);
-    pipeOfRequests.pipe(concatAll()).subscribe(
-      () => this.updateCurrentBoard(boardId),
-    );
+    let pipeOfRequestsLength = 0;
+    pipeOfRequests.pipe(concatAll()).subscribe(() => {
+      pipeOfRequestsLength++;
+      if (pipeOfRequestsLength === 3) {
+        this.updateCurrentBoard(boardId);
+      }
+    });
   }
 }
